@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+. <(functions at ...)
+
+main() {
+	apt-get install -y ttf2bdf
+
+	sudo -u "$SUDO_USER" env PATH=$PATH bin/bootstrap
+}

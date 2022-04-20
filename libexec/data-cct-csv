@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Generates summary CSV sorted by CCTs
+#
+# Input:  Summary hash in JSON format
+# Output: Summary in CSV format sorted by CCTs
+
+require 'csv'
+require 'json'
+
+def process(results)
+  fields = results.first.keys
+  index  = fields.index('cct')
+
+  # rows = results.reject { |result| result['extension'].nil? }.map(&:values).sort_by { |row| [row[index]] }
+  rows = results.map(&:values).sort_by { |row| [row[index]] }
+
+  [fields, *rows].map(&:to_csv).join
+end
+
+def main
+  puts process(JSON.parse(ARGF.read))
+end
+
+main

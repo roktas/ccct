@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Generates statistics CSV
+#
+# Input:  Summary hash in JSON format
+# Output: CCT statistics in CSV format by analyzed variants
+
+require 'csv'
+require 'json'
+
+def stats(results, analyze)
+  ccts = results.select { |result| result['analyze'] == analyze }.map { |result| result['cct'] }
+
+  mean = ccts.sum(0.0) / ccts.size
+
+  sum = ccts.sum(0.0) { |element| (element - mean) ** 2 }
+  variance = sum / (ccts.size - 1)
+  std = Math.sqrt(variance)
+
+  {
+    theme: analyze,
+    mean:  mean.round(2),
+    std:   std.round(2),
+    min:   ccts.min,
+    max:   ccts.max
+  }
+end
+
+def process(results)
+  [
+    %w[theme mean std min max].join(','),
+    stats(results, 'dark').values.join(','),
+    stats(results, 'light').values.join(',')
+  ].join("\n")
+end
+
+def main
+  puts process(JSON.parse(ARGF.read))
+end
+
+main

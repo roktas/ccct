@@ -1,0 +1,176 @@
+---
+- name: Andromeda
+  class: dark
+  installs: 387086
+  rating: 5
+  reviews: 43
+  extension: EliverLara.andromeda
+  id: andromeda
+- name: Atom One Dark
+  class: dark
+  installs: 2951962
+  rating: 4.8
+  reviews: 98
+  extension: akamud.vscode-theme-onedark
+  id: atom-one-dark
+- name: Atom One Light
+  class: light
+  installs: 639943
+  rating: 4.9
+  reviews: 32
+  extension: akamud.vscode-theme-onelight
+  id: atom-one-light
+- name: Ayu
+  class: light
+  installs: 1127068
+  rating: 4.7
+  reviews: 92
+  extension: teabyii.ayu
+  id: ayu
+- name: Visual Studio C/C++
+  class: dual
+  installs: 4695332
+  rating: 3.7
+  reviews: 3
+  extension: ms-vscode.cpptools-themes
+  id: c-c++
+- name: Default
+  class: dual
+  installs: 
+  rating: 
+  reviews: 
+  extension: 
+  id: default
+- name: Dracula Official
+  class: dark
+  installs: 3364922
+  rating: 4.9
+  reviews: 103
+  extension: dracula-theme.theme-dracula
+  id: dracula
+- name: Github
+  class: dual
+  installs: 3504664
+  rating: 4.5
+  reviews: 116
+  extension: GitHub.github-vscode-theme
+  id: github
+- name: Gruvbox
+  class: dual
+  installs: 215607
+  rating: 5
+  reviews: 30
+  extension: jdinhlife.gruvbox
+  id: gruvbox
+- name: Hop Light
+  class: light
+  installs: 76483
+  rating: 5
+  reviews: 6
+  extension: bubersson.theme-hop-light
+  id: hop
+- name: Learn with Sumit
+  class: dual
+  installs: 26166
+  rating: 5
+  reviews: 427
+  extension: SumitSaha.learn-with-sumit-theme
+  id: learn-with-sumit
+- name: Community Material
+  class: light
+  installs: 989598
+  rating: 4.7
+  reviews: 6
+  extension: Equinusocio.vsc-community-material-theme
+  id: material
+- name: Monokai Pro
+  class: dual
+  installs: 1318719
+  rating: 3.7
+  reviews: 188
+  extension: monokai.theme-monokai-pro-vscode
+  id: monokai
+- name: Netbeans Light
+  class: light
+  installs: 87696
+  rating: 4.6
+  reviews: 8
+  extension: obrejla.netbeans-light-theme
+  id: netbeans
+- name: Night Owl
+  class: dual
+  installs: 1298793
+  rating: 4.8
+  reviews: 114
+  extension: sdras.night-owl
+  id: night-owl
+- name: Nord
+  class: dual
+  installs: 541929
+  rating: 4.8
+  reviews: 65
+  extension: arcticicestudio.nord-visual-studio-code
+  id: nord
+- name: One Dark Pro
+  class: dark
+  installs: 5051456
+  rating: 4.6
+  reviews: 168
+  extension: zhuangtongfa.Material-theme
+  id: one-dark-pro
+- name: One Monokai
+  class: dark
+  installs: 1205736
+  rating: 4.9
+  reviews: 81
+  extension: azemoh.one-monokai
+  id: one-monokai
+- name: Palenight
+  class: dark
+  installs: 832384
+  rating: 4.9
+  reviews: 56
+  extension: whizkydee.material-palenight-theme
+  id: palenight
+- name: Plastic
+  class: dark
+  installs: 84556
+  rating: 5
+  reviews: 34
+  extension: will-stone.plastic
+  id: plastic
+- name: Shades of Purple
+  class: dark
+  installs: 1122570
+  rating: 4.9
+  reviews: 144
+  extension: ahmadawais.shades-of-purple
+  id: shades-of-purple
+- name: Snazzy Light
+  class: light
+  installs: 60368
+  rating: 5
+  reviews: 4
+  extension: loilo.snazzy-light
+  id: snazzy
+- name: Tiny Light
+  class: light
+  installs: 50676
+  rating: 4.8
+  reviews: 6
+  extension: luqimin.tiny-light
+  id: tiny
+- name: Tokyo Night
+  class: dual
+  installs: 375090
+  rating: 5
+  reviews: 38
+  extension: enkia.tokyo-night
+  id: tokyo-night
+- name: Winter is Coming
+  class: dual
+  installs: 1558028
+  rating: 4.7
+  reviews: 35
+  extension: johnpapa.winteriscoming
+  id: winter-is-coming

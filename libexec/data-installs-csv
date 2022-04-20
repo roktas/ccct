@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Generates themes data in CSV format
+#
+# Input:  Themes data in YAML format
+# Output: Themes data in CSV format sorted by installs
+
+require 'csv'
+require 'yaml'
+
+def process(results)
+  fields = results.first.keys
+  index  = fields.index('installs')
+
+  rows = results.reject { |result| result['extension'].nil? }.map(&:values).sort_by { |row| [row[index]] }.reverse
+
+  [fields, *rows].map(&:to_csv).join
+end
+
+def main
+  puts process(YAML.load(ARGF.read))
+end
+
+main

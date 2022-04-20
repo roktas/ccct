@@ -1,0 +1,6 @@
+...
+.bundle/
+_/
+__pycache__
+tmp/
+vendor/

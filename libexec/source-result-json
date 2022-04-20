@@ -1,0 +1,44 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Computes the result
+#
+# Input 1: Extended JSON IR of syntax highlighted source code
+# Input 2: JSON IR of BDF font
+# Output:  Result hash in JSON format
+
+require 'json'
+require 'yaml'
+
+def process(source_hash, font_hash, meta_hash)
+  colors = source_hash['codes'].map do |code|
+    code['color']['value']
+  end.tally
+
+  cccts = source_hash['codes'].map do |code|
+    cct = code['color']['cct'] || 0.0
+    code['content'].chars.map { |char| font_hash[char].fetch('density', 0.0) * cct }
+  end.flatten.tally
+
+  average = cccts.sum { |k, v| k * v } / cccts.values.sum.to_f
+  diff65  = 100.0 * (average - 6500.0) / 6500.0
+
+  warn "    Average CCCT: #{average.round(2)}"
+
+  {
+    colors:  Hash[colors.sort_by { |k, v| [-v, k] }],
+    cccts:   Hash[cccts.sort_by  { |k, v| [-v, k] }],
+    source:  meta_hash,
+    average: average,
+    diff65:  diff65
+  }
+end
+
+def main
+  meta_hash = YAML.load_file(ARGV.pop)
+  source_hash, font_hash = ARGV.map { |file| JSON.parse File.read(file) }
+
+  puts JSON.pretty_generate process(source_hash, font_hash, meta_hash)
+end
+
+main

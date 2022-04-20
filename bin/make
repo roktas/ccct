@@ -1,0 +1,188 @@
+#!/usr/bin/env bash
+
+cd "$(dirname "$0")"/.. || exit 1
+
+abort()   { printf '\e[1m\e[38;5;9m✗\e[0m   \e[1m%s\e[0m\n'  "$*" >&2; exit 1; }
+
+running() { printf '\e[1m\e[38;5;14m>\e[0m   \e[1m%s\e[0m\n' "$*" >&2;         }
+
+pp-() {
+	local pp_name_=${1?${FUNCNAME[0]}: missing argument}; shift
+	local -n pp_ref_=$pp_name_
+
+	if [[ "$(declare -p "$pp_name_")" =~ declare\ -[aA] ]]; then
+		local key
+		for key in "${!pp_ref_[@]}"; do
+			printf '    %-32s%s\n' "${key}" "${pp_ref_[$key]}"
+		done | sort
+	else
+		printf '    %-32s%s\n' '' "${pp_ref_}"
+	fi
+
+	echo
+}
+
+outdated() {
+	local infile=$1 outfile=$2
+
+	[[ -z ${MAKE_FORCE:-} ]]   || return 0
+	[[ -e $outfile          ]] || return 0
+	[[ $outfile -nt $infile ]] || return 0
+
+	return 1
+}
+
+font-to-bdf() {
+	local infile=share/fonts/${source[fontface]}.ttf
+	local outfile=${source[dir]}/font.bdf
+
+	outdated "$infile" "$outfile" || return 0
+
+	libexec/font-to-bdf "$infile" "${source[fontsize]:-14}" >"$outfile"
+}
+
+font-ir-json() {
+	local infile=${source[dir]}/font.bdf
+	local outfile=${source[dir]}/font-ir.json
+
+	outdated "$infile" "$outfile" || return 0
+
+	bundle exec libexec/font-ir-json "$infile" >"$outfile"
+}
+
+source-raw-html() {
+	local infile=${source[dir]}/raw.html
+	local outfile=${source[dir]}/source.html
+
+	outdated "$infile" "$outfile" || return 0
+
+	bundle exec libexec/source-raw-html "$infile" >"$outfile"
+}
+
+source-ir-json() {
+	local infile=${source[dir]}/source.html
+	local outfile=${source[dir]}/source-ir.json
+
+	outdated "$infile" "$outfile" || return 0
+
+	bundle exec libexec/source-ir-json "$infile" >"$outfile"
+}
+
+source-ir+-json() {
+	local infile=${source[dir]}/source-ir.json
+	local outfile=${source[dir]}/source-ir+.json
+
+	outdated "$infile" "$outfile" || return 0
+
+	libexec/source-ir+-json "$infile" >"$outfile" 2>/dev/null
+}
+
+declare -ag result_files=()
+
+source-result-json() {
+	local source_file=${source[dir]}/source-ir+.json
+	local font_file=${source[dir]}/font-ir.json
+	local meta_file=${source[dir]}/source.yml
+	local outfile=${source[dir]}/result.json
+
+	libexec/source-result-json "$source_file" "$font_file" "$meta_file" >"$outfile"
+
+	result_files+=("$outfile")
+}
+
+data-defaults-csv() {
+	local infile=srv/summary.json
+	local outfile=doc/data/themes-defaults.csv
+
+	mkdir -p "$(dirname "$outfile")"
+
+	libexec/data-defaults-csv "$infile" >"$outfile"
+}
+
+data-cct-csv() {
+	local infile=srv/summary.json
+	local outfile=doc/data/themes-by-cct.csv
+
+	mkdir -p "$(dirname "$outfile")"
+
+	libexec/data-cct-csv "$infile" >"$outfile"
+}
+
+data-installs-csv() {
+	local infile=share/themes.yml
+	local outfile=doc/data/themes-by-installs.csv
+
+	mkdir -p "$(dirname "$outfile")"
+
+	libexec/data-installs-csv "$infile" >"$outfile"
+}
+
+data-stats-csv() {
+	local infile=srv/summary.json
+	local outfile=doc/data/themes-stats.csv
+
+	outdated "$infile" "$outfile" || return 0
+
+	mkdir -p "$(dirname "$outfile")"
+
+	libexec/data-stats-csv "$infile" >"$outfile"
+}
+
+summary-json() {
+	local outfile=srv/summary.json
+	libexec/summary-json "$@" >"$outfile"
+}
+
+# --- Main
+
+yaml-to-bash() {
+	local var=$1 yaml=$2
+	eval -- "$var=($(
+		ruby -ryaml - "$yaml" <<-EOF
+			YAML.load_file(ARGV.first).each { |key, value| puts "['#{key}']='#{value}'" }
+		EOF
+	))"
+}
+
+main() {
+	local dirs=()
+
+	if [[ $# -gt 0 ]]; then
+		dirs=("$@")
+	else
+		mapfile -t dirs < <(find srv -name 'source.yml' -not -path '*/.../*' -printf '%h\n')
+	fi
+
+	local dir
+
+	# shellcheck disable=2034
+	for dir in "${dirs[@]}"; do
+		local meta=$dir/source.yml
+
+		[[ -f $meta ]] || continue
+
+		local -A source=()
+
+		yaml-to-bash source "$meta"
+		source[dir]=$dir
+
+		running "$dir"; pp- source
+
+		source-raw-html
+
+		font-to-bdf
+		font-ir-json
+		source-ir-json
+		source-ir+-json
+
+		source-result-json
+	done
+
+	summary-json "${result_files[@]}"
+
+	data-cct-csv
+	data-installs-csv
+	data-stats-csv
+}
+
+main "$@"

@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Generates summary report for all themes
+#
+# Input:  Theme result hash in JSON format
+# Output: Report in JSON
+
+require 'json'
+
+def main
+  rows = ARGV.map do |result_file|
+    result = JSON.parse File.read(result_file)
+    source = result['source']
+    source['cct'] = result['average'].round
+    source['diff65'] = result['diff65'].round
+    source
+  end.sort_by { |row| [row['cct']] }
+
+  puts JSON.pretty_generate rows
+end
+
+main

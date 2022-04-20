@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Generates a JSON IR (Intermediate Representation) of BDF font
+#
+# Input:  BDF font
+# Output: BDF JSON IR
+
+require 'json'
+
+require 'bdf'
+
+def area_by_bbx(hash)
+  hash[:bbx][:w] * hash[:bbx][:h]
+end
+
+def area_by_bits(hash)
+  return 0 if hash[:bits].nil? || hash[:bits].first.nil?
+
+  hash[:bits].size * hash[:bits].first.size
+end
+
+def calculate!(hash)
+  hash[:bits] = (hash[:bitmap] || []).map do |string|
+    string.scan(/../).map { |pair| ("%08B" % pair.hex) }.join
+  end
+
+  area = area_by_bits(hash)
+
+  hash[:density] = ((hash[:bits].sum { |row| row.count('1') }).to_f / area) unless area.zero?
+
+  hash
+end
+
+def process(font)
+  result = {}
+  font.instance_variable_get('@chars').each do |code, data|
+    result[code.hex.chr(Encoding::UTF_8)] = calculate!(data)
+  end
+  result
+end
+
+def main
+  puts JSON.pretty_generate process(BDF::Font.from_file(ARGV.empty? ? '/dev/stdin' : ARGV.first))
+end
+
+main

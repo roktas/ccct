@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Generates a pretty formatted HTML from raw HTML
+#
+# Input:  Syntax highlighted source code in raw HTML format
+# Output: Pretty formatted HTML file
+
+require 'htmlbeautifier'
+
+def process(content)
+  content.force_encoding('UTF-16LE').encode!('UTF-8')
+  content.gsub!(/^.*(<html>.*)$/mu, '\1')
+
+  HtmlBeautifier.beautify(content)
+end
+
+def main
+  puts process(ARGF.read)
+end
+
+main

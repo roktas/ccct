@@ -1,0 +1,829 @@
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage{ifthen, array, booktabs}
+\usepackage{csvsimple}
+\usepackage{float}
+\usepackage{verbatimbox}
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\usepackage{comment}
+\usepackage{svg}
+\svgpath{{./img/}}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{io}        = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process}   = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{arrow}     = [thick,->,>=stealth]
+
+\makeatletter
+\g@addto@macro\@floatboxreset\centering
+\makeatother
+
+\setlength{\abovecaptionskip}{15pt plus 3pt minus 2pt}
+\setlength{\belowcaptionskip}{15pt plus 3pt minus 2pt}
+
+\widowpenalties 1 10000
+\raggedbottom
+
+% \title{The effect of the Blue Light Hazard of the different Syntax Highlighting}
+
+\title{A novel approach to the theme for syntax highlighting selection based on Color Correlated Temperature in terms of blue light hazard}
+
+\author{Nurettin Şenyer, Recai Oktaş, Mehmet Serhat Odabas}
+\date{January 2022}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Digital screens containing artificial light sources emit intensely blue light, which is known to be hazardous to human eye health. Software developers are among the people who are most affected by this blue light. Color themes are used to color code in software development processes. The developers chose the color theme based on their personal tastes or the popularity of the theme, Without being aware of the danger of blue light. In this study, Color Correlated Temperature (CCT) was utilized to calculate the quantity of blue light contained in popular color themes chosen by developers. It was observed that the average CCT values of both the dark and light versions of the examined themes were above the D65 threshold and contained intense blue light. Theme developers should consider the risks that blue light poses to human eye health while creating their themes.
+\end{abstract}
+
+\textbf{Keywords} Blue light hazard, CCT, Code highlighting, Eye health
+
+\section{Introduction} \label{sec:introduction}
+
+Software developers spend long hours in front of the screen while reading, writing, or debugging code \cite{vigliarolo2019report}. The complexity of the source code that composes the software requires high concentration and effort in terms of coding the algorithm or understanding the algorithm of the coded one.
+The fact that code readability is of great importance in this whole process has been well expressed by Abelson \emph{et. al.} (1996) in their seminal book \emph{Structure and Interpretation of Computer Programs}, 'Programs must be written for people to read, and only incidentally for machines to execute.'\cite{abelson1996sicp}. 
+
+Syntax highlighting (SH), based on the different coloring of code elements, is an important tool to visually improve the readability of source code and the context of the text. Modern IDEs offer built-in and installable color themes. Users tend to go with the default theme. They choose the theme according to their popularity and personal taste when they want to change.
+
+Coloring plays an important role in syntax highlighting. Coloring allows perceptual segregation of code \cite{hannebauer2018does}. Thus, colors provide a clear model of the perceived concept. Colors clearly indicate the differences between various programming language elements and provide clues to the programmer.
+
+The artificial light produced by digital screens, a critical component of software development, contains blue light hazard (BLH). Artificial light sources are best described by light spectrum (SPD); however, this is generally a complicated task \cite{abe1991}. Therefore, it is sufficient to use CCT to assess the amount of blue light in SPD. While it is not possible to measure SPD, predicting CCT value of the light source requires solving a non-linear optimization problem \cite{li2016}. For this reason, it is not possible to calculate CCT analytically and for quite a long time scientists and engineers have been in the search for practical and simple methods for measuring CCT in industrial applications. In all methods available for the calculation of CCT, the objective function was barely estimated approximately and estimations achieved a limited accuracy. The basis of the method proposed by Qui in 1987 is based on the established functional relationships between CCT and the x, y or u, v chromaticity coordinates of the light source \cite{xingzhong1987formulas}. Qiu’s method is valid for CCTs between $2.500 K$ and $10.000 K$ \cite{li2016}. Following this method, in 1992, McCamy \cite{mccamy1992correlated,mccamy1993correlated} suggested  a more simple formula to estimate temperature from x,y chromaticity coordinates for CCTs ranging from $2.000 K$ to $12.500 K$. McCamy isotherms are high compatible around $6.000 K$ \cite{davis2020correlated}. In 1999, Hernández-Andrés et al.\cite{hernandez1999calculating} produced a different open open formula valid for calculating a wider range of CCT up to $10^6 K$ \cite{li2016}. Li et al. proposed calculating CCT by using Newton method in which the objective function’s first and second derivatives are required. When the proposed method was initialized with Robertson’s method \cite{robertson1968computation}, it generated fairly accurate estimates of less that $0,0012 K$ for light sources with CCT varying between $500 K$ and $10^6 K$ \cite{li2016}. \textbf{TODO: McCammy i kullanmadık!} In this study, McCamy’s CCT formula was used since it is commonly found in a large number of studies and due to its simplicity of calculation.
+
+Blue light, which is known with its phototoxic \cite{ohagan2016} / photochemical \cite{rebec2015, ham1978histologic} adverse effect shows its effects on individuals depending on various parameters such as the time exposed to artificial light producing device (at night, while going to bed, etc.) \cite{cajochen2005high, mineshita2020, yoshimura2017, duncan1985diurnal, white1987degree, organisciak2000circadian, vaughan2002evidence, wong2014circadian, cajochen2007alerting} and frequency \cite{organisciak1989retinal}, dose/intensity \cite{rebec2015, lewy1980light, cajochen2007alerting, duffy2009}, distance \cite{alim2016transient, oh2015, yoshimura2017}, time/past \cite{alim2016transient, cajochen2005high, cajochen2007alerting, lawwill1973effects, lawwill1977retinal, griess1981additivity, duffy2009}, age \cite{cie_human_eye2012, lee2018}. These effects may cause harm with serious side effects on health such as cancer (breast \cite{hansen2001light, blask2005melatonin, stevens2009light, stevens2011testing, kloog2008light, kloog2010nighttime, fang2016, smolensky2015nocturnal, hansen2001increased, schernhammer2001rotating, schernhammer2003night}, prostate and colorectal \cite{kloog2009global, haim2010effects, smolensky2015nocturnal, hansen2001increased, schernhammer2001rotating, schernhammer2003night}), psychological (depression \cite{bedrosian2011dim, maras2015, turner2010role}, anxiety/ severity \cite{maras2015} problems, mental health \cite{grandner2017sleep}, mood disorder \cite{lazzerini2017mood}, more frequent engagement on quiet and mobile devices \cite{aziz2018}, behavioral problems \cite{touitou2016disruption}), body function disorders (increase in temperature and heart rate \cite{kim2019}, obesity \cite{spiegal2004sleep, fonken2010light, goldfield2011physical, mineshita2020, grandner2017sleep}, diabetes \cite{spiegel2005sleep, fang2016}, cardiovascular disease \cite{grandner2017sleep}, hormone balance disorder \cite{gabel2017differential}, systemic disorder \cite{turner2010role}, balance disorder, headache \cite{domingues2017clinical}, long term cumulative effect \cite{algvere2006age}). It has been reported that blue light increased melatonin suppression \cite{kozakov2008}, leading to a deterioration in the circadian rhythm, which is seen as biological clock \cite{ostrin2017}, caused a delay in phase \cite{wahl2019, tahkamo2018, touitou2016disruption, lockley2003, ruger2012}, and had adverse effects such as reproduction/early adolescence \cite{fang2016}. The negative effect on circadian rhythm causes accumulated sleep loss \cite{wolfson1998, turner2010role}, decreases quality of sleep such as sleep interruption/inefficiency \cite{heo2016, moderie2017, kayaba2014, gabel2017differential}, sleep difficulty/delay \cite{domingues2017clinical} and daytime sleepiness \cite{wolfson1998, touitou2016disruption}. It has been shown that smart phone use especially without room light affects sleep disorder \cite{munezawa2011}. As a result of all these, neurocognitive function losses have been reported \cite{grandner2017sleep} such as phase shifts in circadian rhythms \cite{lockley2003}, loss of academic performance \cite{tremblay2011, touitou2016disruption}, cognitive daytime dysfunction \cite{wolfson1998, cajochen2011}, decrease in the ability to learn \cite{mineshita2020}, decrease in the ability to concentrate and remember \cite{cohen2011}, and decrease in comfort and work productivity \cite{conlon1998, kurimoto1986, anshel2007, stoner2002}. 
+
+It can be expected that adverse effects will be reduced if screen producers use model estimations to adjust the spectral power of self-illuminated devices by finding out how the products they make will influence melatonin levels and adjusting them to the circadian rhythm \cite{wood2012}. However, this is very difficult to achieve due to concerns such as the perception of image quality. Therefore, we as individuals will have to resort to different methods to minimize the harmful effects of devices while using them. These are filter use \cite{mortazavi2018, heiting2020}, special lens use \cite{sano2014}, special glass use \cite{heiting2020, lely2014}, screen specific night/reading mode \cite{sanz2020, teran2020} and software adjusting color temperature \cite{sanz2020}.
+ 
+Setting the CCT regardless of context is a disadvantage. \textbf{TODO} bağlama cümlesi gerekli. The dark theme trend in syntax highlighting themes shows an organic movement in theme selection in the context of eye health \cite{suraj2020dark, coyier2013poll}. Popular themes make subjective evaluations stating that they are better for eye health \cite{}. An objective evaluation cannot be made in the context of eye health for syntax highlighting themes, which are chosen based on popularity and personal tastes. CCT can be used to express the amount of blue light a Syntax highlighting theme contains. The higher the average CCT produced by the Syntax highlighting theme in the coloring of the selected code, the more blue light it has. 
+
+In this study, we aim to the theme for syntax highlighting selection based on Color Correlated Temperature in terms of blue light hazard.
+
+\section{Material and Methods} \label{sec:material-methods}
+
+In this study, the CCT was utilized to calculate the quantity of blue light contained in popular color themes chosen by developers. It was observed that the average CCT values of both the dark and light versions of the examined themes were above the D65 threshold and contained intense blue light. Theme developers should consider the risks that blue light poses to human eye health while creating their themes.
+
+The amount of blue light in the color theme was determined using the workflow shown in Figure
+\ref{fig:general-flowchart}. Primarily, the themes to be used in the study were selected.
+
+The first step was to choose a theme. Themes are generally classified into two theme groups according to the use of dark/light background colors in the user interface: dark/light themes.  Theme selection is dependent on editor selection. The VS Code programming editor was chosen for our research\footnote{Rationales behind all these selections were explained in further sections.}. Developers use a variety of programming languages to create the code for their projects. Because analyzing the influence of the chosen theme on all codes would be impractical, operations were conducted out on a sample source code. For this purpose, a C programming language source code taken from the Git source code, which is a fairly modern code base, was chosen. The HTML output for the colorized version of the code with the chosen theme, as well as a code representation based on it, was created. Different fonts are preferred by developers. The influence of different fonts on the calculation was not investigated in this study. The BDF transformation and subsequently the font representation have been created for the selected font. The McCammy equation has been used to determine the CCT using code and font representation.
+
+\begin{comment}
+The flow of transactions taking place in the analysis is presented below, each of which is detailed in the relevant sections. As can be seen in this flowchart, all the coloring themes chosen for a single source code and font sample (bk. \ref{sec:material-methods.inputs})  are kept constant as analysis input is handled separately.
+\end{comment}
+
+\begin{figure}[H]
+  \begin{tikzpicture}[node distance=2cm]
+    \node (select_color_theme)  [startstop,                               xshift=4cm, yshift=0cm   ] {Choose theme};
+
+    \node (input_source_code)   [io,        below of=select_color_theme,  xshift=0cm, yshift=-0.5cm] {Source code};
+    \node (produce_source_html) [process,   below of=input_source_code,   xshift=0cm, yshift=-0.5cm] {Generate HTML output};
+    \node (produce_source_ir)   [process,   below of=produce_source_html, xshift=0cm, yshift=-0.5cm] {Generate representative code};
+    \node (calculate_cct)       [process,   below of=produce_source_ir,   xshift=0cm, yshift=-0.5cm] {Calculate CCT};
+    \node (save_results)        [startstop, below of=calculate_cct,       xshift=0cm, yshift=-0.5cm] {Save the results};
+
+    \node (input_ttf_font)      [io,        right of=input_source_code,   xshift=4cm, yshift=0cm   ] {TTF font};
+    \node (produce_bdf_font)    [process,   below of=input_ttf_font,      xshift=0cm, yshift=-0.5cm] {Convert to BDF font};
+    \node (produce_bdf_ir)      [process,   below of=produce_bdf_font,    xshift=0cm, yshift=-0.5cm] {Generate representative font};
+
+    \draw [arrow] (select_color_theme)  -- (input_source_code);
+    \draw [arrow] (input_source_code)   -- (produce_source_html);
+    \draw [arrow] (produce_source_html) -- (produce_source_ir);
+
+    \draw [arrow] (input_ttf_font)      -- (produce_bdf_font);
+    \draw [arrow] (produce_bdf_font)    -- (produce_bdf_ir);
+
+    \draw [arrow] (produce_source_ir)   -- (calculate_cct);
+    \draw [arrow] (produce_bdf_ir)      |- (calculate_cct);
+
+    \draw [arrow] (calculate_cct)       -- (save_results);
+    \draw [arrow] (save_results)        -- ++ (-3cm, 0) |- (select_color_theme);
+  \end{tikzpicture}
+  
+   \caption{Flow chart}
+   \label{fig:general-flowchart}
+\end{figure}
+
+The analyzes were performed in a mixed environment with components written in different programming languages and running on Windows and Linux. In this context:
+
+\begin{itemize}
+  \item PowerShell has been used to convert the colored codes to HTML format.
+  \item The Ruby programming language has been used to parse the HTML format and obtain the bitmap for the font.
+  \item CCT calculation has been done with the Python programming language.
+  \item The entire process has been made up of subscripts implemented with the Bash shell programming language.
+  \end{itemize}
+
+\subsection{Selection of analysis inputs} \label{sec:material-methods.inputs}
+
+The following choices have been made in order to carry out the targeted analyses of the research.
+
+\begin{itemize}
+  \item Editor choice: Programming editor where development was made.
+  \item Theme selection: The color theme set in the programming editor for coloring. 
+  \item Sample source code selection: It is the source code file that is the subject of syntax coloring.
+  \item Font selection: Fixed-width font set in the programming editor for displaying the source code.
+\end{itemize}
+
+\subsubsection{Editor Selection} \label{sec:material-methods.inputs.editor}
+
+In order to determine the coloring themes, which are the subject of this research, and to obtain the codes colored with these themes, a suitable programming editor should be determined, which will enable concrete and comparative analysis. The following criteria were taken into account in the selection of the programming editor:
+
+\begin{itemize}
+  \item To be public.
+  \item Multi-platform (e.g. Windows, OS X, Linux) support.
+  \item To provide data on the popularity of themes installed as plugins.
+  \item It offers possibilities for obtaining coloring information.
+\end{itemize}
+
+Considering these criteria, the Visual Studio Code (VS Code) editor developed by Microsoft and offered as open-source on the Github platform has come to the fore as the most suitable option among alternatives.
+
+\begin{itemize}
+  \item According to Stack Overflow's 2021 developer survey\cite{so2022survey}, he is the first on the list of preferred editors by a very serious margin; Visual Studio IDE, which uses a similar infrastructure to VS Code, is in second place in the same survey.
+  \item It works on Windows, OS X, and Linux.
+  \item It offers theme statistics\cite{vs2022thememarket} through the VS Code market.
+  \item It has the ability to analyze colors.
+\end{itemize}
+
+\subsubsection{Theme Selection} \label{sec:material-methods.inputs.themes}
+
+Based on VS Code theme statistics\cite{vs2022thememarket}, the most popular 17 themes have been chosen. Some of these
+themes have dark and light versions.Since the dark theme is mostly used\cite{sarath2016prefer}, the number of examples
+of this theme was chosen more than the light theme.Since there is no API to retrieve VS code Market information
+programmatically, theme information was obtained for each theme by web scraping. Information on themes selected within
+the scope of the study are shown in Table \ref{tab:themes}. 
+
+\subsubsection{Programming language and source code selection} \label{sec:material-methods.inputs.language}
+
+Since it will not be possible to work with all common programming languages for analysis, the C language was preferred as an example language. The main reason for this preference is that, according to the TIOBE index, which tracks programming language usage rates, six of the top ten programming languages (C, Java, C++, C\#, Javascript, PHP) are in the "C programming language family" in terms of syntax as of the date of this study\cite{tiobe2022index}, and in this regard, the code coloring of the C programming language represents the general situation with a sufficient approximation. The following criteria have been used to pick sample source code produced in the C programming language.
+
+\begin{itemize}
+  \item Should be a fairly modern and professional code base that reflects current practices.
+
+  \item Should contain most syntax elements of the C programming language.
+
+  \item The number of lines of code (LOC) must be large enough (e.g. a few thousand rows) for the sample to be large.
+\end{itemize}
+
+In the light of these criteria, the source code\cite{github2022gitgrep} of the \texttt{grep} subcommand\cite{git2022grep} was chosen as an example in the source code repository\cite{github2022gitrepo} of the Git\cite{git2022homepage} version tracking system. This sample code, which has a total of 2025 lines, can be accessed in the Git repository with the command below.
+
+\begin{verbatim}
+git show 0a6adc26e2efd2dcfb3e65407623287e08989a63:grep.c
+\end{verbatim}
+
+\subsubsection{Font Selection} \label{sec:material-methods.inputs.font}
+	
+Among the many monospace fonts, the study was carried out only with a font installed on the system and available as a default. As explained in the \ref{sec:material-methods.inputs.editor} section, colored codes are obtained with the VS Code programming editor on the Windows 10 operating system.
+During the research, the Consolas\cite{microsoft2022consolas} fixed-width TrueType font,  displayed in Figure \ref{fig:consolas} by default in this environment, is also used as a default 14-point size. Since it is predefined, this font selection is considered to reflect the common situation experienced by developers.
+
+\begin{figure}[h]
+  \centering
+  \includesvg[inkscapelatex=false, width=150pt]{consolas.svg}
+  \caption{Consolas font}
+  \label{fig:consolas}
+\end{figure}
+
+\subsection{Syntax colored code representation}
+
+\subsubsection{Converting colored codes to HTML format}
+
+To produce colored code in HTML format, the "Copy With Highlight" command that has been added to VS Code at version 1.10 was used. Accessible from the editor's command palette, this command copies the selected source code content to the clipboard in a colored format. Since the editor has no feature to save the colored source code to a file in HTML format, the copied content in the clipboard must be saved to a file manually. For this purpose, the below procedure has been performed by using the PowerShell terminal on the Windows platform where the study was carried out.
+
+\begin{itemize}
+  \item Copy colored code to clipboard in VS Code editor.
+    \begin{itemize}
+      \item Open the file and select all source code.
+      \item Run the "Copy With Highlight" command from the command palette.
+    \end{itemize}
+  \item Save clipboard contents to file in HTML format with commands run in PowerShell terminal.
+    \begin{itemize}
+      \item Set the format of the clipboard content to HTML.
+        \begin{verbatim}
+          Get-Clipboard -TextFormatType Html | Set-Clipboard
+        \end{verbatim}
+      \item Save clipboard contents to file.
+        \begin{verbatim}
+          Get-Clipboard >source.html
+        \end{verbatim}
+    \end{itemize}
+\end{itemize}
+
+For example, if we consider a C source code in the following content:
+
+\vspace{0.1in}
+\begin{verbbox}
+#include "cache.h"
+\end{verbbox}
+\noindent\hspace{1in}\fbox{\theverbbox}
+\vspace{0.1in}
+
+Here is a simplified view of the "raw" file produced for such a code:
+
+\begin{figure}
+  \centering
+  \begin{BVerbatim}
+    Version:0.9
+    StartHTML:0000000105
+    EndHTML:0000186320
+    StartFragment:0000000141
+    EndFragment:0000186284
+    <html>
+    <body>
+    <!--StartFragment--><div><span style="color: #c74ded;">
+    #include</span><span style="color: #d5ced9;"> </span>
+    <span style="color: #96e072;">"cache.h"</span></div>
+    ...
+    </body>
+    </html>
+  \end{BVerbatim}
+  \caption{The raw HTML output of colorized sample code}
+  \label{code:syntaxhtml}
+\end{figure}
+
+The following observations can be made to these examples:
+
+\begin{itemize}
+\item There is some meta-information at the beginning of the file. These lines must be removed for the content to be a valid HTML file.
+\item Each line has been converted into a \texttt{div} blockquote in HTML.
+\item Colorings are transformed into color-coded \texttt{span} parts.
+\end{itemize}
+
+\subsubsection{Parsing the HTML format}
+
+After the colored code was obtained in HTML format, the raw file was converted to a valid XML file and parsed with a script written in the Ruby programming language. At this stage, which is carried out with the Nokogiri library\cite{nokogiri2022package}, which is widely used in the Ruby programming language, it is parsed into an inter representation file in JSON format.
+
+Color information has been produced from CSS declarations given inline in the HTML output. In the parsing of CSS declarations, it has been preferred to parse with regular expressions without using a particular library, taking into account the monotony of the declaration. At the end of this stage, an inter representation output in JSON format containing the following information has been produced.
+
+\begin{itemize}
+  \item Fixed-width font information used in code: A dictionary of font family and font size
+  \item Colorized content groups: An array of color and content string groups
+\end{itemize}
+
+\subsection{Generating the Font Representation}
+
+The most common font technology used in computer applications today is TrueType\cite{ttf2022reference}. Developed by Apple in the late 1980s, this technology enables vector-based scalable font families that allow a character to be displayed on the screen in a wide variety of sizes with high precision. Fixed-width TrueType fonts (TTF) are widely used in programming editors and regular applications. The fixed-width font is a user preference among programmers as crucial as choosing a color theme. "Monaco", "SF Mono", "Cascadia Code", "Consolas", "Fira Mono".
+Considering the existence of a large number of\cite{wikipedia2022monospace} fixed-width fonts, with examples like "Menlo," it should say that font preference is as important as color theme, especially in the aesthetic perceptions of a user looking at a colored source code\cite{so2010monospace,quora2018monospace}.
+
+In this research, it is necessary to determine the pixel density of a particular character in the selected font to calculate CCT values. For this purpose, the TTF font chosen must be converted to bitmap format in a suitable size. "Glyph Bitmap Distribution Format (BDF), a widely used format in its field, was chosen as the bitmap format. The main reasons for selecting the BDF format are:
+
+\begin{itemize}
+  \item Standard: Although bitmap fonts are not used as much as TTF today, BDF (with PCF alternative) is a common standard used when needed.
+  \item Simplicity: BDF is a simple text-based format that it can quickly parse.
+  \item Tooling: Necessary tools are available to handle BDF fonts.
+\end{itemize}
+
+Before the theme analysis, a "Font representation" was generated in the later stages of the study based on the technologies described above for the selected font in the programming editor. A "font representation" is a file in JSON format that contains all the font data that it will need to analyze that font. While some of this data is transferred from the BDF font definition, some consist of data calculated by the methods described in the following sections, such as "Character bit density."
+
+\subsubsection{Conversion to BDF font}
+
+The developers used the \texttt{otf2bdf} tool\cite{otf2bdf2008man} developed as part of the FreeType project\cite{freetype2022project} to convert the TTF font to BDF format, as shown in the flow diagram (Figure \ref{fig:otf2bdf}). In the generated BDF file, simple post-processing has been made to remove some fields in the BDF format to ensure compatibility with the next parsing steps.
+
+\begin{figure}[H]
+  \caption{TTF to BDF conversion}
+  \label{fig:otf2bdf}
+
+  \begin{tikzpicture}[node distance=2cm]
+    \node (input_ttf)   [io,                            xshift=4cm, yshift=0.0cm] {TTF font file};
+    \node (otf2bdf)     [process, below of=input_ttf,   xshift=0cm, yshift=-0.5cm] {otf2bdf};
+    \node (postprocess) [process, below of=otf2bdf,     xshift=0cm, yshift=-0.5cm] {Post-processing};
+    \node (output_bdf)  [io,      below of=postprocess, xshift=0cm, yshift=-0.5cm] {BDF font file};
+
+    \draw [arrow] (input_ttf)   -- (otf2bdf);
+    \draw [arrow] (otf2bdf)     -- (postprocess);
+    \draw [arrow] (postprocess) -- (output_bdf);
+  \end{tikzpicture}
+\end{figure}
+
+\subsubsection{Calculation of font character fill rate}
+
+In syntax coloring, each syntax group (e.g., an identifier, a keyword) in the source code is displayed with the font selected in color set in the theme. To calculate the contribution of a character in the group to the color temperature, it is necessary to calculate the character bit density from the bitmap of the character in the selected font. To explain the method followed in making this calculation, for example, the definition of BDF given in Figure \ref{code:letter_A_BDF} with the Consolas font of the character \texttt{A} is discussed.
+
+In this definition, each line starting with \texttt{BITMAP} corresponds to a line in the bit matrix of the corresponding
+character. A bitmap is obtained when bit patterns reported in hexadecimal are converted to binary (Figure
+\ref{fig:letter_A_bitmap}). Based on this bitmap, the appearance of character A is shown in Figure \ref{fig:letter_A}.
+
+\begin{figure}[htbp]
+  \caption{BDF definition of the Consolas font for the character \texttt{A}}
+  \label{code:letter_A_BDF}
+
+  \centering
+  \begin{BVerbatim}
+    STARTCHAR 0041
+    ENCODING 65
+    SWIDTH 514 0
+    DWIDTH 10 0
+    BBX 10 12 0 0
+    BITMAP
+    0E00
+    0E00
+    1A00
+    1300
+    1300
+    3100
+    3180
+    2180
+    7F80
+    60C0
+    40C0
+    C0C0
+    ENDCHAR
+  \end{BVerbatim}
+\end{figure}
+
+\begin{figure}[htbp]
+  \caption{Bit pattern in Consolas font of character \texttt{A}}
+  \label{fig:letter_A_bitmap}
+
+  \centering
+  \begin{BVerbatim}
+    0 0 0 0 1 1 1 0 0 0 0 0 0 0 0 0 
+    0 0 0 0 1 1 1 0 0 0 0 0 0 0 0 0 
+    0 0 0 1 1 0 1 0 0 0 0 0 0 0 0 0 
+    0 0 0 1 0 0 1 1 0 0 0 0 0 0 0 0 
+    0 0 0 1 0 0 1 1 0 0 0 0 0 0 0 0 
+    0 0 1 1 0 0 0 1 0 0 0 0 0 0 0 0 
+    0 0 1 1 0 0 0 1 1 0 0 0 0 0 0 0 
+    0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 0 
+    0 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 
+    0 1 1 0 0 0 0 0 1 1 0 0 0 0 0 0 
+    0 1 0 0 0 0 0 0 1 1 0 0 0 0 0 0 
+    1 1 0 0 0 0 0 0 1 1 0 0 0 0 0 0 
+  \end{BVerbatim}
+\end{figure}
+
+Considering the bit pattern at Figure \ref{fig:letter_A_bitmap} "Character bit density" is calculated  as follows.
+
+\[
+  \textrm{Character bit density} = \frac{\textrm{number of 1 bits}}{\textrm{(number of rows)}\cdot\textrm{(number of columns)}}
+\]
+
+The following result is obtained when this calculation is made for character \texttt{A} given as an example.
+
+\[
+  \textrm{Character bit density} = \frac{44}{{12}\cdot{16}} = 0.229
+\]
+
+\def\pixelmapnobb{{%
+  {1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0},
+  {0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0},
+  {0,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0},
+  {0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0},
+  {0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0},
+  {0,0,1,1,0,0,0,1,1,0,0,0,0,0,0,0},
+  {0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0},
+  {0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0},
+  {0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0},
+  {0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0},
+  {0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0},
+  {0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0},
+}}
+\def\pixelmapbb{{%
+  {1,1,0,0,0,0,0,0,1,1},
+  {0,1,0,0,0,0,0,0,1,1},
+  {0,1,1,0,0,0,0,0,1,1},
+  {0,1,1,1,1,1,1,1,1,0},
+  {0,0,1,0,0,0,0,1,1,0},
+  {0,0,1,1,0,0,0,1,1,0},
+  {0,0,1,1,0,0,0,1,0,0},
+  {0,0,0,1,0,0,1,1,0,0},
+  {0,0,0,1,0,0,1,1,0,0},
+  {0,0,0,1,1,0,1,0,0,0},
+  {0,0,0,0,1,1,1,0,0,0},
+  {0,0,0,0,1,1,1,0,0,0},
+}}
+
+\colorlet{color0}{yellow!40}
+\colorlet{color1}{red}
+
+\begin{figure}[htbp]
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \caption{Consolas TTF '\texttt{A}' letter}
+    \label{fig:consolas_A}
+
+    \includesvg[inkscapelatex=false, width=140pt]{consolas_A.svg}
+  \end{minipage}\hfill%
+  \begin{minipage}{0.48\textwidth}
+    \centering
+    \caption{Consolas BDF '\texttt{A}' letter}
+    \label{fig:letter_A}
+
+    \begin{tikzpicture}[%
+      scale=0.35,
+      box/.style={rectangle,draw=black,thin, minimum size=1cm},
+      every node/.style={transform shape}
+    ]%
+
+    \foreach \x in {0, 1, ..., 15}{
+      \foreach \y in {0, 1, ...,11}{
+        \def\bit{0} \pgfmathsetmacro{\bit}{\pixelmapnobb[mod(\y,12)][mod(\x,16)]}
+        \node[box, fill=color\bit] at (\x,\y){};
+      }
+    }
+    \end{tikzpicture}
+  \end{minipage}
+\end{figure}
+
+\subsection{CCT Calculation}
+
+\textbf{TODO} D65 nedir?
+
+In CCT calculations, as seen in the flow diagram shown in Figure  \ref{fig:general-flowchart}, the production process is taken as inputs for colored code representation and font representation, which is explained in the previous sections. Within the scope of this study, the Color library \cite{colour2022package} written in Python was used in most of the color-related analysis, especially the CCT calculation.
+
+Colour is an open-source Python package providing a comprehensive number of algorithms and datasets for colour science.
+
+To estimate the Correlated Color Temperature (CCT) value, a nonlinear optimization problem needs to be solved. Therefore, there is no analytical expression for calculating CCT, and scientists have long sought simple and practical methods to calculate CCT in industrial applications. In all previous methods available for calculating CCT, the aim is to only approximate the function and keep the estimates with limited accuracy. Researchers have proposed to calculate CCT using Newton's method, which requires first and second derivatives of the objective function \cite{li2016accurate}. The proposed method, when initialized with Robertson's method, produced fairly accurate estimates of less than 0.0012 K for light sources with CCTs ranging from 500 K to 106 K \cite{robertson1968computation}. The method proposed by Qiu (1987) is based on established functional relationships between the CCT and the x, y, or u, v chromaticity coordinates of the light source. Qiu's method is applicable for CCTs ranging from 2500 K to 10,000 K. \cite{mccamy1992correlated} found a simpler formula for estimating the temperature from the x, y chromaticity coordinates for CCTs ranging from 2000 K to 12500 K. Hernández-Andrés et al. (1999) \cite{hernandez1999calculating} developed another explicit formula that is valid for estimating a wider range of CCTs up to 106 K. The CCT value is accepted as the temperature of the black body radiation that gives the closest color to it under the same brightness and observation conditions. A low CCT (2,500 K) is called a warm color and a high CCT (6,500 K) is a cool color. The general structure of calculating the CCT from the digital image is shown in Figure 2.
+
+\begin{figure}[H]
+  \caption{CCT computational flowchart}
+  \label{fig:cctflowchart}
+
+  \begin{tikzpicture}[node distance=4cm]
+    \node (input_rgb)   [io,                          xshift=0.5cm,  yshift=0.0cm]  {RGB};
+    \node (rgb2xyz)     [process, right of=input_rgb, xshift=0.5cm,  yshift=0.0cm]  {RGB-to-XYZ};
+    \node (xyz2xy)      [process, right of=rgb2xyz,   xshift=0.5cm,  yshift=0.0cm]  {XYZ-to-XY};
+    \node (tstf)        [process, below of=xyz2xy,    xshift=0.0cm,  yshift=-0.0cm] {TS-TF Restriction};
+    \node (mccammy)     [process, left of=tstf,       xshift=-0.5cm, yshift=0.0cm]  {McCammy};
+    \node (output_cct)  [io,      left of=mccammy,    xshift=-0.5cm, yshift=0.0cm]  {CCT};
+
+    \draw [arrow] (input_rgb)  -- (rgb2xyz);
+    \draw [arrow] (rgb2xyz)    -- node[anchor=south] {XYZ} (xyz2xy);
+    \draw [arrow] (xyz2xy)     -- node[anchor=east]  {XY}  (tstf);
+    \draw [arrow] (tstf)      -- (mccammy);
+    \draw [arrow] (mccammy)   -- (output_cct);
+  \end{tikzpicture}
+\end{figure}
+
+\begin{equation}
+\begin{bmatrix}
+    X\\
+    Y\\
+    Z
+\end{bmatrix}
+=
+\begin{bmatrix}
+    0.4124&0.3576&0.1805\\
+    0.2126&0.7152&0.0722\\
+    0.0193&0.1192&0.9505
+\end{bmatrix}
+\begin{bmatrix}
+    sR\\ 
+    sG\\ 
+    sB
+\end{bmatrix}
+\label{eq:RGB2XYZ}
+\end{equation}
+
+The following equation was used to compute CIE xy chromaticity coordinates from CIE XYZ tristimulus values \cite{Wikipedia2005},
+
+\begin{equation}
+\begin{matrix}
+    x = \frac{X}{X+Y+Z}\\
+    \\
+    y = \frac{Y}{X+Y+Z}
+\end{matrix}
+\label{eq:XYZ2xy}
+\end{equation}
+
+McCamy function \cite{davis2020correlated} was used to calculate CCT with CIE xy chromaticity coordinates,
+
+\begin{equation}
+\begin{matrix}
+    T_M = CCT(x, y) := p\left ( \frac{x-0.3320}{y-0.1858} \right )\\
+    \\
+    p(t) := -449 \times t^3 + 3525 \times t^2 - 6823.3 \times t + 5520.33
+\end{matrix}
+\label{eq:xy2TM}
+\end{equation}
+
+McCamy equation has $O(N^3)$ complexity and it is valid for CCT values between the ranges of 2.000 K to 12.500 K \cite{mccamy1992correlated, mccamy1993correlated}. The intermediate region indicated by isotemperature line of $T_S=2.000 K$ and $T_F=12.5000 K$ was chosen as a safe region for computing CCT in the Planckian Locus. It was checked whether the xy chromaticity coordinates computed from the pixels in the image were within this region. The number of pixels outside this region were called as $p_e$, while the number of pixels inside this region were called as $p_i$. The rate of pixels being included in the computation is calculated in $p_r$ percentage as follows,
+
+\begin{equation}
+p_r = \frac{p_i}{p_e + p_i} \times 100
+\label{eq:pr}
+\end{equation}
+
+If the CCT value ($T_M$) computed with McCamy was outside the computation region, it was limited to the limit value,
+
+\begin{equation}
+T = \left \{ 
+\begin{matrix}
+T_M < T_S & T_S\\
+T_M > T_F & T_F\\
+T_M & other
+\end{matrix}
+\right \}
+\label{eq:TS_TF}
+\end{equation}
+
+\textbf{TODO} Ortalama CCT hesabı nasıl yapılıyor?
+- Karakter bit yoğunluğunu da dikkate alarak eşitlik formunda yaz.
+- Belki bir flowchart da sunmak gerek
+
+\section{Results and Discussion}
+
+Bu çalışmada programlama editörü olarak seçilen VS Code ile uyumlu SH temalardan en popüler olanları üzerinde
+çalışılmıştır.  Seçilen tüm temalar Tablo \ref{tab:themes}'de indirme sayıları, beğeni skorları ve yorum sayıları ile
+birlikte verilmiştir.  Bazı temaların (ör. Visual Studio C/C++) hem dark hem de light versiyonları aynı paket içinde
+bulunduğundan bu tür temaların grupları tabloda "dual" olarak belirtilmiş; salt dark veya light nitelikte olan temaların
+grupları ise sırasıyla dark ve light olarak belirtilmiştir.
+
+\csvnames{themestats}{
+  name=\Xtheme,%
+  class=\Xclass,%
+  installs=\Xinstalls,%
+  rating=\Xrating,%
+  reviews=\Xreviews,%
+  extension=\Xextension,%
+  id=\Xid,%
+}
+
+\begin{table}[H]
+	\csvreader[%
+		themestats,%
+		centered tabular=lllll,%
+		table head=\multicolumn{5}{c}{}\\\toprule
+    Theme & Group & Installed & Like & Comment \\\midrule,%
+		late after line=\\, late after last line=\\\bottomrule%
+	]{%
+		./data/themes-by-installs.csv%
+	}{}{%
+    \Xtheme & \Xclass & \Xinstalls & \Xrating & \Xreviews%
+	}
+
+  \caption{Themes}
+  \label{tab:themes}
+\end{table}
+
+Tablolar indirme sayılarına göre sıralı olarak sunulmuştur.  Dark ve light temaların popülerlik karşılaştırılması
+yapılırken dual nitelikteki temalara ilişkin indirme sayılarının nihai durumda kullanılan tema grubunun kesin şekilde
+belirlenmesini olanaksızlaştırdığı dikkate alınmalıdır.  Buna göre Tablo \ref{tab:themes}'de dual temalar göz ardı
+edilerek sadece tema grubunun kesin olarak bilindiği temalar dikkate alındığında salt dark temalar arasında en fazla indirme
+sayısına sahip olan temanın "One Dark Pro", salt Light temalarda ise "Ayu" olduğu görülmektedir. En fazla indirme sayısı bu
+çalışmanın yapıldığı tarih itibarıyla dark temalar için "One Dark Pro" ile 5 milyon civarı iken light temalar için "Ayu"
+ile 1 milyon civarıdır. Salt dark ve light temaların toplam indirme sayılarına bakıldığında bu sayı dark için 15 milyon
+civarı iken, light için 3 milyon civarıdır.
+
+Dark temaların oldukça yüksek bir indirme oranına sahip olduğu görülmektedir. Bu sonuçlar Sarath'ın yaptığı anket
+çalışması \cite{sarath2016prefer} ve Coyier'in CSS özelinde renk tema tercih anketi \cite{coyier2013poll} başta olmak
+üzere farklı çalışmalarda geliştiricilerin dark tema kullanma eğilimiyle oldukça uyumlu bir sonuçtur.  Gerek VS Code'un
+gerekse de Visual Studio'nun ilk kurulumda öntanımlı olarak yerleşik bir dark temayla kurulu gelmesi de dark temaların
+geliştiriciler arasında daha popüler olduğu gözlemine uygun bir tercih olarak yorumlanmalıdır.
+
+Temaların indirme sayıları ile beğeni skorları ve yorum sayıları arasında anlamlı bir korelasyona rastlanmamıştır.
+İndirme sayısı yüksek olduğu halde beğeni skoru o derece yüksek değildir ve uyumlu olarak yüksek miktarda yorum da
+eklenmemiştir. "Visual Studio C/C++" light teması bu gözleme örnek olarak verilebilir.
+
+\textbf{TODO} İnsanlar indiriyor, ancak neden beğenmiyor veya yorum eklemiyorlar? Bununla ilgili literatür desteği kesin
+vardır. İnceleyip ondan da destek alarak burayı zenginleştireceğiz.
+
+Şekil \ref{fig:cctflowchart}'de verilen hesaplama akışı kullanılarak seçilen renk teması, font ve örnek kaynak kod için
+ortalama CCT değerleri hesaplanmıştır. Dark temalar için hesaplanan CCT değerleri Tablo \ref{tab:cct-dark-themes}'da ve
+light temalar için olanlar ise Tablo \ref{tab:cct-light-themes}'da verilmiştir.
+
+\csvnames{themeccts}{
+  analyze=\Xanalyze,
+  fontface=\Xfontface,%
+  fontsize=\Xfontsize,%
+  language=\Xlanguage,%
+  theme=\Xtheme,%
+  cct=\Xcct,%
+  diff65=\Xdiff,%
+}
+
+\begin{table}[H]
+	\csvreader[%
+		themeccts,%
+		filter ifthen=\equal{\Xanalyze}{dark},%
+		centered tabular=lll,%
+		table head=\multicolumn{3}{c}{}\\\toprule
+    Theme & Mean CCT & \% Deviation from D65\\\midrule,%
+		late after line=\\, late after last line=\\\bottomrule%
+	]{%
+		./data/themes-by-cct.csv%
+	}{}{%
+    \Xtheme & \Xcct & \Xdiff%
+	}
+
+	\caption{Dark Themes Temperatures}
+  \label{tab:cct-dark-themes}
+\end{table}
+
+\begin{table}[H]
+	\csvreader[%
+		themeccts,%
+		filter ifthen=\equal{\Xanalyze}{light},%
+		centered tabular=lll,%
+		table head=\multicolumn{3}{c}{}\\\toprule
+    Theme & Mean CCT & \% Deviation from D65\\\midrule,%
+		late after line=\\, late after last line=\\\bottomrule
+	]{%
+		./data/themes-by-cct.csv%
+	}{}{%
+    \Xtheme & \Xcct & \Xdiff%
+	}
+
+	\caption{Light Themes Temperatures}
+  \label{tab:cct-light-themes}
+\end{table}
+
+Ne dark ne de light temalar için indirme sayıları, beğeni skoru veya yorum sayısıyla ortalama CCT arasında anlamlı bir
+ilişki bulunamamıştır. Temaların descriptive istatistik sonuçları Tablo \ref{tab:descriptive}'da verilmiştir. Dark
+temaların ortalama CCT değerlerinin ortalaması 8.851 K iken light temalar için 20.276 K hesaplanmıştır. İncelenen 18
+dark temadan 11'inin (\approx \%60), 17 light temadan 14'ünün (\approx \%76) CCT değerlerinin D65 değerinin üzerinde
+olduğu görülmektedir. Her iki tema grubu için hesaplanan CCT ortalamaları, light temalarda oransal olarak daha fazla
+olmak üzere, D65 (6.500 K) değerinin çok üzerindedir.  
+
+Dark tema grubunda en düşük CCT ortalaması 1.675 K ile Gruvbox iken en yüksek CCT ortalaması 19.253 K ile "Tokyo Night"
+olmuştur. En fazla indirmenin olduğu "One Dark Pro" için CCT ortalaması 10.613 K'dir. İlk üç indirme sayısı yüksek tema
+için elde edilen ortalama CCT değerleri de D65'in çok üzerindedir. Dark tema kullananların gün ışığının çok üzerinde bir
+mavı ışığa maruz kaldığını göstermektedir.
+
+Light tema grubunda en düşük CCT ortalaması 2.563 K ile "Tiny Light" iken en yüksek CCT ortalaması 137.739 K ile "Atom
+One Light" olmuştur. "Atom One Light" temasının böylesi yüksek bir CCT ortalamasına sahip olmasının temel nedeni bu
+temada programlama dilinin rezerve kelimelerini içeren sözdizimi grubu için ortalama CCT değeri yüksek bir rengin
+seçilmiş olmasıdır. Kaynak kodda rezerve kelime sıklığı yüksek olduğundan temanın bu gruba ilişkin yaptığı renklendirme
+nihai CCT değerinde baskın olarak etki göstermektedir.  En fazla indirmenin olduğu "Visual Studio C/C++" için CCT
+ortalaması 8.824 K'dir. İlk üç indirme sayısı yüksek tema için elde edilen ortalama CCT değerleri "Monokai Pro" hariç
+D65'in çok üzerindedir. Light tema kullananların dark kullananlara göre daha yüksek oranda mavi ışığa maruz kaldığını
+göstermektedir.
+
+VS Code'un öntanımlı temaları için hesaplanan ortalama CCT değerleri de Tablo \ref{tab:cct-dark-themes} ve Tablo
+\ref{tab:cct-light-themes}'de verilmiştir. Elde edilen değerlere göre dark, light'a göre düşük olsa da D65'in çok
+üzerindedir. Programlama editörünün default temasını kullananların da yüksek mavi ışığa maruz kaldığını göstermektedir.
+
+\csvnames{cct-descriptive}{
+  theme=\Xtheme,%
+  mean=\Xmean,%
+  std=\Xstd,%
+  max=\Xmax,%
+  min=\Xmin, %
+}
+  
+\begin{table}[H]
+	\csvreader[%
+		cct-descriptive,%
+		centered tabular=lllll,%
+		table head=\multicolumn{5}{c}{}\\\toprule
+		Theme & Mean (K) & Std (K) & Min (K) & Max (K) \\\midrule,%
+		late after line=\\, late after last line=\\\bottomrule%
+	]{%
+		./data/themes-stats.csv%
+	}{}{%
+		\Xtheme & \Xmean & \Xstd & \Xmin & \Xmax %
+	}
+
+	\caption{Theme descriptive statistics}
+	\label{tab:descriptive}
+\end{table}
+
+Dual temalar için hesaplanan ortalama CCT değerleri Figure \ref{fig:dark-light-pair-compare}'de verilmiştir. Temaların
+dark versiyonlarının belirgin bir şekilde light versiyonlarına oranla daha düşük CCT ürettiği ancak yine de D65'in
+üzerinde olduğu görülmektedir. Tema çiftlerinden illa birisi tercih edilecekse dark tercih edilmelidir.
+
+\begin{figure}[h]
+  \begin{tikzpicture}
+    \begin{axis}[
+      xbar,
+      tick label style={font=\footnotesize},
+      ytick={1,2,3,4,5,6,7,8},
+      yticklabels={Visual Studio C/C++,Winter is Coming,Monokai Pro,Night Owl,Nord,Tokyo Night,Gruvbox,Github},
+      xticklabel style={
+        /pgf/number format/fixed,
+        /pgf/number format/precision=5
+      },
+      scaled x ticks=false,
+      xlabel=$CCT$,
+      y=12mm,
+    ]
+    \addplot coordinates {
+      (8406,1)  % Visual C/C++ dark
+      (16945,2) % Winter is Coming dark
+      (2509,3)  % Monokai Pro dark
+      (15011,4) % Night Owl dark
+      (3667,5)  % Nord dark
+      (19253,6) % Tokyo Night dark
+      (1675,7)  % Gruvbox dark
+      (9842,8)  % Github dark
+    };
+    \addplot coordinates {
+      (8824,1)  % Visual C/C++ light
+      (33440,2) % Winter is Coming light
+      (2894,3)  % Monokai Pro light
+      (30055,4) % Night Owl light
+      (7837,5)  % Nord light
+      (19322,6) % Tokyo Night light
+      (2976,7)  % Gruvbox light
+      (12887,8) % Github light
+    };
+    \legend {Dark, Light};
+    \draw[thick,dashed] (axis cs: 6500,0) -- (axis cs: 6500,8.5) node[anchor=east]{D65};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Dark-Light CCT value comparison of themes in pairs}
+  \label{fig:dark-light-pair-compare}
+\end{figure}
+
+Figure \ref{fig:dark-compare}'de salt dark temaların ortalama CCT değerleri verilmiştir. "Andromeda" ve "One Monokai"
+haricindeki temaların ortalama CCT değerleri D65'in üzerindedir. "Palenight" ise CCT değeri en yüksek olan temadır.
+Dolayısıyla en fazla mavi ışık barındıran tema "Palenight" temasıdır.
+
+Bu noktada CCT değeri neredeyse tam D65 seviyesinde olan "Dracula Official" temasına özel olarak vurgu yapılmalıdır.
+İndirme sayılarını baz alan popülerlik sıralamasında 4'ncü sırada olan bu temanın Github kaynak kod deposu 18.3 K "star"
+almıştır\cite{draculatheme2022github}.  Bu değer listedeki diğer temaların Github kaynak kod depolarındaki "star"
+sayılarının çok üzerindedir.  Örneğin listede indirme sayıları açısından birinci sırada olan "One Dark Pro" temasının
+"star" sayısı 1 K\cite{onedarkprotheme2022github}, ikinci sırada olan "Visual Studio C/C++" temasının star sayısı ise
+4.6 K'dır\cite{visualstudiotheme2022github}.  Bu sonuç bir yandan "Dracula Official" temasının bu çalışma kapsamındaki
+ölçütlere göre çok başarılı bir tema olduğunu gösterirken diğer yandan tema popülerliği için indirme sayıları dışında
+ölçütlerin de dikkate alınması gerektiğini ortaya koymaktadır.
+
+\begin{figure}[h]
+  \begin{tikzpicture}
+    \begin{axis}[
+      xbar,
+      tick label style={font=\tiny},
+      ytick={1,2,3,4,5,6,7,8,9},
+      yticklabels={One Dark,Github,Dracula Official,Atom One Dark,One Monokai,Shades of Purple,Palenight,Andromeda,Plastic},
+      xticklabel style={
+        /pgf/number format/fixed,
+        /pgf/number format/precision=5
+      },
+      scaled x ticks=false,
+      xlabel=$CCT$,
+    ]
+    \addplot coordinates {
+      (10613,1) % One Dark
+      (9842,2)  % Github
+      (6532,3)  % Dracula Official
+      (10613,4) % Atom One Dark
+      (3923,5)  % One Monokai
+      (10488,6) % Shades of Purple
+      (16669,7) % Palenight
+      (2191,8)  % Andromeda
+      (9720,9)  % Plastic
+    };
+    \draw[thick,dashed] (axis cs: 6500,0) -- (axis cs: 6500,9.5) node[anchor=east, yshift=-8.5mm]{D65};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{CCT value comparison of dark themes}
+  \label{fig:dark-compare}
+\end{figure}
+
+Sarath'ın yaptığı anket çalışması \cite{sarath2016prefer} ve Coyier'in CSS özelinde renk tema tercih anketi \cite{coyier2013poll} başta olmak üzere farklı çalışmalarda geliştiricilerin dark tema kullanma eğiliminde olduğu görülmüştür. Bu tercihin altında "Soothing to Eye", "More Concentration" ve "Save Energy" önplana çıkmaktadır.
+
+İncelenen temaların dark versiyonları, light olanlarına oranla yarı oranda CCT değerine sahiptir. D65 değerine çok yakın bir ortalamaya sahiptir. Özellikle mavi ışığın zararlı etkisinin sonucu olarak light temaların daha uyarıcı (\textbf{TODO} referans gerekebilir) olmasına karşın uzun süreli kullanımda insan sağlığı açısından olumsuz etkilerinin renk tema tercihinin light yerine dark olmasını açıklamaktadır. Bauer vd.lerinin \cite{bauer1980improving} yaptıkları çalışmada ortaya konan dark temanın okuma üzerine olumlu katkısının da bu tercih önemli bir katkısı olduğu değerlendirilmektedir.
+
+\begin{comment}
+Implications – The study indicates that individuals use Dark Mode for a more satisfying user experience as they feel e.g. less eye strain with a dark themed user interface. Editing and coding software is mostly designed in a light-on-dark color scheme, as users often work for long continuous hours on screen, surrounded by dark environment. As screen time per individual increases, more users are experiencing ocular diseases. In counteraction, society demanded dark themed interfaces for operating systems, websites, and apps. As individuals were already using unofficial dark themes on different interfaces, tech companies started releasing system updates to make Dark Mode a choice. As Apple released their user interface update just in 2019, Dark Mode is still a relevant trend discussed in the industry and society. Experts indicate that Dark Mode is here to stay, as it satisfies preferences of many users and makes current OLED screens and future digital devices with appropriate display technology more sustainable \cite{eisfeld2020rise}
+\end{comment}
+
+\subsection{Kısıtlamalar}
+
+Bu çalışmanın aşağıda listelenen çeşitli kısıtlamaları mevcuttur.
+
+\begin{itemize}
+  \item İndirme sayılarına bakılarak sadece en popüler temalar araştırmaya dahil edilmiştir.  Tema seçimi
+    \ref{sec:material-methods.inputs.themes} bölümünde açıklanmıştır.
+
+  \item Çözümleme için örnek dil olarak C dili tercih edilmiştir.  Bu tercihin gerekçeleri
+    \ref{sec:material-methods.inputs.language} bölümünde açıklanmıştır.
+
+  \item Çözümleme sadece bir font için gerçekleştirilmiştir.  Font seçimi \ref{sec:material-methods.inputs.font}
+    bölümünde açıklanmıştır.
+
+  \item CCT hesabında, seçilen hesap yaklaşımının kısıtından ötürü $T_S$ ve $T_F$ aralığı dışında kalan renkler göz ardı
+    edilmek zorunda kalmıştır.
+
+	\item Ekran veya ekran kartının renk bozucu etkisi göz ardı edilmiştir.
+
+	\item Ortamın aydınlatması göz ardı edilmiştir.
+
+	\item Geliştiricinin renk algısı tek tip olarak kabul edilmiştir.
+\end{itemize}
+
+\section{Conclusion}
+Bu çalışmada kullanılan temaların indirme sayıları incelendiğinde dark temaların light olanlara oranla çok daha fazla indirildiği görülmüştür. Bu durum farklı anketlerde ortaya konan dark tema kullanım sonuçları uyumludur.
+
+Hem dark hem de light tema grubu için hesaplanan ortalama CCT değerleri D65'in çok üzerinde çıkmıştır. Dark tema ortalamaları light'a göre daha düşüktür. Bu durum farklı anketlerde ortaya konan dark tema kullanım eğilimiyle uyumludur.
+
+Hem dark hem de light tema grubunu kullananların gün ışığının çok üzerinde bir mavi ışığa maruz kaldığını göstermektedir. Bu durum hem editör ile öntanımlı gelen temalar hem de indirme sayısı yüksek olan temalar için de geçerlidir. Göz sağlığı başta olmak üzere genel insan sağlığı için light yerine dark tema tercih edilmelidir. Dark temalar arasında ise D65'in altında yer alan temalardan seçim yapılmalıdır.
+
+Çift olarak sunulan temaların hem dark hem de light versiyonlarının CCT değerleri de D65'in üzerinde çıkmıştır. Tema çiftlerinden illa birisi tercih edilecekse dark tercih edilmelidir.
+
+In order to minimize these effects, it is possible for screen producers to know how the  products they make will influence melatonin levels and to use model estimations to adjust spectral power distribution of self-lighting devices to adjust them to circadian rhythm or individuals to resort to different methods (using filters, using special lens, using special glasses, using screen specific night/reading mode and software to adjust color temperature) to minimize the harmful effects during the use of these devices. However, considering that it was not possible to reduce BLH' effect to a great extent due to screen technology although blue filtering level was increased and that artificial color temperature changes in theme create visual discomfort, the most common solution will be creating theme with lower mean CCT without sacrificing coding cognitive level in the source where they are created and this will be an acceptable solution in terms of human health. Tema tasarımı yapılırken mavi ışık tehlikesi göz önüne alınarak renk paleti oluşturmayla ilgili ileri çalışmalara ihtiyaç duyulmaktadır. Var olan temaların mavi ışık etkisini azaltmak için gün ışığına bağlı olarak CCT ayarlayan yazılımların SH temalarında context de dikkate alınarak gerçekleştirilmesi daha yerinde olacaktır.
+
+\section*{Acknowledgement}
+\section*{Conflicts of interest}
+The author declares no conflicts of interest.
+
+\bibliographystyle{ieeetr}
+\bibliography{manuscript}
+\end{document}

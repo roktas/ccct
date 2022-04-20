@@ -1,0 +1,55 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Generates a JSON IR (Intermediate Representation) of syntax highlighted code
+#
+# Input:  Syntax highlighted source code in HTML format
+# Output: JSON IR of parsed HTML file
+
+require 'json'
+require 'nokogiri'
+
+def element_style_to_h(element)
+  result = {}
+
+  style = element.attributes['style']&.value
+  return result unless style
+
+  style.split(';').each do |pair|
+    key, value = pair.split(/:\s*/, 2)
+    result[key] = value.match?(',') ? value.split(/,\s*/).map { |e| e.delete "'" } : value
+  end
+
+  result
+end
+
+def process(content)
+  doc = Nokogiri::HTML(content)
+
+  style = if (first_div = doc.search('div').first)
+    element_style_to_h first_div
+  end || {}
+
+  codes = []
+
+  doc.traverse do |e|
+    case e.name
+    when 'span'
+      content = e.text.gsub(/[[:space:]]/, '')
+      next if content.empty?
+
+      codes << { color: element_style_to_h(e)['color'], content: content }
+    end
+  end
+
+  {
+    style: style,
+    codes: codes
+  }
+end
+
+def main
+  puts JSON.pretty_generate process(ARGF.read)
+end
+
+main
