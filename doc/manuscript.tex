@@ -605,7 +605,7 @@ light temalar için olanlar ise Tablo \ref{tab:cct-light-themes}'da verilmiştir
 		filter ifthen=\equal{\Xanalyze}{dark},%
 		centered tabular=lll,%
 		table head=\multicolumn{3}{c}{}\\\toprule
-    Theme & Mean CCT & \% Deviation from D65\\\midrule,%
+    Theme & Mean CCT (K) & Deviation from D65 (\%)\\\midrule,%
 		late after line=\\, late after last line=\\\bottomrule%
 	]{%
 		./data/themes-by-cct.csv%
@@ -623,7 +623,7 @@ light temalar için olanlar ise Tablo \ref{tab:cct-light-themes}'da verilmiştir
 		filter ifthen=\equal{\Xanalyze}{light},%
 		centered tabular=lll,%
 		table head=\multicolumn{3}{c}{}\\\toprule
-    Theme & Mean CCT & \% Deviation from D65\\\midrule,%
+    Theme & Mean CCT (K) & Deviation from D65 (\%)\\\midrule,%
 		late after line=\\, late after last line=\\\bottomrule
 	]{%
 		./data/themes-by-cct.csv%
@@ -701,7 +701,7 @@ dark versiyonlarının belirgin bir şekilde light versiyonlarına oranla daha d
         /pgf/number format/precision=5
       },
       scaled x ticks=false,
-      xlabel=$CCT$,
+      xlabel=$CCT (K)$,
       y=12mm,
     ]
     \addplot coordinates {
@@ -749,15 +749,16 @@ sayılarının çok üzerindedir.  Örneğin listede indirme sayıları açısı
   \begin{tikzpicture}
     \begin{axis}[
       xbar,
-      tick label style={font=\tiny},
+      tick label style={font=\footnotesize},
       ytick={1,2,3,4,5,6,7,8,9},
       yticklabels={One Dark,Github,Dracula Official,Atom One Dark,One Monokai,Shades of Purple,Palenight,Andromeda,Plastic},
       xticklabel style={
+        font=\tiny,
         /pgf/number format/fixed,
         /pgf/number format/precision=5
       },
       scaled x ticks=false,
-      xlabel=$CCT$,
+      xlabel=$CCT (K)$,
     ]
     \addplot coordinates {
       (10613,1) % One Dark
