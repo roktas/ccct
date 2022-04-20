@@ -78,6 +78,21 @@ After cloning the repository
   bin/remake
   ```
 
+- Compile paper
+
+  ```sh
+  cd doc
+  latexmk --shell-escape
+  ```
+
+- Format BibTeX file
+
+  ```sh
+  cd doc
+  bibtool -s -i manuscript.bib -o manuscript-sorted.bib
+  mv manuscript-sorted.bib manuscript.bib
+  ```
+
 #### Generating syntax highlighted sources in HTML format
 
 - Open the source with the selected color theme
