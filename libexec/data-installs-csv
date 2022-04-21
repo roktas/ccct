@@ -1,11 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# Generates themes data in CSV format
-#
-# Input:  Themes data in YAML format
-# Output: Themes data in CSV format sorted by installs
-
 require 'csv'
 require 'yaml'
 

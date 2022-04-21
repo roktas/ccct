@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'json'
+
+SELECTED_THEMES = [
+  'Visual Studio C/C++',
+  'Winter is Coming',
+  'Monokai Pro',
+  'Default',
+  'Nord',
+  'Tokyo Night',
+  'Gruvbox',
+  'Github'
+].freeze
+
+def process(results)
+  [
+    ['themes', *SELECTED_THEMES],
+    ['index', *1.upto(SELECTED_THEMES.size).to_a],
+    [
+      'dark', *SELECTED_THEMES.map do |theme|
+        results.find { |result| result['analyze'] == 'dark' && result['theme'] == theme }.fetch('cct')
+      end
+    ],
+    [
+      'light', *SELECTED_THEMES.map do |theme|
+        results.find { |result| result['analyze'] == 'light' && result['theme'] == theme }.fetch('cct')
+      end
+    ]
+  ].map { |rows| rows.join(',') }.join("\n")
+end
+
+def main
+  puts process(JSON.parse(ARGF.read))
+end
+
+main

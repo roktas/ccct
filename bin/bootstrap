@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-. <(functions at ...)
+cd "$(dirname "$0")"/.. || exit 1
 
 main() {
 	bundle config set --local path vendor/bundle

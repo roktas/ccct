@@ -60,16 +60,17 @@ After cloning the repository
   sudo env PATH=$PATH sbin/bootstrap
   ```
 
+- Setup environment
+
+  ```sh
+  sudo apt-get install direnv
+  direnv allow
+  ```
+
 - Make all files
 
   ```sh
   bin/make
-  ```
-
-  or if `direnv` installed on your system, load `.envrc` with `direnv allow` and run commands directly:
-
-  ```sh
-  make
   ```
 
 - Remake all files

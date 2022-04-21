@@ -1,11 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# Generates a JSON IR (Intermediate Representation) of BDF font
-#
-# Input:  BDF font
-# Output: BDF JSON IR
-
 require 'json'
 
 require 'bdf'

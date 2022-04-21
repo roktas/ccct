@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'json'
+
+SELECTED_THEMES = [
+  'One Dark Pro',
+  'Github',
+  'Dracula Official',
+  'Atom One Dark',
+  'One Monokai',
+  'Default',
+  'Andromeda',
+  'Plastic'
+].freeze
+
+def process(results)
+  selects = SELECTED_THEMES.map do |theme|
+    results.find { |result| result['analyze'] == 'dark' && result['theme'] == theme }
+  end.sort_by { |result| result['cct'] }
+
+  [
+    ['themes', *selects.map { |select| select['theme'] }],
+    ['index',  *1.upto(selects.size).to_a],
+    ['ccts',   *selects.map { |select| select['cct'] }]
+  ].map { |rows| rows.join(',') }.join("\n")
+end
+
+def main
+  puts process(JSON.parse(ARGF.read))
+end
+
+main

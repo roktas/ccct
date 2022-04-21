@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-# Generates BDF font from TTF
-#
-# Input:  TTF font (from share/fonts)
-# Output: BDF font
-
 main() {
 	otf2bdf -p "${2:-14}" "${1:-/dev/stdin}" | sed -e '/^COMMENT/d' | tr -d '©'
 }

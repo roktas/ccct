@@ -11,7 +11,7 @@
 \usepackage{comment}
 \usepackage{svg}
 \svgpath{{./img/}}
-\usepackage{pgfplots}
+\usepackage{pgfplots, pgfplotstable}
 \pgfplotsset{compat=1.17}
 
 \usepackage{polyglossia}
@@ -689,13 +689,16 @@ Dual temalar için hesaplanan ortalama CCT değerleri Figure \ref{fig:dark-light
 dark versiyonlarının belirgin bir şekilde light versiyonlarına oranla daha düşük CCT ürettiği ancak yine de D65'in
 üzerinde olduğu görülmektedir. Tema çiftlerinden illa birisi tercih edilecekse dark tercih edilmelidir.
 
+\pgfplotstableread[col sep=comma,text indicator="]{./data/themes-dual.csv}\dualtable
+\pgfplotstabletranspose[colnames from=themes]\tabledual{\dualtable}
+
 \begin{figure}[h]
   \begin{tikzpicture}
     \begin{axis}[
       xbar,
       tick label style={font=\footnotesize},
-      ytick={1,2,3,4,5,6,7,8},
-      yticklabels={Visual Studio C/C++,Winter is Coming,Monokai Pro,Night Owl,Nord,Tokyo Night,Gruvbox,Github},
+      ytick=data,
+      yticklabels from table={\tabledual}{colnames},
       xticklabel style={
         /pgf/number format/fixed,
         /pgf/number format/precision=5
@@ -704,28 +707,10 @@ dark versiyonlarının belirgin bir şekilde light versiyonlarına oranla daha d
       xlabel=$CCT (K)$,
       y=12mm,
     ]
-    \addplot coordinates {
-      (8406,1)  % Visual C/C++ dark
-      (16945,2) % Winter is Coming dark
-      (2509,3)  % Monokai Pro dark
-      (15011,4) % Night Owl dark
-      (3667,5)  % Nord dark
-      (19253,6) % Tokyo Night dark
-      (1675,7)  % Gruvbox dark
-      (9842,8)  % Github dark
-    };
-    \addplot coordinates {
-      (8824,1)  % Visual C/C++ light
-      (33440,2) % Winter is Coming light
-      (2894,3)  % Monokai Pro light
-      (30055,4) % Night Owl light
-      (7837,5)  % Nord light
-      (19322,6) % Tokyo Night light
-      (2976,7)  % Gruvbox light
-      (12887,8) % Github light
-    };
-    \legend {Dark, Light};
-    \draw[thick,dashed] (axis cs: 6500,0) -- (axis cs: 6500,8.5) node[anchor=east]{D65};
+      \addplot table[x=dark,y=index] {\tabledual};
+      \addplot table[x=light,y=index] {\tabledual};
+      \legend {Dark, Light};
+      \draw[thick,dashed] (axis cs: 6500,0) -- (axis cs: 6500,8.5) node[anchor=east]{D65};
     \end{axis}
   \end{tikzpicture}
   \caption{Dark-Light CCT value comparison of themes in pairs}
@@ -745,33 +730,27 @@ sayılarının çok üzerindedir.  Örneğin listede indirme sayıları açısı
 ölçütlere göre çok başarılı bir tema olduğunu gösterirken diğer yandan tema popülerliği için indirme sayıları dışında
 ölçütlerin de dikkate alınması gerektiğini ortaya koymaktadır.
 
+\pgfplotstableread[col sep=comma,text indicator="]{./data/themes-dark.csv}\darktable
+\pgfplotstabletranspose[colnames from=themes]\tabledark{\darktable}
+
 \begin{figure}[h]
   \begin{tikzpicture}
     \begin{axis}[
       xbar,
       tick label style={font=\footnotesize},
-      ytick={1,2,3,4,5,6,7,8,9},
-      yticklabels={One Dark,Github,Dracula Official,Atom One Dark,One Monokai,Shades of Purple,Palenight,Andromeda,Plastic},
+      ytick=data,
+      yticklabels from table={\tabledark}{colnames},
       xticklabel style={
-        font=\tiny,
         /pgf/number format/fixed,
         /pgf/number format/precision=5
       },
       scaled x ticks=false,
       xlabel=$CCT (K)$,
+      xmin=5000,
+      y=12mm,
     ]
-    \addplot coordinates {
-      (10613,1) % One Dark
-      (9842,2)  % Github
-      (6532,3)  % Dracula Official
-      (10613,4) % Atom One Dark
-      (3923,5)  % One Monokai
-      (10488,6) % Shades of Purple
-      (16669,7) % Palenight
-      (2191,8)  % Andromeda
-      (9720,9)  % Plastic
-    };
-    \draw[thick,dashed] (axis cs: 6500,0) -- (axis cs: 6500,9.5) node[anchor=east, yshift=-8.5mm]{D65};
+      \addplot table[x=ccts,y=index] {\tabledark};
+      \draw[thick,dashed] (axis cs: 6500,0) -- (axis cs: 6500,8.5) node[anchor=east, yshift=-7.5mm]{D65};
     \end{axis}
   \end{tikzpicture}
   \caption{CCT value comparison of dark themes}

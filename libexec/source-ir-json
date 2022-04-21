@@ -1,11 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# Generates a JSON IR (Intermediate Representation) of syntax highlighted code
-#
-# Input:  Syntax highlighted source code in HTML format
-# Output: JSON IR of parsed HTML file
-
 require 'json'
 require 'nokogiri'
 

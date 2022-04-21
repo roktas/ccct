@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'json'
+
+def process(_)
+  '' # TODO
+end
+
+def main
+  puts process(JSON.parse(ARGF.read))
+end
+
+main

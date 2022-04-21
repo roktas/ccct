@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+
+import sys
+
+from common import hex_to_cct
+
+print(hex_to_cct(sys.argv[1]))

@@ -128,6 +128,39 @@ data-stats-csv() {
 	libexec/data-stats-csv "$infile" >"$outfile"
 }
 
+data-dual-csv() {
+	local infile=srv/summary.json
+	local outfile=doc/data/themes-dual.csv
+
+	outdated "$infile" "$outfile" || return 0
+
+	mkdir -p "$(dirname "$outfile")"
+
+	bundle exec libexec/data-dual-csv "$infile" >"$outfile"
+}
+
+data-dark-csv() {
+	local infile=srv/summary.json
+	local outfile=doc/data/themes-dark.csv
+
+	outdated "$infile" "$outfile" || return 0
+
+	mkdir -p "$(dirname "$outfile")"
+
+	bundle exec libexec/data-dark-csv "$infile" >"$outfile"
+}
+
+data-light-csv() {
+	local infile=srv/summary.json
+	local outfile=doc/data/themes-light.csv
+
+	outdated "$infile" "$outfile" || return 0
+
+	mkdir -p "$(dirname "$outfile")"
+
+	bundle exec libexec/data-light-csv "$infile" >"$outfile"
+}
+
 summary-json() {
 	local outfile=srv/summary.json
 	libexec/summary-json "$@" >"$outfile"
@@ -181,6 +214,9 @@ main() {
 	summary-json "${result_files[@]}"
 
 	data-cct-csv
+	data-dual-csv
+	data-dark-csv
+	data-light-csv
 	data-installs-csv
 	data-stats-csv
 }

@@ -1,11 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# Generates statistics CSV
-#
-# Input:  Summary hash in JSON format
-# Output: CCT statistics in CSV format by analyzed variants
-
 require 'csv'
 require 'json'
 
