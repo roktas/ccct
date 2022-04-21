@@ -10,16 +10,6 @@ require 'json'
 
 require 'bdf'
 
-def area_by_bbx(hash)
-  hash[:bbx][:w] * hash[:bbx][:h]
-end
-
-def area_by_bits(hash)
-  return 0 if hash[:bits].nil? || hash[:bits].first.nil?
-
-  hash[:bits].size * hash[:bits].first.size
-end
-
 def calculate!(hash)
   hash[:bits] = (hash[:bitmap] || []).map do |string|
     string.scan(/../).map { |pair| ("%08B" % pair.hex) }.join
