@@ -1,30 +1,12 @@
 [
   {
-    "analyze": "dark",
+    "analyze": "light",
     "fontface": "Consolas-Regular",
     "fontsize": 14,
     "language": "c",
     "theme": "Gruvbox",
-    "cct": 1675,
-    "diff65": -74
-  },
-  {
-    "analyze": "dark",
-    "fontface": "Consolas-Regular",
-    "fontsize": 14,
-    "language": "c",
-    "theme": "Andromeda",
-    "cct": 2191,
-    "diff65": -66
-  },
-  {
-    "analyze": "dark",
-    "fontface": "Consolas-Regular",
-    "fontsize": 14,
-    "language": "c",
-    "theme": "Monokai Pro",
-    "cct": 2509,
-    "diff65": -61
+    "cct": 4833,
+    "diff65": -26
   },
   {
     "analyze": "light",
@@ -32,8 +14,17 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Tiny Light",
-    "cct": 2563,
-    "diff65": -61
+    "cct": 5267,
+    "diff65": -19
+  },
+  {
+    "analyze": "dark",
+    "fontface": "Consolas-Regular",
+    "fontsize": 14,
+    "language": "c",
+    "theme": "Gruvbox",
+    "cct": 5581,
+    "diff65": -14
   },
   {
     "analyze": "light",
@@ -41,44 +32,17 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Monokai Pro",
-    "cct": 2894,
-    "diff65": -55
-  },
-  {
-    "analyze": "light",
-    "fontface": "Consolas-Regular",
-    "fontsize": 14,
-    "language": "c",
-    "theme": "Gruvbox",
-    "cct": 2976,
-    "diff65": -54
+    "cct": 5953,
+    "diff65": -8
   },
   {
     "analyze": "dark",
     "fontface": "Consolas-Regular",
     "fontsize": 14,
     "language": "c",
-    "theme": "Nord",
-    "cct": 3667,
-    "diff65": -44
-  },
-  {
-    "analyze": "dark",
-    "fontface": "Consolas-Regular",
-    "fontsize": 14,
-    "language": "c",
-    "theme": "One Monokai",
-    "cct": 3923,
-    "diff65": -40
-  },
-  {
-    "analyze": "dark",
-    "fontface": "Consolas-Regular",
-    "fontsize": 14,
-    "language": "c",
-    "theme": "Learn with Sumit",
-    "cct": 4547,
-    "diff65": -30
+    "theme": "Monokai Pro",
+    "cct": 6061,
+    "diff65": -7
   },
   {
     "analyze": "light",
@@ -86,17 +50,8 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Ayu",
-    "cct": 5453,
-    "diff65": -16
-  },
-  {
-    "analyze": "dark",
-    "fontface": "Consolas-Regular",
-    "fontsize": 14,
-    "language": "c",
-    "theme": "Dracula Official",
-    "cct": 6532,
-    "diff65": 0
+    "cct": 6789,
+    "diff65": 4
   },
   {
     "analyze": "dark",
@@ -104,8 +59,17 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Default",
-    "cct": 6723,
-    "diff65": 3
+    "cct": 7121,
+    "diff65": 10
+  },
+  {
+    "analyze": "dark",
+    "fontface": "Consolas-Regular",
+    "fontsize": 14,
+    "language": "c",
+    "theme": "Visual Studio C/C++",
+    "cct": 7627,
+    "diff65": 17
   },
   {
     "analyze": "light",
@@ -113,17 +77,8 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Nord",
-    "cct": 7837,
-    "diff65": 21
-  },
-  {
-    "analyze": "dark",
-    "fontface": "Consolas-Regular",
-    "fontsize": 14,
-    "language": "c",
-    "theme": "Visual Studio C/C++",
-    "cct": 8406,
-    "diff65": 29
+    "cct": 7718,
+    "diff65": 19
   },
   {
     "analyze": "light",
@@ -131,8 +86,8 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Visual Studio C/C++",
-    "cct": 8824,
-    "diff65": 36
+    "cct": 7754,
+    "diff65": 19
   },
   {
     "analyze": "light",
@@ -140,26 +95,17 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Netbeans Light",
-    "cct": 8986,
-    "diff65": 38
+    "cct": 7803,
+    "diff65": 20
   },
   {
     "analyze": "dark",
     "fontface": "Consolas-Regular",
     "fontsize": 14,
     "language": "c",
-    "theme": "Plastic",
-    "cct": 9720,
-    "diff65": 50
-  },
-  {
-    "analyze": "dark",
-    "fontface": "Consolas-Regular",
-    "fontsize": 14,
-    "language": "c",
-    "theme": "Github",
-    "cct": 9842,
-    "diff65": 51
+    "theme": "Andromeda",
+    "cct": 8306,
+    "diff65": 28
   },
   {
     "analyze": "light",
@@ -167,35 +113,8 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Snazzy Light",
-    "cct": 10342,
-    "diff65": 59
-  },
-  {
-    "analyze": "dark",
-    "fontface": "Consolas-Regular",
-    "fontsize": 14,
-    "language": "c",
-    "theme": "Shades of Purple",
-    "cct": 10488,
-    "diff65": 61
-  },
-  {
-    "analyze": "dark",
-    "fontface": "Consolas-Regular",
-    "fontsize": 14,
-    "language": "c",
-    "theme": "Atom One Dark",
-    "cct": 10613,
-    "diff65": 63
-  },
-  {
-    "analyze": "dark",
-    "fontface": "Consolas-Regular",
-    "fontsize": 14,
-    "language": "c",
-    "theme": "One Dark Pro",
-    "cct": 10613,
-    "diff65": 63
+    "cct": 8331,
+    "diff65": 28
   },
   {
     "analyze": "light",
@@ -203,8 +122,17 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Hop Light",
-    "cct": 11010,
-    "diff65": 69
+    "cct": 8432,
+    "diff65": 30
+  },
+  {
+    "analyze": "dark",
+    "fontface": "Consolas-Regular",
+    "fontsize": 14,
+    "language": "c",
+    "theme": "One Monokai",
+    "cct": 8648,
+    "diff65": 33
   },
   {
     "analyze": "light",
@@ -212,17 +140,17 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Github",
-    "cct": 12887,
-    "diff65": 98
+    "cct": 9055,
+    "diff65": 39
   },
   {
     "analyze": "dark",
     "fontface": "Consolas-Regular",
     "fontsize": 14,
     "language": "c",
-    "theme": "Night Owl",
-    "cct": 15011,
-    "diff65": 131
+    "theme": "Winter is Coming",
+    "cct": 9570,
+    "diff65": 47
   },
   {
     "analyze": "light",
@@ -230,26 +158,35 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Community Material",
-    "cct": 15679,
-    "diff65": 141
+    "cct": 9908,
+    "diff65": 52
   },
   {
     "analyze": "dark",
     "fontface": "Consolas-Regular",
     "fontsize": 14,
     "language": "c",
-    "theme": "Palenight",
-    "cct": 16669,
-    "diff65": 156
+    "theme": "Github",
+    "cct": 9914,
+    "diff65": 53
   },
   {
     "analyze": "dark",
     "fontface": "Consolas-Regular",
     "fontsize": 14,
     "language": "c",
-    "theme": "Winter is Coming",
-    "cct": 16945,
-    "diff65": 161
+    "theme": "Nord",
+    "cct": 9935,
+    "diff65": 53
+  },
+  {
+    "analyze": "dark",
+    "fontface": "Consolas-Regular",
+    "fontsize": 14,
+    "language": "c",
+    "theme": "Plastic",
+    "cct": 10170,
+    "diff65": 56
   },
   {
     "analyze": "light",
@@ -257,8 +194,8 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Learn with Sumit",
-    "cct": 17119,
-    "diff65": 163
+    "cct": 10349,
+    "diff65": 59
   },
   {
     "analyze": "light",
@@ -266,17 +203,35 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Default",
-    "cct": 17578,
-    "diff65": 170
+    "cct": 10432,
+    "diff65": 60
   },
   {
     "analyze": "dark",
     "fontface": "Consolas-Regular",
     "fontsize": 14,
     "language": "c",
-    "theme": "Tokyo Night",
-    "cct": 19253,
-    "diff65": 196
+    "theme": "Atom One Dark",
+    "cct": 10738,
+    "diff65": 65
+  },
+  {
+    "analyze": "dark",
+    "fontface": "Consolas-Regular",
+    "fontsize": 14,
+    "language": "c",
+    "theme": "One Dark Pro",
+    "cct": 10738,
+    "diff65": 65
+  },
+  {
+    "analyze": "dark",
+    "fontface": "Consolas-Regular",
+    "fontsize": 14,
+    "language": "c",
+    "theme": "Dracula Official",
+    "cct": 10817,
+    "diff65": 66
   },
   {
     "analyze": "light",
@@ -284,8 +239,8 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Tokyo Night",
-    "cct": 19322,
-    "diff65": 197
+    "cct": 11242,
+    "diff65": 73
   },
   {
     "analyze": "light",
@@ -293,8 +248,8 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Night Owl",
-    "cct": 30055,
-    "diff65": 362
+    "cct": 14311,
+    "diff65": 120
   },
   {
     "analyze": "light",
@@ -302,8 +257,35 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Winter is Coming",
-    "cct": 33440,
-    "diff65": 414
+    "cct": 15384,
+    "diff65": 137
+  },
+  {
+    "analyze": "dark",
+    "fontface": "Consolas-Regular",
+    "fontsize": 14,
+    "language": "c",
+    "theme": "Tokyo Night",
+    "cct": 16517,
+    "diff65": 154
+  },
+  {
+    "analyze": "dark",
+    "fontface": "Consolas-Regular",
+    "fontsize": 14,
+    "language": "c",
+    "theme": "Palenight",
+    "cct": 18208,
+    "diff65": 180
+  },
+  {
+    "analyze": "dark",
+    "fontface": "Consolas-Regular",
+    "fontsize": 14,
+    "language": "c",
+    "theme": "Learn with Sumit",
+    "cct": 23084,
+    "diff65": 255
   },
   {
     "analyze": "light",
@@ -311,7 +293,25 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Atom One Light",
-    "cct": 137739,
-    "diff65": 2019
+    "cct": 47866,
+    "diff65": 636
+  },
+  {
+    "analyze": "dark",
+    "fontface": "Consolas-Regular",
+    "fontsize": 14,
+    "language": "c",
+    "theme": "Shades of Purple",
+    "cct": 118081,
+    "diff65": 1717
+  },
+  {
+    "analyze": "dark",
+    "fontface": "Consolas-Regular",
+    "fontsize": 14,
+    "language": "c",
+    "theme": "Night Owl",
+    "cct": 118951,
+    "diff65": 1730
   }
 ]

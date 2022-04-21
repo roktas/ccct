@@ -15,9 +15,42 @@ def process(source_hash, font_hash, meta_hash)
     code['color']['value']
   end.tally
 
+  cct_background      = source_hash['style']['background-color']['cct']
+  vertical_row_factor = source_hash['style']['line-height'].to_f / source_hash['style']['font-size'].to_f
+
   cccts = source_hash['codes'].map do |code|
     cct = code['color']['cct'] || 0.0
-    code['content'].chars.map { |char| font_hash[char].fetch('density', 0.0) * cct }
+    code['content'].chars.map do |char|
+      h = font_hash[char]
+
+      if char == ' '
+        # Boşluk karakteri özel.  Boşluklar için HTML'de span içinde bir renk bildiriliyor ama bunun bir önemi
+        # yok.  Neden? Çünkü boşluklarda CSS background rengiyle overwrite ediyor.  Dolayısıyla boşluklar
+        # için kaynak temsilinde bildirilen renk yerine background rengini esas alıyoruz.
+        next cct_background
+      elsif h['count1'].nil?
+        # Muhtelemen bir kontrol karakteri, yani printable değil. BDF'te bu tür karakterler için bitmap boş.
+        # Dolayısıyla bu karakterlerin CCT katkısı 0.0.
+        next 0.0
+      end
+
+      # Line-height'ten gelen üst ve alt pikselleri hesaba katmaya hazırlanıyoruz.  Bu pikseller 0 yani background
+      # rengi olarak katkı sağlayacak.
+      extra_rows = (vertical_row_factor * h['nrows']).round
+      extra_area = extra_rows * h['ncols']
+
+      areafull = h['areafull'] + extra_area
+      count0   = h['count0']   + extra_area # Line-height katkısı
+      count1   = h['count1']
+
+      # 0'lar background rengiyle, 1'ler ise bildirilen renkle katkı sağlıyor
+      # Formül:
+      #
+      #   ((1'lerin sayısı) x (bildirilen renk CCT)) + ((0'ların sayısı) x (arkaplan CCT))
+      #   -------------------------------------------------------------------------------
+      #                             toplam piksel sayısı
+      ((count1 * cct) + (count0 * cct_background)) / areafull.to_f
+    end
   end.flatten.tally
 
   average = cccts.sum { |k, v| k * v } / cccts.values.sum.to_f

@@ -35,8 +35,7 @@ def process(content)
   doc.traverse do |e|
     case e.name
     when 'span'
-      content = e.text.gsub(/[[:space:]]/, '')
-      next if content.empty?
+      content = e.text
 
       codes << { color: element_style_to_h(e)['color'], content: content }
     end
