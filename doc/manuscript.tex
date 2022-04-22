@@ -34,7 +34,9 @@
 
 % \title{The effect of the Blue Light Hazard of the different Syntax Highlighting}
 
-\title{A novel approach to the theme for syntax highlighting selection based on Color Correlated Temperature in terms of blue light hazard}
+%\title{A novel approach to the theme for syntax highlighting selection based on Color Correlated Temperature in terms of blue light hazard}
+
+\title{Comparison and Evaluation of Popular Syntax Highlighting Themes in Terms of Color Correlated Temperature values}
 
 \author{Nurettin Şenyer, Recai Oktaş, Mehmet Serhat Odabas}
 \date{January 2022}
@@ -705,12 +707,12 @@ dark versiyonlarının belirgin bir şekilde light versiyonlarına oranla daha d
       },
       scaled x ticks=false,
       xlabel=$CCT (K)$,
-      y=12mm,
+      y=11mm,
     ]
       \addplot table[x=dark,y=index] {\tabledual};
       \addplot table[x=light,y=index] {\tabledual};
       \legend {Dark, Light};
-      \draw[thick,dashed] (axis cs: 6500,0) -- (axis cs: 6500,8.5) node[anchor=east]{D65};
+      \draw[thin,dashed] (axis cs: 6500,0) -- (axis cs: 6500,8.5) node[anchor=west, yshift=-14mm]{D65};
     \end{axis}
   \end{tikzpicture}
   \caption{Dark-Light CCT value comparison of themes in pairs}
@@ -733,7 +735,7 @@ sayılarının çok üzerindedir.  Örneğin listede indirme sayıları açısı
 \pgfplotstableread[col sep=comma,text indicator="]{./data/themes-dark.csv}\darktable
 \pgfplotstabletranspose[colnames from=themes]\tabledark{\darktable}
 
-\begin{figure}[h]
+\begin{figure}[H]
   \begin{tikzpicture}
     \begin{axis}[
       xbar,
@@ -747,14 +749,41 @@ sayılarının çok üzerindedir.  Örneğin listede indirme sayıları açısı
       scaled x ticks=false,
       xlabel=$CCT (K)$,
       xmin=5000,
-      y=12mm,
+      y=8mm,
     ]
       \addplot table[x=ccts,y=index] {\tabledark};
-      \draw[thick,dashed] (axis cs: 6500,0) -- (axis cs: 6500,8.5) node[anchor=east, yshift=-7.5mm]{D65};
+      \draw[thin,dashed] (axis cs: 6500,0) -- (axis cs: 6500,8.5) node[anchor=east, yshift=-8.0mm]{D65};
     \end{axis}
   \end{tikzpicture}
   \caption{CCT value comparison of dark themes}
   \label{fig:dark-compare}
+\end{figure}
+
+\pgfplotstableread[col sep=comma,text indicator="]{./data/themes-light.csv}\lighttable
+\pgfplotstabletranspose[colnames from=themes]\tablelight{\lighttable}
+
+\begin{figure}[H]
+  \begin{tikzpicture}
+    \begin{axis}[
+      xbar,
+      tick label style={font=\footnotesize},
+      ytick=data,
+      yticklabels from table={\tablelight}{colnames},
+      xticklabel style={
+        /pgf/number format/fixed,
+        /pgf/number format/precision=5
+      },
+      scaled x ticks=false,
+      xlabel=$CCT (K)$,
+      xmin=5000,
+      y=8mm,
+    ]
+      \addplot [fill=red!30!white] table[x=ccts,y=index] {\tablelight};
+      \draw[thin,dashed] (axis cs: 6500,0) -- (axis cs: 6500,8.5) node[anchor=east, yshift=-8.0mm]{D65};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{CCT value comparison of light themes}
+  \label{fig:light-compare}
 \end{figure}
 
 Sarath'ın yaptığı anket çalışması \cite{sarath2016prefer} ve Coyier'in CSS özelinde renk tema tercih anketi \cite{coyier2013poll} başta olmak üzere farklı çalışmalarda geliştiricilerin dark tema kullanma eğiliminde olduğu görülmüştür. Bu tercihin altında "Soothing to Eye", "More Concentration" ve "Save Energy" önplana çıkmaktadır.
