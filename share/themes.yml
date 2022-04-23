@@ -21,7 +21,7 @@
   extension: akamud.vscode-theme-onelight
   id: atom-one-light
 - name: Ayu
-  class: light
+  class: dual
   installs: 1127068
   rating: 4.7
   reviews: 92
@@ -34,6 +34,13 @@
   reviews: 3
   extension: ms-vscode.cpptools-themes
   id: c-c++
+- name: Community Material
+  class: dual
+  installs: 1191276
+  rating: 4.7
+  reviews: 6
+  extension: Equinusocio.vsc-community-material-theme
+  id: material
 - name: Default
   class: dual
   installs: 
@@ -76,12 +83,12 @@
   reviews: 427
   extension: SumitSaha.learn-with-sumit-theme
   id: learn-with-sumit
-- name: Community Material
-  class: light
-  installs: 989598
-  rating: 4.7
-  reviews: 6
-  extension: Equinusocio.vsc-community-material-theme
+- name: Material
+  class: dual
+  installs: 989586
+  rating: 5
+  reviews: 13
+  extension: Equinusocio.vsc-material-theme
   id: material
 - name: Monokai Pro
   class: dual
@@ -105,7 +112,7 @@
   extension: sdras.night-owl
   id: night-owl
 - name: Nord
-  class: dual
+  class: dark
   installs: 541929
   rating: 4.8
   reviews: 65

@@ -4,17 +4,18 @@ light,Consolas-Regular,14,c,Tiny Light,5225,-20
 dark,Consolas-Regular,14,c,Gruvbox,5709,-12
 light,Consolas-Regular,14,c,Monokai Pro,5901,-9
 dark,Consolas-Regular,14,c,Monokai Pro,6080,-6
-light,Consolas-Regular,14,c,Ayu,6276,-3
 dark,Consolas-Regular,14,c,Default,6368,-2
 dark,Consolas-Regular,14,c,Visual Studio C/C++,6590,1
 light,Consolas-Regular,14,c,Visual Studio C/C++,6645,2
+light,Consolas-Regular,14,c,Ayu,6667,3
 light,Consolas-Regular,14,c,Netbeans Light,6670,3
-light,Consolas-Regular,14,c,Nord,6784,4
+dark,Consolas-Regular,14,c,Community Material,6827,5
 dark,Consolas-Regular,14,c,Winter is Coming,6833,5
 light,Consolas-Regular,14,c,Snazzy Light,6835,5
 light,Consolas-Regular,14,c,Hop Light,6914,6
 light,Consolas-Regular,14,c,Github,7110,9
-light,Consolas-Regular,14,c,Community Material,7401,14
+light,Consolas-Regular,14,c,Material,7176,10
+light,Consolas-Regular,14,c,Community Material,7372,13
 light,Consolas-Regular,14,c,Learn with Sumit,7681,18
 light,Consolas-Regular,14,c,Default,7847,21
 light,Consolas-Regular,14,c,Tokyo Night,8228,27
@@ -26,8 +27,10 @@ light,Consolas-Regular,14,c,Night Owl,9361,44
 dark,Consolas-Regular,14,c,Atom One Dark,9384,44
 dark,Consolas-Regular,14,c,One Dark Pro,9384,44
 light,Consolas-Regular,14,c,Winter is Coming,9889,52
+dark,Consolas-Regular,14,c,Material,9984,54
 dark,Consolas-Regular,14,c,Nord,10016,54
 dark,Consolas-Regular,14,c,Dracula Official,10471,61
+dark,Consolas-Regular,14,c,Ayu,11929,84
 dark,Consolas-Regular,14,c,Tokyo Night,13968,115
 dark,Consolas-Regular,14,c,Palenight,16296,151
 light,Consolas-Regular,14,c,Atom One Light,22253,242

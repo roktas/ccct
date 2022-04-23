@@ -45,15 +45,6 @@
     "diff65": -6
   },
   {
-    "analyze": "light",
-    "fontface": "Consolas-Regular",
-    "fontsize": 14,
-    "language": "c",
-    "theme": "Ayu",
-    "cct": 6276,
-    "diff65": -3
-  },
-  {
     "analyze": "dark",
     "fontface": "Consolas-Regular",
     "fontsize": 14,
@@ -85,8 +76,8 @@
     "fontface": "Consolas-Regular",
     "fontsize": 14,
     "language": "c",
-    "theme": "Netbeans Light",
-    "cct": 6670,
+    "theme": "Ayu",
+    "cct": 6667,
     "diff65": 3
   },
   {
@@ -94,9 +85,18 @@
     "fontface": "Consolas-Regular",
     "fontsize": 14,
     "language": "c",
-    "theme": "Nord",
-    "cct": 6784,
-    "diff65": 4
+    "theme": "Netbeans Light",
+    "cct": 6670,
+    "diff65": 3
+  },
+  {
+    "analyze": "dark",
+    "fontface": "Consolas-Regular",
+    "fontsize": 14,
+    "language": "c",
+    "theme": "Community Material",
+    "cct": 6827,
+    "diff65": 5
   },
   {
     "analyze": "dark",
@@ -139,9 +139,18 @@
     "fontface": "Consolas-Regular",
     "fontsize": 14,
     "language": "c",
+    "theme": "Material",
+    "cct": 7176,
+    "diff65": 10
+  },
+  {
+    "analyze": "light",
+    "fontface": "Consolas-Regular",
+    "fontsize": 14,
+    "language": "c",
     "theme": "Community Material",
-    "cct": 7401,
-    "diff65": 14
+    "cct": 7372,
+    "diff65": 13
   },
   {
     "analyze": "light",
@@ -247,6 +256,15 @@
     "fontface": "Consolas-Regular",
     "fontsize": 14,
     "language": "c",
+    "theme": "Material",
+    "cct": 9984,
+    "diff65": 54
+  },
+  {
+    "analyze": "dark",
+    "fontface": "Consolas-Regular",
+    "fontsize": 14,
+    "language": "c",
     "theme": "Nord",
     "cct": 10016,
     "diff65": 54
@@ -259,6 +277,15 @@
     "theme": "Dracula Official",
     "cct": 10471,
     "diff65": 61
+  },
+  {
+    "analyze": "dark",
+    "fontface": "Consolas-Regular",
+    "fontsize": 14,
+    "language": "c",
+    "theme": "Ayu",
+    "cct": 11929,
+    "diff65": 84
   },
   {
     "analyze": "dark",
