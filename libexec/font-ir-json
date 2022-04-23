@@ -12,10 +12,9 @@ def calculate!(hash)
 
   return hash if hash[:bits].nil? || hash[:bits].empty?
 
-  hash[:nrows]    = hash[:bits].size
-  hash[:ncols]    = hash[:bits].first.size
-  hash[:areafull] = hash[:bits].size * hash[:bits].first.size
-  hash[:areabbox] = hash[:bbx][:w] * hash[:bbx][:h]
+  hash[:nrows]    = 14 # TODO hash[:bits].size
+  hash[:ncols]    = 14 # TODO hash[:bits].first.size
+  hash[:areafull] = hash[:nrows] * hash[:ncols] # TODO hash[:bits].size * hash[:bits].first.size
   hash[:count1]   = hash[:bits].sum { |row| row.count('1') }
   hash[:count0]   = hash[:areafull] - hash[:count1]
 

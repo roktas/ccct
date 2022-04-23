@@ -115,6 +115,35 @@ The flow of transactions taking place in the analysis is presented below, each o
    \label{fig:general-flowchart}
 \end{figure}
 
+\begin{figure}[htb]
+  \centering
+  \begin{BVerbatim}
+    #include "cache.h"
+    #include "config.h"
+    ···
+    static void std_output(struct grep_opt *opt, const void *buf, size_t size)
+    {
+            fwrite(buf, size, 1, stdout);
+    }
+  \end{BVerbatim}
+  \caption{Sample code without coloring}
+  \label{code:string}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includesvg[inkscapelatex=false, width=400pt]{code.svg}
+  \caption{Colored code}
+  \label{fig:code}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex=false, width=200pt]{string.svg}
+  \caption{Colored code content as a single string}
+  \label{fig:string}
+\end{figure}
+
 The analyzes were performed in a mixed environment with components written in different programming languages and running on Windows and Linux. In this context:
 
 \begin{itemize}
@@ -158,8 +187,8 @@ Considering these criteria, the Visual Studio Code (VS Code) editor developed by
 \subsubsection{Theme Selection} \label{sec:material-methods.inputs.themes}
 
 Based on VS Code theme statistics\cite{vs2022thememarket}, the most popular 17 themes have been chosen. Some of these
-themes have dark and light versions.Since the dark theme is mostly used\cite{sarath2016prefer}, the number of examples
-of this theme was chosen more than the light theme.Since there is no API to retrieve VS code Market information
+themes have dark and light versions. Since the dark theme is mostly used\cite{sarath2016prefer}, the number of examples
+of this theme was chosen more than the light theme. Since there is no API to retrieve VS code Market information
 programmatically, theme information was obtained for each theme by web scraping. Information on themes selected within
 the scope of the study are shown in Table \ref{tab:themes}. 
 
@@ -178,13 +207,13 @@ Since it will not be possible to work with all common programming languages for 
 In the light of these criteria, the source code\cite{github2022gitgrep} of the \texttt{grep} subcommand\cite{git2022grep} was chosen as an example in the source code repository\cite{github2022gitrepo} of the Git\cite{git2022homepage} version tracking system. This sample code, which has a total of 2025 lines, can be accessed in the Git repository with the command below.
 
 \begin{verbatim}
-git show 0a6adc26e2efd2dcfb3e65407623287e08989a63:grep.c
+  git show 0a6adc26e2efd2dcfb3e65407623287e08989a63:grep.c
 \end{verbatim}
 
 \subsubsection{Font Selection} \label{sec:material-methods.inputs.font}
 	
 Among the many monospace fonts, the study was carried out only with a font installed on the system and available as a default. As explained in the \ref{sec:material-methods.inputs.editor} section, colored codes are obtained with the VS Code programming editor on the Windows 10 operating system.
-During the research, the Consolas\cite{microsoft2022consolas} fixed-width TrueType font,  displayed in Figure \ref{fig:consolas} by default in this environment, is also used as a default 14-point size. Since it is predefined, this font selection is considered to reflect the common situation experienced by developers.
+During the research, the Consolas\cite{microsoft2022consolas} fixed-width TrueType font, displayed in Figure \ref{fig:consolas} by default in this environment, is also used as a default 14-point size. Since it is predefined, this font selection is considered to reflect the common situation experienced by developers.
 
 \begin{figure}[h]
   \centering
@@ -221,15 +250,15 @@ To produce colored code in HTML format, the "Copy With Highlight" command that h
 For example, if we consider a C source code in the following content:
 
 \vspace{0.1in}
-\begin{verbbox}
-#include "cache.h"
-\end{verbbox}
-\noindent\hspace{1in}\fbox{\theverbbox}
+\begin{BVerbatim}
+  #include "cache.h"
+  ...
+\end{BVerbatim}
 \vspace{0.1in}
 
 Here is a simplified view of the "raw" file produced for such a code:
 
-\begin{figure}
+\begin{figure}[H]
   \centering
   \begin{BVerbatim}
     Version:0.9
@@ -239,10 +268,14 @@ Here is a simplified view of the "raw" file produced for such a code:
     EndFragment:0000186284
     <html>
     <body>
-    <!--StartFragment--><div><span style="color: #c74ded;">
-    #include</span><span style="color: #d5ced9;"> </span>
-    <span style="color: #96e072;">"cache.h"</span></div>
-    ...
+      <!--StartFragment-->
+      <div style="color: #d4d4d4;background-color: #1e1e1e;
+      font-family: Consolas, 'Courier New', monospace;font-weight: normal;
+      font-size: 14px;line-height: 19px;white-space: pre;">
+      <div><span style="color: #c586c0;">#include</span>
+      <span style="color: #569cd6;"> </span>
+      <span style="color: #ce9178;">"cache.h"</span></div>
+      ...
     </body>
     </html>
   \end{BVerbatim}
@@ -256,6 +289,9 @@ The following observations can be made to these examples:
 \item There is some meta-information at the beginning of the file. These lines must be removed for the content to be a valid HTML file.
 \item Each line has been converted into a \texttt{div} blockquote in HTML.
 \item Colorings are transformed into color-coded \texttt{span} parts.
+\item Font family (`Consolas`) and size (`14px`) are defined at the beginning.
+\item Line height (`19px`), which will be used to compute a full height character box, is defined.
+\item Background color, which will be used for space characters, is defined.
 \end{itemize}
 
 \subsubsection{Parsing the HTML format}
@@ -313,54 +349,63 @@ character. A bitmap is obtained when bit patterns reported in hexadecimal are co
 \ref{fig:letter_A_bitmap}). Based on this bitmap, the appearance of character A is shown in Figure \ref{fig:letter_A}.
 
 \begin{figure}[htbp]
-  \caption{BDF definition of the Consolas font for the character \texttt{A}}
+  \caption{Selected fields from BDF font properties section of the Consolas font}
+  \label{code:consolas_properties_BDF}
+
+  \centering
+  \begin{BVerbatim}
+    SIZE 14 100 100
+    FONTBOUNDINGBOX 19 27 -6 -6
+    FAMILY_NAME "Consolas"
+    WEIGHT_NAME "Medium"
+    SLANT "R"
+  \end{BVerbatim}
+\end{figure}
+
+\begin{figure}[htbp]
+  \caption{BDF definition of the Consolas font for the character '\texttt{a}'}
   \label{code:letter_A_BDF}
 
   \centering
   \begin{BVerbatim}
-    STARTCHAR 0041
-    ENCODING 65
+    STARTCHAR 0061
+    ENCODING 97
     SWIDTH 514 0
     DWIDTH 10 0
-    BBX 10 12 0 0
+    BBX 8 9 1 0
     BITMAP
-    0E00
-    0E00
-    1A00
-    1300
-    1300
-    3100
-    3180
-    2180
-    7F80
-    60C0
-    40C0
-    C0C0
+    3E
+    43
+    03
+    03
+    3F
+    43
+    C3
+    C7
+    7B
     ENDCHAR
   \end{BVerbatim}
 \end{figure}
 
 \begin{figure}[htbp]
-  \caption{Bit pattern in Consolas font of character \texttt{A}}
+  \caption{Bit pattern in Consolas font of character '\texttt{a}'}
   \label{fig:letter_A_bitmap}
 
   \centering
   \begin{BVerbatim}
-    0 0 0 0 1 1 1 0 0 0 0 0 0 0 0 0 
-    0 0 0 0 1 1 1 0 0 0 0 0 0 0 0 0 
-    0 0 0 1 1 0 1 0 0 0 0 0 0 0 0 0 
-    0 0 0 1 0 0 1 1 0 0 0 0 0 0 0 0 
-    0 0 0 1 0 0 1 1 0 0 0 0 0 0 0 0 
-    0 0 1 1 0 0 0 1 0 0 0 0 0 0 0 0 
-    0 0 1 1 0 0 0 1 1 0 0 0 0 0 0 0 
-    0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 0 
-    0 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 
-    0 1 1 0 0 0 0 0 1 1 0 0 0 0 0 0 
-    0 1 0 0 0 0 0 0 1 1 0 0 0 0 0 0 
-    1 1 0 0 0 0 0 0 1 1 0 0 0 0 0 0 
+    0 0 1 1 1 1 1 0
+    0 1 0 0 0 0 1 1
+    0 0 0 0 0 0 1 1
+    0 0 0 0 0 0 1 1
+    0 0 1 1 1 1 1 1
+    0 1 0 0 0 0 1 1
+    1 1 0 0 0 0 1 1
+    1 1 0 0 0 1 1 1
+    0 1 1 1 1 0 1 1
   \end{BVerbatim}
 \end{figure}
 
+\begin{comment}
 Considering the bit pattern at Figure \ref{fig:letter_A_bitmap} "Character bit density" is calculated  as follows.
 
 \[
@@ -372,66 +417,58 @@ The following result is obtained when this calculation is made for character \te
 \[
   \textrm{Character bit density} = \frac{44}{{12}\cdot{16}} = 0.229
 \]
+\end{comment}
 
-\def\pixelmapnobb{{%
-  {1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0},
-  {0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0},
-  {0,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0},
-  {0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0},
-  {0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0},
-  {0,0,1,1,0,0,0,1,1,0,0,0,0,0,0,0},
-  {0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0},
-  {0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0},
-  {0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0},
-  {0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0},
-  {0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0},
-  {0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0},
-}}
-\def\pixelmapbb{{%
-  {1,1,0,0,0,0,0,0,1,1},
-  {0,1,0,0,0,0,0,0,1,1},
-  {0,1,1,0,0,0,0,0,1,1},
-  {0,1,1,1,1,1,1,1,1,0},
-  {0,0,1,0,0,0,0,1,1,0},
-  {0,0,1,1,0,0,0,1,1,0},
-  {0,0,1,1,0,0,0,1,0,0},
-  {0,0,0,1,0,0,1,1,0,0},
-  {0,0,0,1,0,0,1,1,0,0},
-  {0,0,0,1,1,0,1,0,0,0},
-  {0,0,0,0,1,1,1,0,0,0},
-  {0,0,0,0,1,1,1,0,0,0},
+\begin{figure}[htbp]
+    \centering
+    \includesvg[inkscapelatex=false, width=250pt]{charbox.svg}
+    \caption{Consolas TTF of '\texttt{a}' character with line height}
+    \label{fig:charbox}
+\end{figure}
+
+\def\pixelmap_a{{%
+  {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+  {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+  {0,1,1,1,1,0,1,1,0,0,0,0,0,0},
+  {1,1,0,0,0,1,1,1,0,0,0,0,0,0},
+  {1,1,0,0,0,0,1,1,0,0,0,0,0,0},
+  {0,1,0,0,0,0,1,1,0,0,0,0,0,0},
+  {0,0,1,1,1,1,1,1,0,0,0,0,0,0},
+  {0,0,0,0,0,0,1,1,0,0,0,0,0,0},
+  {0,0,0,0,0,0,1,1,0,0,0,0,0,0},
+  {0,1,0,0,0,0,1,1,0,0,0,0,0,0},
+  {0,0,1,1,1,1,1,0,0,0,0,0,0,0},
+  {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+  {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+  {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+  {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+  {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+  {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+  {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+  {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 }}
 
 \colorlet{color0}{yellow!40}
 \colorlet{color1}{red}
 
 \begin{figure}[htbp]
-  \begin{minipage}{0.45\textwidth}
-    \centering
-    \caption{Consolas TTF '\texttt{A}' letter}
-    \label{fig:consolas_A}
+  \centering
+  \caption{Consolas BDF of '\texttt{a}' character with line height}
+  \label{fig:letter_a}
 
-    \includesvg[inkscapelatex=false, width=140pt]{consolas_A.svg}
-  \end{minipage}\hfill%
-  \begin{minipage}{0.48\textwidth}
-    \centering
-    \caption{Consolas BDF '\texttt{A}' letter}
-    \label{fig:letter_A}
+  \begin{tikzpicture}[%
+    scale=0.35,
+    box/.style={rectangle,draw=black,thin, minimum size=1cm},
+    every node/.style={transform shape}
+  ]%
 
-    \begin{tikzpicture}[%
-      scale=0.35,
-      box/.style={rectangle,draw=black,thin, minimum size=1cm},
-      every node/.style={transform shape}
-    ]%
-
-    \foreach \x in {0, 1, ..., 15}{
-      \foreach \y in {0, 1, ...,11}{
-        \def\bit{0} \pgfmathsetmacro{\bit}{\pixelmapnobb[mod(\y,12)][mod(\x,16)]}
-        \node[box, fill=color\bit] at (\x,\y){};
-      }
+  \foreach \x in {0, 1, ..., 13}{
+    \foreach \y in {0, 1, ...,18}{
+      \def\bit{0} \pgfmathsetmacro{\bit}{\pixelmap_a[mod(\y,19)][mod(\x,14)]}
+      \node[box, fill=color\bit] at (\x,\y){};
     }
-    \end{tikzpicture}
-  \end{minipage}
+  }
+  \end{tikzpicture}
 \end{figure}
 
 \subsection{CCT Calculation}
