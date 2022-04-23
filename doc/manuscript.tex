@@ -342,11 +342,15 @@ The developers used the \texttt{otf2bdf} tool\cite{otf2bdf2008man} developed as 
 
 \subsubsection{Calculation of font character fill rate}
 
-In syntax coloring, each syntax group (e.g., an identifier, a keyword) in the source code is displayed with the font selected in color set in the theme. To calculate the contribution of a character in the group to the color temperature, it is necessary to calculate the character bit density from the bitmap of the character in the selected font. To explain the method followed in making this calculation, for example, the definition of BDF given in Figure \ref{code:letter_A_BDF} with the Consolas font of the character \texttt{A} is discussed.
+In syntax coloring, each syntax group (e.g., an identifier, a keyword) in the source code is displayed with the font
+selected in color set in the theme. To calculate the contribution of a character in the group to the color temperature,
+it is necessary to calculate the character bit density from the bitmap of the character in the selected font. To explain
+the method followed in making this calculation, for example, the definition of BDF given in Figure
+\ref{code:letter_a_BDF} with the Consolas font of the character '\texttt{a}` is discussed.
 
 In this definition, each line starting with \texttt{BITMAP} corresponds to a line in the bit matrix of the corresponding
 character. A bitmap is obtained when bit patterns reported in hexadecimal are converted to binary (Figure
-\ref{fig:letter_A_bitmap}). Based on this bitmap, the appearance of character A is shown in Figure \ref{fig:letter_A}.
+\ref{fig:letter_a_bitmap}). Based on this bitmap, the appearance of character '\texttt{a}' is shown in Figure \ref{fig:letter_a}.
 
 \begin{figure}[htbp]
   \caption{Selected fields from BDF font properties section of the Consolas font}
@@ -364,7 +368,7 @@ character. A bitmap is obtained when bit patterns reported in hexadecimal are co
 
 \begin{figure}[htbp]
   \caption{BDF definition of the Consolas font for the character '\texttt{a}'}
-  \label{code:letter_A_BDF}
+  \label{code:letter_a_BDF}
 
   \centering
   \begin{BVerbatim}
@@ -389,7 +393,7 @@ character. A bitmap is obtained when bit patterns reported in hexadecimal are co
 
 \begin{figure}[htbp]
   \caption{Bit pattern in Consolas font of character '\texttt{a}'}
-  \label{fig:letter_A_bitmap}
+  \label{fig:letter_a_bitmap}
 
   \centering
   \begin{BVerbatim}
@@ -406,7 +410,7 @@ character. A bitmap is obtained when bit patterns reported in hexadecimal are co
 \end{figure}
 
 \begin{comment}
-Considering the bit pattern at Figure \ref{fig:letter_A_bitmap} "Character bit density" is calculated  as follows.
+Considering the bit pattern at Figure \ref{fig:letter_a_bitmap} "Character bit density" is calculated  as follows.
 
 \[
   \textrm{Character bit density} = \frac{\textrm{number of 1 bits}}{\textrm{(number of rows)}\cdot\textrm{(number of columns)}}
