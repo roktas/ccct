@@ -115,35 +115,6 @@ The flow of transactions taking place in the analysis is presented below, each o
    \label{fig:general-flowchart}
 \end{figure}
 
-\begin{figure}[htb]
-  \centering
-  \begin{BVerbatim}
-    #include "cache.h"
-    #include "config.h"
-    ···
-    static void std_output(struct grep_opt *opt, const void *buf, size_t size)
-    {
-            fwrite(buf, size, 1, stdout);
-    }
-  \end{BVerbatim}
-  \caption{Sample code without coloring}
-  \label{code:string}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \includesvg[inkscapelatex=false, width=400pt]{code.svg}
-  \caption{Colored code}
-  \label{fig:code}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includesvg[inkscapelatex=false, width=200pt]{string.svg}
-  \caption{Colored code content as a single string}
-  \label{fig:string}
-\end{figure}
-
 The analyzes were performed in a mixed environment with components written in different programming languages and running on Windows and Linux. In this context:
 
 \begin{itemize}
@@ -342,6 +313,35 @@ The developers used the \texttt{otf2bdf} tool\cite{otf2bdf2008man} developed as 
 
 \subsubsection{Calculation of font character fill rate}
 
+\begin{figure}[htb]
+  \centering
+  \begin{BVerbatim}
+    #include "cache.h"
+    #include "config.h"
+    ···
+    static void std_output(struct grep_opt *opt, const void *buf, size_t size)
+    {
+            fwrite(buf, size, 1, stdout);
+    }
+  \end{BVerbatim}
+  \caption{Sample code without coloring}
+  \label{code:string}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includesvg[inkscapelatex=false, width=400pt]{code.svg}
+  \caption{Colored code}
+  \label{fig:code}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex=false, width=200pt]{string.svg}
+  \caption{Colored code content as a single string}
+  \label{fig:string}
+\end{figure}
+
 In syntax coloring, each syntax group (e.g., an identifier, a keyword) in the source code is displayed with the font
 selected in color set in the theme. To calculate the contribution of a character in the group to the color temperature,
 it is necessary to calculate the character bit density from the bitmap of the character in the selected font. To explain
@@ -351,20 +351,6 @@ the method followed in making this calculation, for example, the definition of B
 In this definition, each line starting with \texttt{BITMAP} corresponds to a line in the bit matrix of the corresponding
 character. A bitmap is obtained when bit patterns reported in hexadecimal are converted to binary (Figure
 \ref{fig:letter_a_bitmap}). Based on this bitmap, the appearance of character '\texttt{a}' is shown in Figure \ref{fig:letter_a}.
-
-\begin{figure}[htbp]
-  \caption{Selected fields from BDF font properties section of the Consolas font}
-  \label{code:consolas_properties_BDF}
-
-  \centering
-  \begin{BVerbatim}
-    SIZE 14 100 100
-    FONTBOUNDINGBOX 19 27 -6 -6
-    FAMILY_NAME "Consolas"
-    WEIGHT_NAME "Medium"
-    SLANT "R"
-  \end{BVerbatim}
-\end{figure}
 
 \begin{figure}[htbp]
   \caption{BDF definition of the Consolas font for the character '\texttt{a}'}
@@ -405,23 +391,16 @@ character. A bitmap is obtained when bit patterns reported in hexadecimal are co
   \end{BVerbatim}
 \end{figure}
 
-\begin{comment}
-Considering the bit pattern at Figure \ref{fig:letter_a_bitmap} "Character bit density" is calculated  as follows.
-
-\[
-  \textrm{Character bit density} = \frac{\textrm{number of 1 bits}}{\textrm{(number of rows)}\cdot\textrm{(number of columns)}}
-\]
-
-The following result is obtained when this calculation is made for character \texttt{A} given as an example.
-
-\[
-  \textrm{Character bit density} = \frac{44}{{12}\cdot{16}} = 0.229
-\]
-\end{comment}
+\begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex=false, width=100pt]{line.svg}
+  \caption{Line of colored character boxes}
+  \label{fig:line}
+\end{figure}
 
 \begin{figure}[htbp]
     \centering
-    \includesvg[inkscapelatex=false, width=250pt]{charbox.svg}
+    \includesvg[inkscapelatex=false, width=150pt]{charbox.svg}
     \caption{Consolas TTF of '\texttt{a}' character with line height}
     \label{fig:charbox}
 \end{figure}
@@ -473,6 +452,36 @@ The following result is obtained when this calculation is made for character \te
   }
   \end{tikzpicture}
 \end{figure}
+
+Renklendirilmiş kayna kodun ortalama CCT değeri Eşitlik \ref{eq:cct_average} ile elde edilmiştir.
+
+\begin{equation}
+  \text{Average CCT} = \frac{\sum_{i=1}^{N} CCT(charbox_{i})}{N}
+	\label{eq:cct_average}
+\end{equation}
+
+Bu ifadede görülen $CCT(charbox_{i})$ kaynak kod dizgisindeki $i$'nci karakter kutusunun ortalama CCT değerine olan CCT
+katkısını ifade etmekte olup Eşitlik \ref{eq:cct_charbox} ile tanımlanmıştır.
+
+\begin{equation}
+	CCT(charbox_{i}) = \frac{
+		Count_{i}^{\texttt{1}} \times CCT_{i}^{fg} +
+		(Width_{i} \times Height_{i} - Count_{i}^{\texttt{1}}) \times CCT_{i}^{bg}
+	}{
+		Width_{i} \times Height_{i}
+	}
+	\label{eq:cct_charbox}
+\end{equation}
+
+Bu ifadede $i$ renklendirilmiş kaynak kod dizgisindeki $i$'nci karakter kutusuna karşı gelmek üzere:
+
+\begin{itemize}
+	\item $Count_{i}^{\texttt{1}}$ karakter kutusundaki \texttt{1}'lerin sayısını
+	\item $Width_{i}$ ve $Height_{i}$ sırasıyla karakter kutusunun genişlik ve yüksekliğini
+	\item $CCT_{i}^{fg}$ ve $CCT_{i}^{bg}$ karakter kutusundaki her bir pikselin ön ve arka plan renklerine ait CCT değerlerini
+\end{itemize}
+
+göstermektedir.
 
 \subsection{CCT Calculation}
 
