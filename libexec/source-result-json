@@ -16,7 +16,6 @@ def process(source_hash, font_hash, meta_hash)
   end.tally
 
   cct_background      = source_hash['style']['background-color']['cct']
-  vertical_row_factor = source_hash['style']['line-height'].to_f / source_hash['style']['font-size'].to_f
 
   cccts = source_hash['codes'].map do |code|
     cct = code['color']['cct'] || 0.0
@@ -34,13 +33,11 @@ def process(source_hash, font_hash, meta_hash)
         next 0.0
       end
 
-      # Line-height'ten gelen üst ve alt pikselleri hesaba katmaya hazırlanıyoruz.  Bu pikseller 0 yani background
-      # rengi olarak katkı sağlayacak.
-      extra_rows = (vertical_row_factor * h['nrows']).round
-      extra_area = extra_rows * h['ncols']
+      # Line-height'ten gelen üst ve alt pikselleri (krili çözüm olarak) font temsilinde elde ettik.
+      # Halbuki burada hesap edilmeli.
 
-      areafull = h['areafull'] + extra_area
-      count0   = h['count0']   + extra_area # Line-height katkısı
+      areafull = h['areafull']
+      count0   = h['count0']
       count1   = h['count1']
 
       # 0'lar background rengiyle, 1'ler ise bildirilen renkle katkı sağlıyor

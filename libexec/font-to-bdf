@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
 
+EFFECTIVE_PPI=96
+STANDARD_PPI=72
+
 main() {
-	otf2bdf -p "${2:-14}" "${1:-/dev/stdin}" | sed -e '/^COMMENT/d' | tr -d '©'
+	local infile=${1:-/dev/stdin}
+	local px=${2:-14}
+
+	local pt
+	pt=$(echo "scale=2; ${px} * ${STANDARD_PPI}/${EFFECTIVE_PPI}" | bc)
+
+	otf2bdf -n -r "$EFFECTIVE_PPI" -p "$pt" "$infile" | sed -e '/^COMMENT/d' | tr -d '©'
 }
 
 main "$@"

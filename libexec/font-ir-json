@@ -12,9 +12,14 @@ def calculate!(hash)
 
   return hash if hash[:bits].nil? || hash[:bits].empty?
 
-  hash[:nrows]    = 14 # TODO hash[:bits].size
-  hash[:ncols]    = 14 # TODO hash[:bits].first.size
-  hash[:areafull] = hash[:nrows] * hash[:ncols] # TODO hash[:bits].size * hash[:bits].first.size
+  # TODO: Ampirik değerler
+  # En geniş karakterler (örneğin 'm') 7 pixel, 1'er pixel yanlarda boş alsak 7 + 1 + 1 = 9
+  # En yüksek karakterler (örneğin '|') 14 pixel, 1'er pixel üst altta boş alsak 14 + 1 + 1 = 16
+  # Yüksekliği line-height oranında arttır 16 x 19/14 ~ 22
+  hash[:nrows]    = 22
+  hash[:ncols]    = 9
+
+  hash[:areafull] = hash[:nrows] * hash[:ncols]
   hash[:count1]   = hash[:bits].sum { |row| row.count('1') }
   hash[:count0]   = hash[:areafull] - hash[:count1]
 
