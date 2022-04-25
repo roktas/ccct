@@ -5,16 +5,16 @@ message: >-
   cite it as below.
 type: software
 authors:
-  - given-names: Nurettin
-    family-names: Şenyer
-    alias: seyyah
-    email: nurettin.senyer@gmail.com
-    orcid: 'https://orcid.org/0000-0002-2324-9285'
   - given-names: Recai
     family-names: Oktaş
     alias: roktas
     email: roktas@gmail.com
     orcid: 'https://orcid.org/0000-0003-3282-3549'
+  - given-names: Nurettin
+    family-names: Şenyer
+    alias: seyyah
+    email: nurettin.senyer@gmail.com
+    orcid: 'https://orcid.org/0000-0002-2324-9285'
   - given-names: Mustafa Serhat
     family-names: Odabaş
     alias: msodabas
@@ -22,4 +22,4 @@ authors:
     orcid: 'https://orcid.org/0000-0002-1863-7566'
 license:
  - GPL-3.0-or-later
-date-released: 2022-01-30
+date-released: 2022-04-30

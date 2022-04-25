@@ -72,10 +72,29 @@ In this study, we aim to the theme for syntax highlighting selection based on Co
 
 \section{Material and Methods} \label{sec:material-methods}
 
+Bu çalışmada seçilen bir örnek kaynak kod, belirli ölçütler dikkate alınarak belirlenen popüler renklendirme temalarının
+her biriyle renklendirilmiş ve elde edilen içeriklerin ortalama CCT değerleri hesaplanarak karşılaştırılmıştır.
+Araştırma kapsamında izlenen iş akışı Şekil \ref{fig:general-flowchart}'de görülmektedir. İzlenen yöntemin temelinde,
+renklendirilmiş kaynak kod içeriğinin ilk karakterden son karaktere kadar ilerleyen tek bir karakter dizisi olarak ele
+alınması yatmaktadır. Bu dizi içinde her bir karakter seçilen yazıtipinden hareketle üretilen bir bit eşlem "karakter
+kutusu" olarak yorumlanmıştır. Her bir karakter kutusu tema tarafından tanımlanan ön plan ve arka plan renkleriyle
+renklendirilmiş piksellerden oluşmaktadır. Arka plan ve ön plan renkleri kapsadığı piksel alanları oranında o karakter
+kutusunun ortalama CCT değerine ve her bir karakter kutusu da o kutunun sıklığı oranında içeriğin tamamına ait ortalama
+CCT değerine katkıda bulunmaktadır. "Correlated Colored Code Temperature" (CCCT) olarak adlandırdığımız bu ortalama CCT
+değeri yüksek hassasiyete sahip olan mutlak bir değer olmaktan ziyade ilgili tema renkleriyle kaynak kodun bir bütün
+halde sahip olacağı ortalama CCT değeri hakkında bir yaklaşıklıklığı temsil etmektedir. Bu şekilde temaya özgü
+olarak belirlenen CCCT değerleriyle kod renklendirme temalarının karşılaştırılması için yeni bir nicel ölçüt ortaya
+konulmuştur.
+
+Çalışma kapsamında geliştirilen tüm çözümleme programları ve üretilen veriler bir Github kod deposunda açık kaynak halde 
+sunulmuştur\cite{ccct2022github}. Rationales behind all the selections in the analysis were explained in further sections.
+
+\begin{comment}
 In this study, the CCT was utilized to calculate the quantity of blue light contained in popular color themes chosen by developers. It was observed that the average CCT values of both the dark and light versions of the examined themes were above the D65 threshold and contained intense blue light. Theme developers should consider the risks that blue light poses to human eye health while creating their themes.
 
 The amount of blue light in the color theme was determined using the workflow shown in Figure
 \ref{fig:general-flowchart}. Primarily, the themes to be used in the study were selected.
+\end{comment}
 
 The first step was to choose a theme. Themes are generally classified into two theme groups according to the use of dark/light background colors in the user interface: dark/light themes.  Theme selection is dependent on editor selection. The VS Code programming editor was chosen for our research\footnote{Rationales behind all these selections were explained in further sections.}. Developers use a variety of programming languages to create the code for their projects. Because analyzing the influence of the chosen theme on all codes would be impractical, operations were conducted out on a sample source code. For this purpose, a C programming language source code taken from the Git source code, which is a fairly modern code base, was chosen. The HTML output for the colorized version of the code with the chosen theme, as well as a code representation based on it, was created. Different fonts are preferred by developers. The influence of different fonts on the calculation was not investigated in this study. The BDF transformation and subsequently the font representation have been created for the selected font. The McCammy equation has been used to determine the CCT using code and font representation.
 
@@ -183,8 +202,12 @@ In the light of these criteria, the source code\cite{github2022gitgrep} of the \
 
 \subsubsection{Font Selection} \label{sec:material-methods.inputs.font}
 	
-Among the many monospace fonts, the study was carried out only with a font installed on the system and available as a default. As explained in the \ref{sec:material-methods.inputs.editor} section, colored codes are obtained with the VS Code programming editor on the Windows 10 operating system.
-During the research, the Consolas\cite{microsoft2022consolas} fixed-width TrueType font, displayed in Figure \ref{fig:consolas} by default in this environment, is also used as a default 14-point size. Since it is predefined, this font selection is considered to reflect the common situation experienced by developers.
+Among the many monospace fonts, the study was carried out only with a font installed on the system and available as a
+default. As explained in the \ref{sec:material-methods.inputs.editor} section, colored codes are obtained with the VS
+Code programming editor on the Windows 10 operating system. During the research, the
+Consolas\cite{microsoft2022consolas} fixed-width TrueType font, displayed in Figure \ref{fig:consolas} by default in
+this environment, is also used as a default 14 pixel size. Since it is predefined, this font selection is considered to
+reflect the common situation experienced by developers.
 
 \begin{figure}[h]
   \centering
@@ -316,13 +339,13 @@ The developers used the \texttt{otf2bdf} tool\cite{otf2bdf2008man} developed as 
 \begin{figure}[htb]
   \centering
   \begin{BVerbatim}
-    #include "cache.h"
-    #include "config.h"
-    ···
-    static void std_output(struct grep_opt *opt, const void *buf, size_t size)
-    {
-            fwrite(buf, size, 1, stdout);
-    }
+#include "cache.h"
+#include "config.h"
+···
+static void std_output(struct grep_opt *opt, const void *buf, size_t size)
+{
+        fwrite(buf, size, 1, stdout);
+}
   \end{BVerbatim}
   \caption{Sample code without coloring}
   \label{code:string}
@@ -330,16 +353,9 @@ The developers used the \texttt{otf2bdf} tool\cite{otf2bdf2008man} developed as 
 
 \begin{figure}[h]
   \centering
-  \includesvg[inkscapelatex=false, width=400pt]{code.svg}
+  \includesvg[inkscapelatex=false, width=370pt]{code.svg}
   \caption{Colored code}
   \label{fig:code}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includesvg[inkscapelatex=false, width=200pt]{string.svg}
-  \caption{Colored code content as a single string}
-  \label{fig:string}
 \end{figure}
 
 In syntax coloring, each syntax group (e.g., an identifier, a keyword) in the source code is displayed with the font
