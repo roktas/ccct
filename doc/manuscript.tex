@@ -97,7 +97,16 @@ The amount of blue light in the color theme was determined using the workflow sh
 \ref{fig:general-flowchart}. Primarily, the themes to be used in the study were selected.
 \end{comment}
 
-The first step was to choose a theme. Themes are generally classified into two theme groups according to the use of dark/light background colors in the user interface: dark/light themes.  Theme selection is dependent on editor selection. The VS Code programming editor was chosen for our research\footnote{Rationales behind all these selections were explained in further sections.}. Developers use a variety of programming languages to create the code for their projects. Because analyzing the influence of the chosen theme on all codes would be impractical, operations were conducted out on a sample source code. For this purpose, a C programming language source code taken from the Git source code, which is a fairly modern code base, was chosen. The HTML output for the colorized version of the code with the chosen theme, as well as a code representation based on it, was created. Different fonts are preferred by developers. The influence of different fonts on the calculation was not investigated in this study. The BDF transformation and subsequently the font representation have been created for the selected font. The McCammy equation has been used to determine the CCT using code and font representation.
+The first step was to choose a theme. Themes are generally classified into two theme groups according to the use of
+dark/light background colors in the user interface: dark/light themes.  Theme selection is dependent on editor
+selection. The VS Code programming editor was chosen for our research. Developers use a variety of programming languages
+to create the code for their projects. Because analyzing the influence of the chosen theme on all codes would be
+impractical, operations were conducted out on a sample source code. For this purpose, a C programming language source
+code taken from the Git source code, which is a fairly modern code base, was chosen. The HTML output for the colorized
+version of the code with the chosen theme, as well as a code representation based on it, was created. Different fonts
+are preferred by developers. The influence of different fonts on the calculation was not investigated in this study. The
+BDF transformation and subsequently the font representation have been created for the selected font. The McCammy
+equation has been used to determine the CCT using code and font representation.
 
 \begin{comment}
 The flow of transactions taking place in the analysis is presented below, each of which is detailed in the relevant sections. As can be seen in this flowchart, all the coloring themes chosen for a single source code and font sample (bk. \ref{sec:material-methods.inputs})  are kept constant as analysis input is handled separately.
