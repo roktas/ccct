@@ -73,23 +73,13 @@ In this study, we aim to the theme for syntax highlighting selection based on Co
 
 \section{Material and Methods} \label{sec:material-methods}
 
-Bu çalışmada seçilen bir örnek kaynak kod, belirli ölçütler dikkate alınarak belirlenen popüler renklendirme temalarının
-her biriyle renklendirilmiş ve elde edilen içeriklerin ortalama CCT değerleri hesaplanarak karşılaştırılmıştır.
-Araştırma kapsamında izlenen iş akışı Şekil \ref{fig:general-flowchart}'de görülmektedir. İzlenen yöntemin temelinde,
-renklendirilmiş kaynak kod içeriğinin ilk karakterden son karaktere kadar ilerleyen tek bir karakter dizisi olarak ele
-alınması yatmaktadır. Bu dizi içinde her bir karakter seçilen yazıtipinden hareketle üretilen bir bit eşlem "karakter
-kutusu" olarak yorumlanmıştır. Her bir karakter kutusu tema tarafından tanımlanan ön plan ve arka plan renkleriyle
-renklendirilmiş piksellerden oluşmaktadır. Arka plan ve ön plan renkleri kapsadığı piksel alanları oranında o karakter
-kutusunun ortalama CCT değerine ve her bir karakter kutusu da o kutunun sıklığı oranında içeriğin tamamına ait ortalama
-CCT değerine katkıda bulunmaktadır. "Correlated Colored Code Temperature" (CCCT) olarak adlandırdığımız bu ortalama CCT
-değeri yüksek hassasiyete sahip olan mutlak bir değer olmaktan ziyade ilgili tema renkleriyle kaynak kodun bir bütün
-halde sahip olacağı ortalama CCT değeri hakkında bir yaklaşıklıklığı temsil etmektedir. Bu şekilde temaya özgü
-olarak belirlenen CCCT değerleriyle kod renklendirme temalarının karşılaştırılması için yeni bir nicel ölçüt ortaya
+Bu çalışmada seçilen bir örnek kaynak kod, belirli ölçütler dikkate alınarak belirlenen popüler renklendirme temalarının her biriyle renklendirilmiş ve elde edilen içeriklerin ortalama CCT değerleri hesaplanarak karşılaştırılmıştır. Araştırma kapsamında izlenen iş akışı Şekil \ref{fig:general-flowchart}'de görülmektedir. İzlenen yöntemin temelinde,
+renklendirilmiş kaynak kod içeriğinin ilk karakterden son karaktere kadar ilerleyen tek bir karakter dizisi olarak ele alınması yatmaktadır. Bu dizi içinde her bir karakter seçilen yazıtipinden hareketle üretilen bir bit eşlem "karakter kutusu" olarak yorumlanmıştır. Her bir karakter kutusu tema tarafından tanımlanan ön plan ve arka plan renkleriyle
+renklendirilmiş piksellerden oluşmaktadır. Arka plan ve ön plan renkleri kapsadığı piksel alanları oranında o karakter kutusunun ortalama CCT değerine ve her bir karakter kutusu da o kutunun sıklığı oranında içeriğin tamamına ait ortalama CCT değerine katkıda bulunmaktadır. "Correlated Colored Code Temperature" (CCCT) olarak adlandırdığımız bu ortalama CCT
+değeri yüksek hassasiyete sahip olan mutlak bir değer olmaktan ziyade ilgili tema renkleriyle kaynak kodun bir bütün halde sahip olacağı ortalama CCT değeri hakkında bir yaklaşıklıklığı temsil etmektedir. Bu şekilde temaya özgü olarak belirlenen CCCT değerleriyle kod renklendirme temalarının karşılaştırılması için yeni bir nicel ölçüt ortaya
 konulmuştur.
 
-Çalışma kapsamında geliştirilen tüm çözümleme programları ve üretilen veriler bir Github kod deposunda açık kaynak halde
-sunulmuştur\cite{Oktas_Code_CCT_2022}. Rationales behind all the selections in the analysis were explained in further
-sections.
+Çalışma kapsamında geliştirilen tüm çözümleme programları ve üretilen veriler bir Github kod deposunda açık kaynak halde sunulmuştur\cite{Oktas_Code_CCT_2022}. Rationales behind all the selections in the analysis were explained in further sections.
 
 \begin{comment}
 In this study, the CCT was utilized to calculate the quantity of blue light contained in popular color themes chosen by developers. It was observed that the average CCT values of both the dark and light versions of the examined themes were above the D65 threshold and contained intense blue light. Theme developers should consider the risks that blue light poses to human eye health while creating their themes.
@@ -98,16 +88,7 @@ The amount of blue light in the color theme was determined using the workflow sh
 \ref{fig:general-flowchart}. Primarily, the themes to be used in the study were selected.
 \end{comment}
 
-The first step was to choose a theme. Themes are generally classified into two theme groups according to the use of
-dark/light background colors in the user interface: dark/light themes.  Theme selection is dependent on editor
-selection. The VS Code programming editor was chosen for our research. Developers use a variety of programming languages
-to create the code for their projects. Because analyzing the influence of the chosen theme on all codes would be
-impractical, operations were conducted out on a sample source code. For this purpose, a C programming language source
-code taken from the Git source code, which is a fairly modern code base, was chosen. The HTML output for the colorized
-version of the code with the chosen theme, as well as a code representation based on it, was created. Different fonts
-are preferred by developers. The influence of different fonts on the calculation was not investigated in this study. The
-BDF transformation and subsequently the font representation have been created for the selected font. The McCammy
-equation has been used to determine the CCT using code and font representation.
+The first step was to choose a theme. Themes are generally classified into two theme groups according to the use of dark/light background colors in the user interface: dark/light themes.  Theme selection is dependent on editor selection. The VS Code programming editor was chosen for our research. Developers use a variety of programming languages to create the code for their projects. Because analyzing the influence of the chosen theme on all codes would be impractical, operations were conducted out on a sample source code. For this purpose, a C programming language source code taken from the Git source code, which is a fairly modern code base, was chosen. The HTML output for the colorized version of the code with the chosen theme, as well as a code representation based on it, was created. Different fonts are preferred by developers. The influence of different fonts on the calculation was not investigated in this study. The BDF transformation and subsequently the font representation have been created for the selected font. The McCammy equation has been used to determine the CCT using code and font representation.
 
 \begin{comment}
 The flow of transactions taking place in the analysis is presented below, each of which is detailed in the relevant sections. As can be seen in this flowchart, all the coloring themes chosen for a single source code and font sample (bk. \ref{sec:material-methods.inputs})  are kept constant as analysis input is handled separately.
@@ -468,11 +449,11 @@ Bu ifadede:
 göstermektedir.
 
 İkinci adımda, her bir karakter kutusu için ilk adımda hesaplanan CCT değerlerinin ortalaması alınmalıdır. Karakter
-kutusu dizisinin $N$ boyutlu olduğu kabul edilecek olursa tüm içeriğin ortalama CCT değeri, yani CCCT değeri Eşitlik
+kutusu dizisinin $N$ boyutlu olduğu kabul edilecek olursa tüm içeriğin ortalama CCT değeri Eşitlik
 \ref{eq:cct_average} ile elde edilir.
 
 \begin{equation}
-  \text{Average CCT} = \frac{\sum_{i=1}^{N} CCT(charbox_{i})}{N}
+  CCT_{average} = \frac{\sum_{i=1}^{N} CCT(charbox_{i})}{N}
 	\label{eq:cct_average}
 \end{equation}
 
@@ -741,28 +722,24 @@ light temalar için olanlar ise Tablo \ref{tab:cct-light-themes}'da verilmiştir
 
 Ne dark ne de light temalar için indirme sayıları, beğeni skoru veya yorum sayısıyla ortalama CCT arasında anlamlı bir
 ilişki bulunamamıştır. Temaların descriptive istatistik sonuçları Tablo \ref{tab:descriptive}'da verilmiştir. Dark
-temaların ortalama CCT değerlerinin ortalaması 8.851 K iken light temalar için 20.276 K hesaplanmıştır. İncelenen 18
-dark temadan 11'inin (61\%), 17 light temadan 14'ünün (82\%) CCT değerlerinin D65 değerinin üzerinde olduğu
-görülmektedir. Her iki tema grubu için hesaplanan CCT ortalamaları, light temalarda oransal olarak daha fazla olmak
-üzere, D65 (6.500 K) değerinin çok üzerindedir.  
+temaların ortalama CCT değerlerinin ortalaması 20.982,19 K iken light temalar için 8.024,53 K hesaplanmıştır. 
 
-Dark tema grubunda en düşük CCT ortalaması 1.675 K ile Gruvbox iken en yüksek CCT ortalaması 19.253 K ile "Tokyo Night"
-olmuştur. En fazla indirmenin olduğu "One Dark Pro" için CCT ortalaması 10.613 K'dir. İlk üç indirme sayısı yüksek tema
-için elde edilen ortalama CCT değerleri de D65'in çok üzerindedir. Dark tema kullananların gün ışığının çok üzerinde bir
-mavı ışığa maruz kaldığını göstermektedir.
+Dark tema olarak 21 tema analiz edilmiştir (Table \ref{tab:cct-dark-themes}. Ortalama CCT değerlerinin D65'den $-12\%$ ile $1.838\%$ arasında bir sapmaya sahip olduğu görülmektedir. Sadece 4 tema D65 değerinde veya altında çıkmıştır.
 
-Light tema grubunda en düşük CCT ortalaması 2.563 K ile "Tiny Light" iken en yüksek CCT ortalaması 137.739 K ile "Atom
+Light tema olarak 17 tema analiz edilmiştir (Table \ref{tab:cct-light-themes}. Ortalama CCT değerlerinin D65'den $-29\%$ ile $242\%$ arasında sapmaya sahip olduğu görülmektedir. Sadece 3 tema D65 değerinde veya altında çıkmıştır.
+
+Dark tema grubunda en düşük CCT ortalaması 5.709 K ile Gruvbox iken en yüksek CCT ortalaması 125.958 K ile "Shades of Purple"
+olmuştur. Dark tema kullananların gün ışığının çok üzerinde bir
+mavı ışığa maruz kaldığını göstermektedir. En fazla indirmenin olduğu "One Dark Pro" için CCT ortalaması 9.384 K'dir. Sonraki en yüksek indirmenin olduğu "Visual Studio C/C++" temasının ortalama CCT değeri D65'de çıkmıştır. 
+
+Light tema grubunda en düşük CCT ortalaması 4.643 K ile "Gruvbox" iken en yüksek CCT ortalaması 22.253 K ile "Atom
 One Light" olmuştur. "Atom One Light" temasının böylesi yüksek bir CCT ortalamasına sahip olmasının temel nedeni bu
 temada programlama dilinin rezerve kelimelerini içeren sözdizimi grubu için ortalama CCT değeri yüksek bir rengin
 seçilmiş olmasıdır. Kaynak kodda rezerve kelime sıklığı yüksek olduğundan temanın bu gruba ilişkin yaptığı renklendirme
-nihai CCT değerinde baskın olarak etki göstermektedir.  En fazla indirmenin olduğu "Visual Studio C/C++" için CCT
-ortalaması 8.824 K'dir. İlk üç indirme sayısı yüksek tema için elde edilen ortalama CCT değerleri "Monokai Pro" hariç
-D65'in çok üzerindedir. Light tema kullananların dark kullananlara göre daha yüksek oranda mavi ışığa maruz kaldığını
-göstermektedir.
+nihai CCT değerinde baskın olarak etki göstermektedir. En fazla indirmenin olduğu "Visual Studio C/C++" için dark temada olduğu gibi CCT
+ortalaması D65'e yakın çıkmıştır (dark için 6.590 K ike light için 6.645 K). Sonraki en yüksek indirmenin olduğu "Github" teması için 7.110 K hesaplanmıştır.
 
-VS Code'un öntanımlı temaları için hesaplanan ortalama CCT değerleri de Tablo \ref{tab:cct-dark-themes} ve Tablo
-\ref{tab:cct-light-themes}'de verilmiştir. Elde edilen değerlere göre dark, light'a göre düşük olsa da D65'in çok
-üzerindedir. Programlama editörünün default temasını kullananların da yüksek mavi ışığa maruz kaldığını göstermektedir.
+VS Code'un öntanımlı temaları için hesaplanan ortalama CCT değerleri dark için 6.368 K ve light için 7.847 K olarak hesaplanmıştır. Elde edilen değerlere göre dark, light'a göre düşüktür. Programlama editörünün light default temasını kullananların yüksek mavi ışığa maruz kaldığını göstermektedir.
 
 \csvnames{cct-descriptive}{
   theme=\Xtheme,%
@@ -790,8 +767,8 @@ VS Code'un öntanımlı temaları için hesaplanan ortalama CCT değerleri de Ta
 \end{table}
 
 Dual temalar için hesaplanan ortalama CCT değerleri Figure \ref{fig:dark-light-pair-compare}'de verilmiştir. Temaların
-dark versiyonlarının belirgin bir şekilde light versiyonlarına oranla daha düşük CCT ürettiği ancak yine de D65'in
-üzerinde olduğu görülmektedir. Tema çiftlerinden illa birisi tercih edilecekse dark tercih edilmelidir.
+light versiyonlarının belirgin bir şekilde light versiyonlarına oranla daha düşük CCT ürettiği ancak yine de D65'in
+üzerinde olduğu görülmektedir. \textbf{TODO} dark için büyük olmasının sebebi arkaplan renginin mavi yoğun olmasıdır.
 
 \pgfplotstableread[col sep=comma,text indicator="]{./data/themes-dual.csv}\dualtable
 \pgfplotstabletranspose[colnames from=themes]\tabledual{\dualtable}
@@ -821,17 +798,14 @@ dark versiyonlarının belirgin bir şekilde light versiyonlarına oranla daha d
   \label{fig:dark-light-pair-compare}
 \end{figure}
 
-Figure \ref{fig:dark-compare}'de salt dark temaların ortalama CCT değerleri verilmiştir. "Andromeda" ve "One Monokai"
-haricindeki temaların ortalama CCT değerleri D65'in üzerindedir. "Palenight" ise CCT değeri en yüksek olan temadır.
-Dolayısıyla en fazla mavi ışık barındıran tema "Palenight" temasıdır.
-
-Bu noktada CCT değeri neredeyse tam D65 seviyesinde olan "Dracula Official" temasına özel olarak vurgu yapılmalıdır.
-İndirme sayılarını baz alan popülerlik sıralamasında 4'ncü sırada olan bu temanın Github kaynak kod deposu 18.3 K "star"
+Figure \ref{fig:dark-compare}'de salt dark temaların ortalama CCT değerleri verilmiştir. "Default" tema
+haricindeki temaların ortalama CCT değerleri D65'in üzerindedir. "Dracula Official" ise CCT değeri en yüksek olan temadır.
+Dolayısıyla en fazla mavi ışık barındıran temadır. İndirme sayılarını baz alan popülerlik sıralamasında 4'ncü sırada olan bu temanın Github kaynak kod deposu 18.3 K "star"
 almıştır\cite{draculatheme2022github}.  Bu değer listedeki diğer temaların Github kaynak kod depolarındaki "star"
 sayılarının çok üzerindedir.  Örneğin listede indirme sayıları açısından birinci sırada olan "One Dark Pro" temasının
 "star" sayısı 1 K\cite{onedarkprotheme2022github}, ikinci sırada olan "Visual Studio C/C++" temasının star sayısı ise
-4.6 K'dır\cite{visualstudiotheme2022github}.  Bu sonuç bir yandan "Dracula Official" temasının bu çalışma kapsamındaki
-ölçütlere göre çok başarılı bir tema olduğunu gösterirken diğer yandan tema popülerliği için indirme sayıları dışında
+4.6 K'dır\cite{visualstudiotheme2022github}.  Bu sonuç "Dracula Official" temasının bu çalışma kapsamındaki
+ölçütlere göre en fazla mavi ışık barındırdığını göstermektedir. Diğer yandan tema popülerliği için indirme sayıları dışında
 ölçütlerin de dikkate alınması gerektiğini ortaya koymaktadır.
 
 \pgfplotstableread[col sep=comma,text indicator="]{./data/themes-dark.csv}\darktable
@@ -888,9 +862,9 @@ sayılarının çok üzerindedir.  Örneğin listede indirme sayıları açısı
   \label{fig:light-compare}
 \end{figure}
 
-Sarath'ın yaptığı anket çalışması \cite{sarath2016prefer} ve Coyier'in CSS özelinde renk tema tercih anketi \cite{coyier2013poll} başta olmak üzere farklı çalışmalarda geliştiricilerin dark tema kullanma eğiliminde olduğu görülmüştür. Bu tercihin altında "Soothing to Eye", "More Concentration" ve "Save Energy" önplana çıkmaktadır.
+Sarath'ın yaptığı anket çalışması \cite{sarath2016prefer} ve Coyier'in CSS özelinde renk tema tercih anketi \cite{coyier2013poll} başta olmak üzere farklı çalışmalarda geliştiricilerin dark tema kullanma eğiliminde olduğu görülmüştür. Bu tercihin altında "Soothing to Eye", "More Concentration" ve "Save Energy" önplana çıkmaktadır. Diğer taraftan bu çalışmanın da ortaya çıkardığı CCT'nin yüksek olması ve mavi ışık tehlikesinin yüksek olduğu gerçeği, dark temaların özellikle arkaplan renklerinin tekrardan gözden geçirilmesini gerektirmektedir.
 
-İncelenen temaların dark versiyonları, light olanlarına oranla yarı oranda CCT değerine sahiptir. D65 değerine çok yakın bir ortalamaya sahiptir. Özellikle mavi ışığın zararlı etkisinin sonucu olarak light temaların daha uyarıcı (\textbf{TODO} referans gerekebilir) olmasına karşın uzun süreli kullanımda insan sağlığı açısından olumsuz etkilerinin renk tema tercihinin light yerine dark olmasını açıklamaktadır. Bauer vd.lerinin \cite{bauer1980improving} yaptıkları çalışmada ortaya konan dark temanın okuma üzerine olumlu katkısının da bu tercih önemli bir katkısı olduğu değerlendirilmektedir.
+İncelenen temaların dark versiyonları, light olanlarına oranla daha yüksek CCT değerine sahiptir. Özellikle mavi ışığın zararlı etkisinin sonucu olarak light temaların daha uyarıcı (\textbf{TODO} referans gerekebilir) olmasına karşın uzun süreli kullanımda insan sağlığı açısından olumsuz etkilerinin renk tema tercihinin light yerine dark olmasını açıklamaktadır. Bauer vd.lerinin \cite{bauer1980improving} yaptıkları çalışmada ortaya konan dark temanın okuma üzerine olumlu katkısının da bu tercih önemli bir katkısı olduğu değerlendirilmektedir. Ancak mavi ışığın uzun süreliği olumsuz etkilerinden korunmak adına CCT'nin ortalamasını yükselten özellikle arkaplan renginin tekrardan gözden geçirilmesi gerekmektedir.
 
 \begin{comment}
 Implications – The study indicates that individuals use Dark Mode for a more satisfying user experience as they feel e.g. less eye strain with a dark themed user interface. Editing and coding software is mostly designed in a light-on-dark color scheme, as users often work for long continuous hours on screen, surrounded by dark environment. As screen time per individual increases, more users are experiencing ocular diseases. In counteraction, society demanded dark themed interfaces for operating systems, websites, and apps. As individuals were already using unofficial dark themes on different interfaces, tech companies started releasing system updates to make Dark Mode a choice. As Apple released their user interface update just in 2019, Dark Mode is still a relevant trend discussed in the industry and society. Experts indicate that Dark Mode is here to stay, as it satisfies preferences of many users and makes current OLED screens and future digital devices with appropriate display technology more sustainable \cite{eisfeld2020rise}

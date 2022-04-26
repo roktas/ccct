@@ -23,29 +23,38 @@ pp-() {
 }
 
 outdated() {
-	local infile=$1 outfile=$2
+	local outfile=$1
+	shift
 
-	[[ -z ${MAKE_FORCE:-} ]]   || return 0
-	[[ -e $outfile          ]] || return 0
-	[[ $outfile -nt $infile ]] || return 0
+	[[ -z ${MAKE_FORCE:-} ]] || return 0
+	[[ -e $outfile        ]] || return 0
+
+	local infile
+	for infile; do
+		[[ $outfile -nt $infile ]] || return 0
+	done
 
 	return 1
 }
 
 font-to-bdf() {
-	local infile=share/fonts/${source[fontface]}.ttf
-	local outfile=${source[dir]}/font.bdf
+	local fontface=${source[fontface]} fontsize=${source[fontsize]:-14}
 
-	outdated "$infile" "$outfile" || return 0
+	local infile=share/fonts/${fontface}/font.ttf
+	local outfile=share/fonts/${fontface}/${fontsize}.bdf
 
-	libexec/font-to-bdf "$infile" "${source[fontsize]:-14}" >"$outfile"
+	outdated "$outfile" "$infile" || return 0
+
+	libexec/font-to-bdf "$infile" "$fontsize" >"$outfile"
 }
 
 font-ir-json() {
-	local infile=${source[dir]}/font.bdf
-	local outfile=${source[dir]}/font-ir.json
+	local fontface=${source[fontface]} fontsize=${source[fontsize]:-14}
 
-	outdated "$infile" "$outfile" || return 0
+	local infile=share/fonts/${fontface}/${fontsize}.bdf
+	local outfile=share/fonts/${fontface}/${fontsize}.json
+
+	outdated "$outfile" "$infile" || return 0
 
 	bundle exec libexec/font-ir-json "$infile" >"$outfile"
 }
@@ -54,7 +63,7 @@ source-raw-html() {
 	local infile=${source[dir]}/raw.html
 	local outfile=${source[dir]}/source.html
 
-	outdated "$infile" "$outfile" || return 0
+	outdated "$outfile" "$infile" || return 0
 
 	bundle exec libexec/source-raw-html "$infile" >"$outfile"
 }
@@ -63,7 +72,7 @@ source-ir-json() {
 	local infile=${source[dir]}/source.html
 	local outfile=${source[dir]}/source-ir.json
 
-	outdated "$infile" "$outfile" || return 0
+	outdated "$outfile" "$infile" || return 0
 
 	bundle exec libexec/source-ir-json "$infile" >"$outfile"
 }
@@ -72,7 +81,7 @@ source-ir+-json() {
 	local infile=${source[dir]}/source-ir.json
 	local outfile=${source[dir]}/source-ir+.json
 
-	outdated "$infile" "$outfile" || return 0
+	outdated "$outfile" "$infile" || return 0
 
 	libexec/source-ir+-json "$infile" >"$outfile" 2>/dev/null
 }
@@ -80,59 +89,69 @@ source-ir+-json() {
 declare -ag result_files=()
 
 source-result-json() {
+	local fontface=${source[fontface]} fontsize=${source[fontsize]:-14}
+
 	local source_file=${source[dir]}/source-ir+.json
-	local font_file=${source[dir]}/font-ir.json
+	local font_file=share/fonts/${fontface}/${fontsize}.json
 	local meta_file=${source[dir]}/source.yml
 	local outfile=${source[dir]}/result.json
 
-	libexec/source-result-json "$source_file" "$font_file" "$meta_file" >"$outfile"
-
 	result_files+=("$outfile")
+
+	outdated "$outfile" "$source_file" "$font_file" "$meta_file" || return 0
+
+	bundle exec libexec/source-result-json "$source_file" "$font_file" "$meta_file" >"$outfile"
 }
 
 data-defaults-csv() {
 	local infile=srv/summary.json
 	local outfile=doc/data/themes-defaults.csv
 
+	outdated "$outfile" "$infile" || return 0
+
 	mkdir -p "$(dirname "$outfile")"
 
-	libexec/data-defaults-csv "$infile" >"$outfile"
+	bundle exec libexec/data-defaults-csv "$infile" >"$outfile"
 }
 
 data-cct-csv() {
 	local infile=srv/summary.json
 	local outfile=doc/data/themes-by-cct.csv
 
+	outdated "$outfile" "$infile" || return 0
+
 	mkdir -p "$(dirname "$outfile")"
 
-	libexec/data-cct-csv "$infile" >"$outfile"
+	bundle exec libexec/data-cct-csv "$infile" >"$outfile"
 }
 
 data-installs-csv() {
 	local infile=share/themes.yml
 	local outfile=doc/data/themes-by-installs.csv
 
+	outdated "$outfile" "$infile" || return 0
+
 	mkdir -p "$(dirname "$outfile")"
 
-	libexec/data-installs-csv "$infile" >"$outfile"
+	bundle exec libexec/data-installs-csv "$infile" >"$outfile"
 }
 
 data-stats-csv() {
 	local infile=srv/summary.json
 	local outfile=doc/data/themes-stats.csv
 
-	outdated "$infile" "$outfile" || return 0
+	outdated "$outfile" "$infile" || return 0
 
 	mkdir -p "$(dirname "$outfile")"
 
-	libexec/data-stats-csv "$infile" >"$outfile"
+	bundle exec libexec/data-stats-csv "$infile" >"$outfile"
 }
 
 data-dual-csv() {
 	local infile=srv/summary.json
 	local outfile=doc/data/themes-dual.csv
 
-	outdated "$infile" "$outfile" || return 0
+	outdated "$outfile" "$infile" || return 0
 
 	mkdir -p "$(dirname "$outfile")"
 
@@ -143,7 +162,7 @@ data-dark-csv() {
 	local infile=srv/summary.json
 	local outfile=doc/data/themes-dark.csv
 
-	outdated "$infile" "$outfile" || return 0
+	outdated "$outfile" "$infile" || return 0
 
 	mkdir -p "$(dirname "$outfile")"
 
@@ -154,7 +173,7 @@ data-light-csv() {
 	local infile=srv/summary.json
 	local outfile=doc/data/themes-light.csv
 
-	outdated "$infile" "$outfile" || return 0
+	outdated "$outfile" "$infile" || return 0
 
 	mkdir -p "$(dirname "$outfile")"
 
@@ -163,7 +182,7 @@ data-light-csv() {
 
 summary-json() {
 	local outfile=srv/summary.json
-	libexec/summary-json "$@" >"$outfile"
+	bundle exec libexec/summary-json "$@" >"$outfile"
 }
 
 # --- Main
@@ -217,8 +236,6 @@ main() {
 	data-dual-csv
 	data-dark-csv
 	data-light-csv
-	data-installs-csv
-	data-stats-csv
 }
 
 main "$@"

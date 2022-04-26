@@ -12,26 +12,40 @@ def calculate!(hash)
 
   return hash if hash[:bits].nil? || hash[:bits].empty?
 
-  # TODO: Ampirik değerler
-  # En geniş karakterler (örneğin 'm') 7 pixel, 1'er pixel yanlarda boş alsak 7 + 1 + 1 = 9
-  # En yüksek karakterler (örneğin '|') 14 pixel, 1'er pixel üst altta boş alsak 14 + 1 + 1 = 16
-  # Yüksekliği line-height oranında arttır 16 x 19/14 ~ 22
-  hash[:nrows]    = 22
-  hash[:ncols]    = 9
-
-  hash[:areafull] = hash[:nrows] * hash[:ncols]
-  hash[:count1]   = hash[:bits].sum { |row| row.count('1') }
-  hash[:count0]   = hash[:areafull] - hash[:count1]
-
+  hash[:ones] = hash[:bits].sum { |row| row.count('1') }
   hash
 end
 
-def process(font)
-  result = {}
-  font.instance_variable_get('@chars').each do |code, data|
-    result[code.hex.chr(Encoding::UTF_8)] = calculate!(data)
+def extremes(font)
+  ascii = font.instance_variable_get('@chars').select do |code, data|
+    hex = code.hex
+    hex >= 0x20 && hex <= 0x7F
   end
-  result
+
+  widest = {}
+  widest[:char], widest[:data] = *ascii.max_by { |code, data| data[:bbx][:w] }
+  width = widest[:data][:bbx][:w]
+
+  tallest = {}
+  tallest[:char], tallest[:data] = *ascii.max_by { |code, data| data[:bbx][:h] }
+  height = tallest[:data][:bbx][:h]
+
+  [width, height]
+end
+
+def process(font)
+  width, height = extremes(font)
+
+  chars = {}
+  font.instance_variable_get('@chars').each do |code, data|
+    chars[code.hex.chr(Encoding::UTF_8)] = calculate!(data)
+  end
+
+  {
+    chars: chars,
+    width: width,
+    height: height,
+  }
 end
 
 def main
