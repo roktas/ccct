@@ -9,6 +9,7 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows}
 \usepackage{comment}
+\usepackage{subcaption}
 \usepackage{svg}
 \svgpath{{./img/}}
 \usepackage{pgfplots, pgfplotstable}
@@ -298,6 +299,28 @@ The following observations can be made to these examples:
 \item Background color, which will be used for space characters, is defined.
 \end{itemize}
 
+\begin{figure}[htb]
+  \centering
+  \begin{BVerbatim}
+#include "cache.h"
+#include "config.h"
+···
+static void std_output(struct grep_opt *opt, const void *buf, size_t size)
+{
+        fwrite(buf, size, 1, stdout);
+}
+  \end{BVerbatim}
+  \caption{Sample code without coloring}
+  \label{fig:plain_code}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includesvg[inkscapelatex=false, width=370pt]{code.svg}
+  \caption{Colored code}
+  \label{fig:colored_code}
+\end{figure}
+
 \subsubsection{Parsing the HTML format}
 
 After the colored code was obtained in HTML format, the raw file was converted to a valid XML file and parsed with a script written in the Ruby programming language. At this stage, which is carried out with the Nokogiri library\cite{nokogiri2022package}, which is widely used in the Ruby programming language, it is parsed into an inter representation file in JSON format.
@@ -344,69 +367,64 @@ The developers used the \texttt{otf2bdf} tool\cite{otf2bdf2008man} developed as 
   \end{tikzpicture}
 \end{figure}
 
-\subsubsection{Calculation of font character fill rate}
+\subsubsection{Calculation of CCT contribution of a character box}
 
-\begin{figure}[htb]
+In syntax coloring, each syntax group (e.g. an identifier, a keyword) in the source code is displayed with the font
+glyph selected in color set in the theme. Bölüm \ref{sec:material-methods} başlangıcında da belirtildiği gibi kaynak kod
+karakter dizisindeki her bir karakter içinde bulunduğu satırın yüksekliğine sahip bir karakter kutusu oluşturmakta ve
+buna göre renklendirilmiş kaynak kod içeriğinin tamamı bu kutulardan oluşan bir karakter kutusu dizisi olarak
+yorumlanabilmektedir. Şekil \ref{fig:colored_code}'de verilen renklendirilmiş kod örneği dikkate alındığında bu karakter
+kutusu dizisinde "\texttt{static}" anahtar kelimesine ilişkin bir bölüm Şekil \ref{fig:line_of_charboxes}'de
+verilmiştir.
+
+\begin{figure}[H]
   \centering
-  \begin{BVerbatim}
-#include "cache.h"
-#include "config.h"
-···
-static void std_output(struct grep_opt *opt, const void *buf, size_t size)
-{
-        fwrite(buf, size, 1, stdout);
-}
-  \end{BVerbatim}
-  \caption{Sample code without coloring}
-  \label{code:string}
+  \includesvg[inkscapelatex=false, width=100pt]{line.svg}
+  \caption{Line of colored character boxes}
+  \label{fig:line_of_charboxes}
 \end{figure}
 
-\begin{figure}[h]
-  \centering
-  \includesvg[inkscapelatex=false, width=370pt]{code.svg}
-  \caption{Colored code}
-  \label{fig:code}
-\end{figure}
+Ortalama CCCT değeri iki adımda hesaplanmaktadır.
 
-In syntax coloring, each syntax group (e.g., an identifier, a keyword) in the source code is displayed with the font
-selected in color set in the theme. To calculate the contribution of a character in the group to the color temperature,
-it is necessary to calculate the character bit density from the bitmap of the character in the selected font. To explain
-the method followed in making this calculation, for example, the definition of BDF given in Figure
-\ref{code:letter_a_BDF} with the Consolas font of the character '\texttt{a}` is discussed.
+\begin{enumerate}
+  \item Her bir karakter kutusunun ortalama CCT değerinin hesaplanması için kutuda bulunan font glyph'ın ön ve arka plan
+    renklerinin CCT katkısı bu renklerin kutu içinde kapladığı piksel alanı oranları dikkate alınarak hesaplanmalıdır.
+    Şekil \ref{fig:line_of_charboxes}'deki örnekte ön plan rengi yeşil, arka plan rengi beyaz olarak verilmiştir.
 
-In this definition, each line starting with \texttt{BITMAP} corresponds to a line in the bit matrix of the corresponding
-character. A bitmap is obtained when bit patterns reported in hexadecimal are converted to binary (Figure
-\ref{fig:letter_a_bitmap}). Based on this bitmap, the appearance of character '\texttt{a}' is shown in Figure \ref{fig:letter_a}.
+  \item Her bir karakter kutusunun içeriğe olan CCT katkısı, karakter kutusunun içerikteki sıklığı dikkate alınarak
+    hesaplanmalıdır.  Örneğin Şekil \ref{fig:line_of_charboxes}'de verilen 6 karakterlik içerikte \texttt{a} karakterine
+    ait karakter kutusu 2 kez, \texttt{s} karakterine ait kutu ise 1 kez geçmektedir.
+\end{enumerate}
+
+Birinci adımda yapılan hesaplamayı örneklemek için \texttt{a} karakteri için Şekil \ref{fig:charbox_TTF}'de verilen
+karakter kutusu dikkate alınsın.  Bu karakterin BDF font tanımı ve bu tanımda yer alan bit eşlemi Şekil
+\ref{fig:letter_a_BDF}'deki gibidir.
 
 \begin{figure}[htbp]
-  \caption{BDF definition of the Consolas font for the character '\texttt{a}'}
-  \label{code:letter_a_BDF}
-
-  \centering
-  \begin{BVerbatim}
-    STARTCHAR 0061
-    ENCODING 97
-    SWIDTH 525 0
-    DWIDTH 7 0
-    BBX 5 7 1 0
-    BITMAP
-    70
-    88
-    08
-    78
-    88
-    88
-    F8
-    ENDCHAR
-  \end{BVerbatim}
-\end{figure}
-
-\begin{figure}[htbp]
-  \caption{Bit pattern in Consolas font of character '\texttt{a}'}
-  \label{fig:letter_a_bitmap}
-
-  \centering
-  \begin{BVerbatim}
+  \begin{subfigure}{0.48\textwidth}
+    \centering
+    \begin{BVerbatim}
+      STARTCHAR 0061
+      ENCODING 97
+      SWIDTH 525 0
+      DWIDTH 7 0
+      BBX 5 7 1 0
+      BITMAP
+      70
+      88
+      08
+      78
+      88
+      88
+      F8
+      ENDCHAR
+    \end{BVerbatim}
+    \caption{BDF definition}
+    \label{code:letter_a_BDF_definitiion}
+  \end{subfigure}
+  \begin{subfigure}{0.48\textwidth}
+    \centering
+    \begin{BVerbatim}
     0 1 1 1 0 0 0 0
     1 0 0 0 1 0 0 0
     0 0 0 0 1 0 0 0
@@ -414,22 +432,49 @@ character. A bitmap is obtained when bit patterns reported in hexadecimal are co
     1 0 0 0 1 0 0 0
     1 0 0 0 1 0 0 0
     1 1 1 1 1 0 0 0
-  \end{BVerbatim}
+    \end{BVerbatim}
+    \caption{Bit map}
+    \label{fig:letter_a_BDF_bitmap}
+  \end{subfigure}
+
+  \caption{Consolas font of character '\texttt{a}' in BDF}
+  \label{fig:letter_a_BDF}
 \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \includesvg[inkscapelatex=false, width=100pt]{line.svg}
-  \caption{Line of colored character boxes}
-  \label{fig:line}
-\end{figure}
+Renklendirilmiş kaynak kodun HTML temsilinde bildirilen \texttt{line-height} değeri ve Şekil
+\ref{fig:letter_a_BDF_bitmap}'deki bit eşlemi birlikte dikkate alınacak olursa \texttt{a} karakteri için Şekil
+\ref{fig:charbox_BDF}'deki karakter kutusu elde edilir.  Bu karakter kutusunun içerik dizisinde $i$'nci karakter kutusu
+olduğu kabul edilirse bu kutuya ait $CCT(charbox_{i})$ ile gösterilen ortalama CCT katkısı Eşitlik \ref{eq:cct_charbox}
+ile tanımlanmıştır.
 
-\begin{figure}[htbp]
-    \centering
-    \includesvg[inkscapelatex=false, width=150pt]{charbox.svg}
-    \caption{Consolas TTF of '\texttt{a}' character with line height}
-    \label{fig:charbox}
-\end{figure}
+\begin{equation}
+	CCT(charbox_{i}) = \frac{
+		Count_{i}^{\texttt{1}} \times CCT_{i}^{fg} +
+		(Width_{i} \times Height_{i} - Count_{i}^{\texttt{1}}) \times CCT_{i}^{bg}
+	}{
+		Width_{i} \times Height_{i}
+	}
+	\label{eq:cct_charbox}
+\end{equation}
+
+Bu ifadede:
+
+\begin{itemize}
+	\item $Count_{i}^{\texttt{1}}$ karakter kutusundaki \texttt{1}'lerin sayısını
+	\item $Width_{i}$ ve $Height_{i}$ sırasıyla karakter kutusunun genişlik ve yüksekliğini
+	\item $CCT_{i}^{fg}$ ve $CCT_{i}^{bg}$ karakter kutusundaki her bir pikselin ön ve arka plan renklerine ait CCT değerlerini
+\end{itemize}
+
+göstermektedir.
+
+İkinci adımda, her bir karakter kutusu için ilk adımda hesaplanan CCT değerlerinin ortalaması alınmalıdır. Karakter
+kutusu dizisinin $N$ boyutlu olduğu kabul edilecek olursa tüm içeriğin ortalama CCT değeri, yani CCCT değeri Eşitlik
+\ref{eq:cct_average} ile elde edilir.
+
+\begin{equation}
+  \text{Average CCT} = \frac{\sum_{i=1}^{N} CCT(charbox_{i})}{N}
+	\label{eq:cct_average}
+\end{equation}
 
 \def\pixelmap_a{{%
   {0,0,0,0,0,0,0,0,0,0,0},
@@ -456,58 +501,40 @@ character. A bitmap is obtained when bit patterns reported in hexadecimal are co
   {0,0,0,0,0,0,0,0,0,0,0},
 }}
 
-\colorlet{color0}{yellow!40}
-\colorlet{color1}{red}
+\colorlet{color0}{black!10}
+\colorlet{color1}{black!40!green}
 
 \begin{figure}[htbp]
-  \centering
-  \caption{Consolas BDF of '\texttt{a}' character with line height}
-  \label{fig:letter_a}
+  \begin{subfigure}{0.48\textwidth}
+    \centering
+    \includesvg[inkscapelatex=false, width=145pt]{charbox.svg}
 
-  \begin{tikzpicture}[%
-    scale=0.35,
-    box/.style={rectangle,draw=black,thin, minimum size=1cm},
-    every node/.style={transform shape}
-  ]%
+    \caption{TTF}
+    \label{fig:charbox_TTF}
+  \end{subfigure}
+  \begin{subfigure}{0.48\textwidth}
+    \centering
+    \begin{tikzpicture}[%
+      scale=0.35,
+      box/.style={rectangle,draw=black,thin, minimum size=1cm},
+      every node/.style={transform shape}
+    ]%
 
-  \foreach \x in {0, 1, ..., 8}{
-    \foreach \y in {0, 1, ...,21}{
-      \def\bit{0} \pgfmathsetmacro{\bit}{\pixelmap_a[mod(\y,22)][mod(\x,9)]}
-      \node[box, fill=color\bit] at (\x,\y){};
+    \foreach \x in {0, 1, ..., 8}{
+      \foreach \y in {0, 1, ...,21}{
+        \def\bit{0} \pgfmathsetmacro{\bit}{\pixelmap_a[mod(\y,22)][mod(\x,9)]}
+        \node[box, fill=color\bit] at (\x,\y){};
+      }
     }
-  }
-  \end{tikzpicture}
+    \end{tikzpicture}
+
+    \caption{BDF}
+    \label{fig:charbox_BDF}
+  \end{subfigure}
+
+  \caption{Character box of '\texttt{a}' with line height in Consolas fontface}
+  \label{fig:charbox}
 \end{figure}
-
-Renklendirilmiş kayna kodun ortalama CCT değeri Eşitlik \ref{eq:cct_average} ile elde edilmiştir.
-
-\begin{equation}
-  \text{Average CCT} = \frac{\sum_{i=1}^{N} CCT(charbox_{i})}{N}
-	\label{eq:cct_average}
-\end{equation}
-
-Bu ifadede görülen $CCT(charbox_{i})$ kaynak kod dizgisindeki $i$'nci karakter kutusunun ortalama CCT değerine olan CCT
-katkısını ifade etmekte olup Eşitlik \ref{eq:cct_charbox} ile tanımlanmıştır.
-
-\begin{equation}
-	CCT(charbox_{i}) = \frac{
-		Count_{i}^{\texttt{1}} \times CCT_{i}^{fg} +
-		(Width_{i} \times Height_{i} - Count_{i}^{\texttt{1}}) \times CCT_{i}^{bg}
-	}{
-		Width_{i} \times Height_{i}
-	}
-	\label{eq:cct_charbox}
-\end{equation}
-
-Bu ifadede $i$ renklendirilmiş kaynak kod dizgisindeki $i$'nci karakter kutusuna karşı gelmek üzere:
-
-\begin{itemize}
-	\item $Count_{i}^{\texttt{1}}$ karakter kutusundaki \texttt{1}'lerin sayısını
-	\item $Width_{i}$ ve $Height_{i}$ sırasıyla karakter kutusunun genişlik ve yüksekliğini
-	\item $CCT_{i}^{fg}$ ve $CCT_{i}^{bg}$ karakter kutusundaki her bir pikselin ön ve arka plan renklerine ait CCT değerlerini
-\end{itemize}
-
-göstermektedir.
 
 \subsection{CCT Calculation}
 
