@@ -177,7 +177,8 @@
     "language": "c",
     "theme": "Nord"
   },
-  "average": 9998.643606080961,
+  "average_cct": 9998.643606080961,
+  "average_cct_without_background": 2470.962044417107,
   "diff65": 53.825286247399404,
-  "cctbg": 11306.26
+  "background_cct": 11306.26
 }

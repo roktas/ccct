@@ -698,8 +698,9 @@ göstermektedir.
   fontsize=\Xfontsize,%
   language=\Xlanguage,%
   theme=\Xtheme,%
-  cct=\Xcct,%
-  cctbg=\Xcctbg,%
+  average_cct=\Xaveragecct,%
+  average_cct_without_background=\averagecctwithoutbackground,%
+  background_cct=\Xbackgroundcct,%
   diff65=\Xdiff,%
 }
 
@@ -714,7 +715,7 @@ göstermektedir.
 	]{%
 		./data/themes-by-cct.csv%
 	}{}{%
-    \Xtheme & \Xcct & \Xcctbg & \Xdiff%
+    \Xtheme & \Xaveragecct & \Xbackgroundcct & \Xdiff%
 	}
 
 	\caption{Dark Themes Temperatures}
@@ -732,7 +733,7 @@ göstermektedir.
 	]{%
 		./data/themes-by-cct.csv%
 	}{}{%
-    \Xtheme & \Xcct & \Xcctbg & \Xdiff%
+    \Xtheme & \Xaveragecct & \Xbackgroundcct & \Xdiff%
 	}
 
 	\caption{Light Themes Temperatures}
@@ -784,6 +785,23 @@ VS Code'un öntanımlı temaları için hesaplanan ortalama CCT değerleri dark 
 	}
 
 	\caption{Theme descriptive statistics}
+	\label{tab:descriptive}
+\end{table}
+
+\begin{table}[H]
+	\csvreader[%
+		cct-descriptive,%
+		centered tabular=lllll,%
+		table head=\multicolumn{5}{c}{}\\\toprule
+		Theme & Mean (K) & Std (K) & Min (K) & Max (K) \\\midrule,%
+		late after line=\\, late after last line=\\\bottomrule%
+	]{%
+		./data/themes-statswobg.csv%
+	}{}{%
+		\Xtheme & \Xmean & \Xstd & \Xmin & \Xmax %
+	}
+
+	\caption{Theme descriptive statistics taking the background CCT as 6500 K}
 	\label{tab:descriptive}
 \end{table}
 
@@ -845,7 +863,7 @@ sahip, dolayısıyla en fazla mavi ışık barındıran temalardır.
       width=0.8\textwidth,
       y=5mm,
     ]
-      \addplot table[x=ccts,y=index] {\tabledark};
+      \addplot table[x=average_ccts,y=index] {\tabledark};
       \draw[thin,dashed] (axis cs: 6500,0) -- (axis cs: 6500,15.8) node[anchor=west, yshift=-210]{D65};
     \end{axis}
   \end{tikzpicture}
@@ -873,7 +891,7 @@ sahip, dolayısıyla en fazla mavi ışık barındıran temalardır.
       width=0.8\textwidth,
       y=5mm,
     ]
-      \addplot [fill=red!30!white] table[x=ccts,y=index] {\tablelight};
+      \addplot [fill=red!30!white] table[x=average_ccts,y=index] {\tablelight};
       \draw[thin,dashed] (axis cs: 6500,0) -- (axis cs: 6500,15.8) node[anchor=west, yshift=-210]{D65};
     \end{axis}
   \end{tikzpicture}

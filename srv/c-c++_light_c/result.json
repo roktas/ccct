@@ -132,7 +132,8 @@
     "language": "c",
     "theme": "Visual Studio C/C++"
   },
-  "average": 6872.458510722596,
+  "average_cct": 6872.458510722596,
+  "average_cct_without_background": 3344.444545251006,
   "diff65": 5.730130934193781,
-  "cctbg": 6503.44
+  "background_cct": 6503.44
 }

@@ -20,12 +20,12 @@ def process(results)
     ['index', *1.upto(SELECTED_THEMES.size).to_a],
     [
       'dark', *SELECTED_THEMES.map do |theme|
-        results.find { |result| result['analyze'] == 'dark' && result['theme'] == theme }.fetch('cct')
+        results.find { |result| result['analyze'] == 'dark' && result['theme'] == theme }.fetch('average_cct')
       end
     ],
     [
       'light', *SELECTED_THEMES.map do |theme|
-        results.find { |result| result['analyze'] == 'light' && result['theme'] == theme }.fetch('cct')
+        results.find { |result| result['analyze'] == 'light' && result['theme'] == theme }.fetch('average_cct')
       end
     ]
   ].map { |rows| rows.join(',') }.join("\n")

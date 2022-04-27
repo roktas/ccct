@@ -140,7 +140,8 @@
     "language": "c",
     "theme": "Hop Light"
   },
-  "average": 7205.59387080105,
+  "average_cct": 7205.59387080105,
+  "average_cct_without_background": 3677.5799053294595,
   "diff65": 10.855290320016152,
-  "cctbg": 6503.44
+  "background_cct": 6503.44
 }

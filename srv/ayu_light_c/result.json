@@ -191,7 +191,8 @@
     "language": "c",
     "theme": "Ayu"
   },
-  "average": 6863.530242262288,
+  "average_cct": 6863.530242262288,
+  "average_cct_without_background": 3273.6327793718797,
   "diff65": 5.592772957881355,
-  "cctbg": 6577.75
+  "background_cct": 6577.75
 }

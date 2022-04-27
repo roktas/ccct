@@ -74,7 +74,8 @@
     "language": "c",
     "theme": "Andromeda"
   },
-  "average": 8516.556704240578,
+  "average_cct": 8516.556704240578,
+  "average_cct_without_background": 2243.6297204403413,
   "diff65": 31.023949296008894,
-  "cctbg": 9799.61
+  "background_cct": 9799.61
 }

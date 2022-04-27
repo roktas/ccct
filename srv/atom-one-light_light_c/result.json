@@ -177,7 +177,8 @@
     "language": "c",
     "theme": "Atom One Light"
   },
-  "average": 26552.883674958102,
+  "average_cct": 26552.883674958102,
+  "average_cct_without_background": 23024.869709486513,
   "diff65": 308.5059026916631,
-  "cctbg": 6503.44
+  "background_cct": 6503.44
 }

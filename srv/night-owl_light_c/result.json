@@ -162,7 +162,8 @@
     "language": "c",
     "theme": "Night Owl"
   },
-  "average": 10224.35158745023,
+  "average_cct": 10224.35158745023,
+  "average_cct_without_background": 6696.337621978641,
   "diff65": 57.29771673000354,
-  "cctbg": 6503.44
+  "background_cct": 6503.44
 }

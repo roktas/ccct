@@ -186,7 +186,8 @@
     "language": "c",
     "theme": "Learn with Sumit"
   },
-  "average": 8164.987415306854,
+  "average_cct": 8164.987415306854,
+  "average_cct_without_background": 4636.973449835265,
   "diff65": 25.61519100472083,
-  "cctbg": 6503.44
+  "background_cct": 6503.44
 }

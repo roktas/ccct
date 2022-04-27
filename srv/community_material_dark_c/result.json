@@ -170,7 +170,8 @@
     "language": "c",
     "theme": "Community Material"
   },
-  "average": 7086.07053272489,
+  "average_cct": 7086.07053272489,
+  "average_cct_without_background": 3558.0565672532994,
   "diff65": 9.016469734229073,
-  "cctbg": 6503.44
+  "background_cct": 6503.44
 }

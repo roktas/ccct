@@ -175,7 +175,8 @@
     "language": "c",
     "theme": "Tiny Light"
   },
-  "average": 5259.662027568053,
+  "average_cct": 5259.662027568053,
+  "average_cct_without_background": 2356.0459721312,
   "diff65": -19.08212265279918,
-  "cctbg": 5753.66
+  "background_cct": 5753.66
 }

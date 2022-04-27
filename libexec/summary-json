@@ -7,11 +7,12 @@ def main
   rows = ARGV.map do |result_file|
     result = JSON.parse File.read(result_file)
     source = result['source']
-    source['cct'] = result['average'].round
+    source['average_cct'] = result['average_cct'].round
+    source['average_cct_without_background'] = result['average_cct_without_background'].round
     source['diff65'] = result['diff65'].round
-    source['cctbg'] = result['cctbg'].round
+    source['background_cct'] = result['background_cct'].round
     source
-  end.sort_by { |row| [row['cct']] }
+  end.sort_by { |row| [row['average_cct']] }
 
   puts JSON.pretty_generate rows
 end

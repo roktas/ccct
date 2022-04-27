@@ -6,7 +6,7 @@ require 'json'
 
 def process(results)
   fields = results.first.keys
-  index  = fields.index('cct')
+  index  = fields.index('average_cct')
 
   rows = results.map(&:values).sort_by { |row| [row[index]] }
 

@@ -22,11 +22,11 @@ def process(source_hash, font_hash, meta_hash)
     code['color']['value']
   end.tally
 
-  cct_background     = source_hash['style']['background-color']['cct']
+  background_cct     = source_hash['style']['background-color']['cct']
   line_height_factor = source_hash['style']['line-height'].to_f / source_hash['style']['font-size'].to_f
 
-  effective_area= effective_area(width: font_hash['width'],
-                                 height: font_hash['height'],
+  effective_area= effective_area(width:              font_hash['width'],
+                                 height:             font_hash['height'],
                                  line_height_factor: line_height_factor)
 
   cccts = source_hash['codes'].map do |code|
@@ -38,7 +38,7 @@ def process(source_hash, font_hash, meta_hash)
         # Boşluk karakteri özel.  Boşluklar için HTML'de span içinde bir renk bildiriliyor ama bunun bir önemi
         # yok.  Neden? Çünkü boşluklarda CSS background rengiyle overwrite ediyor.  Dolayısıyla boşluklar
         # için kaynak temsilinde bildirilen renk yerine background rengini esas alıyoruz.
-        next cct_background
+        next background_cct
       elsif h['ones'].nil?
         # Muhtelemen bir kontrol karakteri, yani printable değil. BDF'te bu tür karakterler için bitmap boş.
         # Dolayısıyla bu karakterlerin CCT katkısı 0.0.
@@ -54,22 +54,42 @@ def process(source_hash, font_hash, meta_hash)
       #   ((1'lerin sayısı) x (bildirilen renk CCT)) + ((0'ların sayısı) x (arkaplan CCT))
       #   -------------------------------------------------------------------------------
       #                             toplam piksel sayısı
-      ((count1 * cct) + (count0 * cct_background)) / effective_area.to_f
+      ((count1 * cct) + (count0 * background_cct)) / effective_area.to_f
     end
   end.flatten.tally
 
-  average = cccts.sum { |k, v| k * v } / cccts.values.sum.to_f
-  diff65  = 100.0 * (average - 6500.0) / 6500.0
+  average_cct = cccts.sum { |k, v| k * v } / cccts.values.sum.to_f
+  diff65  = 100.0 * (average_cct - 6500.0) / 6500.0
 
-  warn "    Average CCCT: #{average.round(2)}"
+  cccts_without_background = source_hash['codes'].map do |code|
+    cct = code['color']['cct'] || 6500.0
+    code['content'].chars.map do |char|
+      h = font_hash['chars'][char]
+
+      next 6500.0 if char == ' ' || h['ones'].nil?
+
+      count1 = h['ones']
+      count0 = effective_area - count1
+
+      (count1 * cct) / effective_area.to_f
+    end
+  end.flatten.tally
+
+  average_cct_without_background = cccts_without_background.sum do |k, v|
+    k * v
+  end / cccts_without_background.values.sum.to_f
+
+  warn "    Average CCCT                   : #{average_cct.round(2)}"
+  warn "    Average CCCT without background: #{average_cct_without_background.round(2)}"
 
   {
-    colors:  Hash[colors.sort_by { |k, v| [-v, k] }],
-    cccts:   Hash[cccts.sort_by  { |k, v| [-v, k] }],
-    source:  meta_hash,
-    average: average,
-    diff65:  diff65,
-    cctbg:   cct_background
+    colors:                         Hash[colors.sort_by { |k, v| [-v, k] }],
+    cccts:                          Hash[cccts.sort_by  { |k, v| [-v, k] }],
+    source:                         meta_hash,
+    average_cct:                    average_cct,
+    average_cct_without_background: average_cct_without_background,
+    diff65:                         diff65,
+    background_cct:                 background_cct
   }
 end
 

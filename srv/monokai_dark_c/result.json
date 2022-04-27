@@ -191,7 +191,8 @@
     "language": "c",
     "theme": "Monokai Pro"
   },
-  "average": 6092.761373413289,
+  "average_cct": 6092.761373413289,
+  "average_cct_without_background": 2324.666752971022,
   "diff65": -6.2652096397955495,
-  "cctbg": 6791.73
+  "background_cct": 6791.73
 }

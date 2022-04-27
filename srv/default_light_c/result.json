@@ -187,7 +187,8 @@
     "language": "c",
     "theme": "Default"
   },
-  "average": 8362.568482550767,
+  "average_cct": 8362.568482550767,
+  "average_cct_without_background": 4834.554517079177,
   "diff65": 28.65489973155026,
-  "cctbg": 6503.44
+  "background_cct": 6503.44
 }

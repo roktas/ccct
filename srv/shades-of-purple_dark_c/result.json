@@ -198,7 +198,8 @@
     "language": "c",
     "theme": "Shades of Purple"
   },
-  "average": 124574.92554439422,
+  "average_cct": 124574.92554439422,
+  "average_cct_without_background": 3616.5170579296887,
   "diff65": 1816.5373160676033,
-  "cctbg": 147514.42
+  "background_cct": 147514.42
 }

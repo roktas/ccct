@@ -93,7 +93,8 @@
     "language": "c",
     "theme": "Netbeans Light"
   },
-  "average": 6902.772901820329,
+  "average_cct": 6902.772901820329,
+  "average_cct_without_background": 3374.7589363487396,
   "diff65": 6.196506181851215,
-  "cctbg": 6503.44
+  "background_cct": 6503.44
 }

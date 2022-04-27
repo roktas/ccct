@@ -5,9 +5,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Gruvbox",
-    "cct": 4678,
+    "average_cct": 4678,
+    "average_cct_without_background": 2376,
     "diff65": -28,
-    "cctbg": 5032
+    "background_cct": 5032
   },
   {
     "analyze": "light",
@@ -15,9 +16,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Tiny Light",
-    "cct": 5260,
+    "average_cct": 5260,
+    "average_cct_without_background": 2356,
     "diff65": -19,
-    "cctbg": 5754
+    "background_cct": 5754
   },
   {
     "analyze": "dark",
@@ -25,9 +27,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Gruvbox",
-    "cct": 5686,
+    "average_cct": 5686,
+    "average_cct_without_background": 2158,
     "diff65": -13,
-    "cctbg": 6503
+    "background_cct": 6503
   },
   {
     "analyze": "light",
@@ -35,9 +38,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Monokai Pro",
-    "cct": 5937,
+    "average_cct": 5937,
+    "average_cct_without_background": 2409,
     "diff65": -9,
-    "cctbg": 6503
+    "background_cct": 6503
   },
   {
     "analyze": "dark",
@@ -45,9 +49,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Monokai Pro",
-    "cct": 6093,
+    "average_cct": 6093,
+    "average_cct_without_background": 2325,
     "diff65": -6,
-    "cctbg": 6792
+    "background_cct": 6792
   },
   {
     "analyze": "dark",
@@ -55,9 +60,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Default",
-    "cct": 6515,
+    "average_cct": 6515,
+    "average_cct_without_background": 2987,
     "diff65": 0,
-    "cctbg": 6503
+    "background_cct": 6503
   },
   {
     "analyze": "dark",
@@ -65,9 +71,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Visual Studio C/C++",
-    "cct": 6802,
+    "average_cct": 6802,
+    "average_cct_without_background": 3274,
     "diff65": 5,
-    "cctbg": 6503
+    "background_cct": 6503
   },
   {
     "analyze": "light",
@@ -75,9 +82,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Ayu",
-    "cct": 6864,
+    "average_cct": 6864,
+    "average_cct_without_background": 3274,
     "diff65": 6,
-    "cctbg": 6578
+    "background_cct": 6578
   },
   {
     "analyze": "light",
@@ -85,9 +93,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Visual Studio C/C++",
-    "cct": 6872,
+    "average_cct": 6872,
+    "average_cct_without_background": 3344,
     "diff65": 6,
-    "cctbg": 6503
+    "background_cct": 6503
   },
   {
     "analyze": "light",
@@ -95,9 +104,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Netbeans Light",
-    "cct": 6903,
+    "average_cct": 6903,
+    "average_cct_without_background": 3375,
     "diff65": 6,
-    "cctbg": 6503
+    "background_cct": 6503
   },
   {
     "analyze": "dark",
@@ -105,9 +115,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Community Material",
-    "cct": 7086,
+    "average_cct": 7086,
+    "average_cct_without_background": 3558,
     "diff65": 9,
-    "cctbg": 6503
+    "background_cct": 6503
   },
   {
     "analyze": "light",
@@ -115,9 +126,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Snazzy Light",
-    "cct": 7086,
+    "average_cct": 7086,
+    "average_cct_without_background": 3496,
     "diff65": 9,
-    "cctbg": 6577
+    "background_cct": 6577
   },
   {
     "analyze": "light",
@@ -125,9 +137,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Hop Light",
-    "cct": 7206,
+    "average_cct": 7206,
+    "average_cct_without_background": 3678,
     "diff65": 11,
-    "cctbg": 6503
+    "background_cct": 6503
   },
   {
     "analyze": "dark",
@@ -135,9 +148,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Winter is Coming",
-    "cct": 7306,
+    "average_cct": 7306,
+    "average_cct_without_background": 4538,
     "diff65": 12,
-    "cctbg": 5591
+    "background_cct": 5591
   },
   {
     "analyze": "light",
@@ -145,9 +159,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Github",
-    "cct": 7450,
+    "average_cct": 7450,
+    "average_cct_without_background": 3922,
     "diff65": 15,
-    "cctbg": 6503
+    "background_cct": 6503
   },
   {
     "analyze": "light",
@@ -155,9 +170,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Material",
-    "cct": 7518,
+    "average_cct": 7518,
+    "average_cct_without_background": 3990,
     "diff65": 16,
-    "cctbg": 6503
+    "background_cct": 6503
   },
   {
     "analyze": "light",
@@ -165,9 +181,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Community Material",
-    "cct": 7762,
+    "average_cct": 7762,
+    "average_cct_without_background": 4234,
     "diff65": 19,
-    "cctbg": 6503
+    "background_cct": 6503
   },
   {
     "analyze": "light",
@@ -175,9 +192,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Learn with Sumit",
-    "cct": 8165,
+    "average_cct": 8165,
+    "average_cct_without_background": 4637,
     "diff65": 26,
-    "cctbg": 6503
+    "background_cct": 6503
   },
   {
     "analyze": "light",
@@ -185,9 +203,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Default",
-    "cct": 8363,
+    "average_cct": 8363,
+    "average_cct_without_background": 4835,
     "diff65": 29,
-    "cctbg": 6503
+    "background_cct": 6503
   },
   {
     "analyze": "dark",
@@ -195,9 +214,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Andromeda",
-    "cct": 8517,
+    "average_cct": 8517,
+    "average_cct_without_background": 2244,
     "diff65": 31,
-    "cctbg": 9800
+    "background_cct": 9800
   },
   {
     "analyze": "dark",
@@ -205,9 +225,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "One Monokai",
-    "cct": 8659,
+    "average_cct": 8659,
+    "average_cct_without_background": 2581,
     "diff65": 33,
-    "cctbg": 9566
+    "background_cct": 9566
   },
   {
     "analyze": "light",
@@ -215,9 +236,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Tokyo Night",
-    "cct": 8786,
+    "average_cct": 8786,
+    "average_cct_without_background": 5025,
     "diff65": 35,
-    "cctbg": 6783
+    "background_cct": 6783
   },
   {
     "analyze": "dark",
@@ -225,9 +247,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Github",
-    "cct": 8920,
+    "average_cct": 8920,
+    "average_cct_without_background": 3469,
     "diff65": 37,
-    "cctbg": 8812
+    "background_cct": 8812
   },
   {
     "analyze": "dark",
@@ -235,9 +258,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Plastic",
-    "cct": 9218,
+    "average_cct": 9218,
+    "average_cct_without_background": 3429,
     "diff65": 42,
-    "cctbg": 9219
+    "background_cct": 9219
   },
   {
     "analyze": "dark",
@@ -245,9 +269,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Atom One Dark",
-    "cct": 9609,
+    "average_cct": 9609,
+    "average_cct_without_background": 3531,
     "diff65": 48,
-    "cctbg": 9566
+    "background_cct": 9566
   },
   {
     "analyze": "dark",
@@ -255,9 +280,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "One Dark Pro",
-    "cct": 9609,
+    "average_cct": 9609,
+    "average_cct_without_background": 3531,
     "diff65": 48,
-    "cctbg": 9566
+    "background_cct": 9566
   },
   {
     "analyze": "dark",
@@ -265,9 +291,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Nord",
-    "cct": 9999,
+    "average_cct": 9999,
+    "average_cct_without_background": 2471,
     "diff65": 54,
-    "cctbg": 11306
+    "background_cct": 11306
   },
   {
     "analyze": "dark",
@@ -275,9 +302,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Material",
-    "cct": 10205,
+    "average_cct": 10205,
+    "average_cct_without_background": 3588,
     "diff65": 57,
-    "cctbg": 10213
+    "background_cct": 10213
   },
   {
     "analyze": "light",
@@ -285,9 +313,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Night Owl",
-    "cct": 10224,
+    "average_cct": 10224,
+    "average_cct_without_background": 6696,
     "diff65": 57,
-    "cctbg": 6503
+    "background_cct": 6503
   },
   {
     "analyze": "dark",
@@ -295,9 +324,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Dracula Official",
-    "cct": 10560,
+    "average_cct": 10560,
+    "average_cct_without_background": 3013,
     "diff65": 62,
-    "cctbg": 11329
+    "background_cct": 11329
   },
   {
     "analyze": "light",
@@ -305,9 +335,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Winter is Coming",
-    "cct": 10862,
+    "average_cct": 10862,
+    "average_cct_without_background": 7334,
     "diff65": 67,
-    "cctbg": 6503
+    "background_cct": 6503
   },
   {
     "analyze": "dark",
@@ -315,9 +346,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Ayu",
-    "cct": 11986,
+    "average_cct": 11986,
+    "average_cct_without_background": 2968,
     "diff65": 84,
-    "cctbg": 13096
+    "background_cct": 13096
   },
   {
     "analyze": "dark",
@@ -325,9 +357,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Tokyo Night",
-    "cct": 14447,
+    "average_cct": 14447,
+    "average_cct_without_background": 5013,
     "diff65": 122,
-    "cctbg": 13595
+    "background_cct": 13595
   },
   {
     "analyze": "dark",
@@ -335,9 +368,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Palenight",
-    "cct": 16619,
+    "average_cct": 16619,
+    "average_cct_without_background": 4544,
     "diff65": 156,
-    "cctbg": 16766
+    "background_cct": 16766
   },
   {
     "analyze": "dark",
@@ -345,9 +379,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Learn with Sumit",
-    "cct": 23913,
+    "average_cct": 23913,
+    "average_cct_without_background": 2609,
     "diff65": 268,
-    "cctbg": 27849
+    "background_cct": 27849
   },
   {
     "analyze": "light",
@@ -355,9 +390,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Atom One Light",
-    "cct": 26553,
+    "average_cct": 26553,
+    "average_cct_without_background": 23025,
     "diff65": 309,
-    "cctbg": 6503
+    "background_cct": 6503
   },
   {
     "analyze": "dark",
@@ -365,9 +401,10 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Shades of Purple",
-    "cct": 124575,
+    "average_cct": 124575,
+    "average_cct_without_background": 3617,
     "diff65": 1817,
-    "cctbg": 147514
+    "background_cct": 147514
   },
   {
     "analyze": "dark",
@@ -375,8 +412,9 @@
     "fontsize": 14,
     "language": "c",
     "theme": "Night Owl",
-    "cct": 124592,
+    "average_cct": 124592,
+    "average_cct_without_background": 4252,
     "diff65": 1817,
-    "cctbg": 146772
+    "background_cct": 146772
   }
 ]

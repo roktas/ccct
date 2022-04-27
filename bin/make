@@ -147,6 +147,17 @@ data-stats-csv() {
 	bundle exec libexec/data-stats-csv "$infile" >"$outfile"
 }
 
+data-statswobg-csv() {
+	local infile=srv/summary.json
+	local outfile=doc/data/themes-statswobg.csv
+
+	outdated "$outfile" "$infile" || return 0
+
+	mkdir -p "$(dirname "$outfile")"
+
+	bundle exec libexec/data-statswobg-csv "$infile" >"$outfile"
+}
+
 data-dual-csv() {
 	local infile=srv/summary.json
 	local outfile=doc/data/themes-dual.csv
@@ -236,6 +247,8 @@ main() {
 	data-dual-csv
 	data-dark-csv
 	data-light-csv
+	data-stats-csv
+	data-statswobg-csv
 }
 
 main "$@"

@@ -177,7 +177,8 @@
     "language": "c",
     "theme": "Dracula Official"
   },
-  "average": 10559.892238129027,
+  "average_cct": 10559.892238129027,
+  "average_cct_without_background": 3012.8653172263216,
   "diff65": 62.45988058660041,
-  "cctbg": 11329.49
+  "background_cct": 11329.49
 }

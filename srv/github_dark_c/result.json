@@ -169,7 +169,8 @@
     "language": "c",
     "theme": "Github"
   },
-  "average": 8919.565574554059,
+  "average_cct": 8919.565574554059,
+  "average_cct_without_background": 3468.841087745276,
   "diff65": 37.22408576237014,
-  "cctbg": 8812.24
+  "background_cct": 8812.24
 }

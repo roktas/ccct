@@ -198,7 +198,8 @@
     "language": "c",
     "theme": "Winter is Coming"
   },
-  "average": 7305.947334648972,
+  "average_cct": 7305.947334648972,
+  "average_cct_without_background": 4537.88203785646,
   "diff65": 12.399189763830341,
-  "cctbg": 5590.89
+  "background_cct": 5590.89
 }

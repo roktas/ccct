@@ -24,13 +24,14 @@ SELECTED_THEMES = [
 def process(results)
   selects = SELECTED_THEMES.map do |theme|
     results.find { |result| result['analyze'] == 'light' && result['theme'] == theme }
-  end.sort_by { |result| result['cct'] }
+  end.sort_by { |result| result['average_cct'] }
 
   [
-    ['themes', *selects.map { |select| select['theme'] }],
-    ['index',  *1.upto(selects.size).to_a],
-    ['ccts',   *selects.map { |select| select['cct'] }],
-    ['bgccts', *selects.map { |select| select['cctbg'] }]
+    ['themes',                          *selects.map { |select| select['theme'] }],
+    ['index',                           *1.upto(selects.size).to_a],
+    ['average_ccts',                    *selects.map { |select| select['average_cct'] }],
+    ['average_ccts_without_background', *selects.map { |select| select['average_cct_without_background'] }],
+    ['background_ccts',                 *selects.map { |select| select['background_cct'] }]
   ].map { |rows| rows.join(',') }.join("\n")
 end
 

@@ -234,7 +234,8 @@
     "language": "c",
     "theme": "Tokyo Night"
   },
-  "average": 14447.404924244618,
+  "average_cct": 14447.404924244618,
+  "average_cct_without_background": 5013.36021110404,
   "diff65": 122.26776806530181,
-  "cctbg": 13595.43
+  "background_cct": 13595.43
 }

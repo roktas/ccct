@@ -190,7 +190,8 @@
     "language": "c",
     "theme": "Material"
   },
-  "average": 10204.664428416569,
+  "average_cct": 10204.664428416569,
+  "average_cct_without_background": 3587.6554514300683,
   "diff65": 56.9948373602549,
-  "cctbg": 10212.72
+  "background_cct": 10212.72
 }

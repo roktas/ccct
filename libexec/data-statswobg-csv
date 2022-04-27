@@ -5,7 +5,7 @@ require 'csv'
 require 'json'
 
 def stats(results, analyze)
-  ccts = results.select { |result| result['analyze'] == analyze }.map { |result| result['average_cct'] }
+  ccts = results.select { |result| result['analyze'] == analyze }.map { |result| result['average_cct_without_background'] }
 
   mean = ccts.sum(0.0) / ccts.size
 
