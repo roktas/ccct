@@ -9,6 +9,7 @@ def main
     source = result['source']
     source['cct'] = result['average'].round
     source['diff65'] = result['diff65'].round
+    source['cctbg'] = result['cctbg'].round
     source
   end.sort_by { |row| [row['cct']] }
 

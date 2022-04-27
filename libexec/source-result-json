@@ -68,7 +68,8 @@ def process(source_hash, font_hash, meta_hash)
     cccts:   Hash[cccts.sort_by  { |k, v| [-v, k] }],
     source:  meta_hash,
     average: average,
-    diff65:  diff65
+    diff65:  diff65,
+    cctbg:   cct_background
   }
 end
 

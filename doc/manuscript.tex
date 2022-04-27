@@ -657,11 +657,21 @@ sayısına sahip olan temanın "One Dark Pro", salt Light temalarda ise "Ayu" ol
 ile 1 milyon civarıdır. Salt dark ve light temaların toplam indirme sayılarına bakıldığında bu sayı dark için 15 milyon
 civarı iken, light için 3 milyon civarıdır.
 
+Bu noktada tema popülerliği için indirme sayılarının tek başına yeterli bir ölçüt teşkil etmeyeceğinin belirtilmesi
+gerekir.  Bir çok temanın Github üzerinden kolaylıkla erişilebilecek açık kaynak kod depoları incelendiğinde tema
+popülerliğini yansıtan bir başka ölçüt olarak ilgili deponun "star" sayısının dikkate alınabileceği görülmektedir.
+Örneğin indirme sayılarını baz alan popülerlik sıralamasında 4'ncü sırada olan "Dracula" temasının Github kaynak kod
+deposu 18.3 K "star" almıştır\cite{draculatheme2022github}. Bu değer listedeki diğer temaların Github kaynak kod
+depolarındaki "star" sayılarının çok üzerindedir.  "Dracula" temasıyla karşılaştırıldığında indirme sayıları açısından
+birinci sırada olan "One Dark Pro" temasının "star" sayısı 1 K\cite{onedarkprotheme2022github}, ikinci sırada olan
+"Visual Studio C/C++" temasının star sayısı ise 4.6 K'dır\cite{visualstudiotheme2022github}.
+
 Dark temaların oldukça yüksek bir indirme oranına sahip olduğu görülmektedir. Bu sonuçlar Sarath'ın yaptığı anket
 çalışması \cite{sarath2016prefer} ve Coyier'in CSS özelinde renk tema tercih anketi \cite{coyier2013poll} başta olmak
 üzere farklı çalışmalarda geliştiricilerin dark tema kullanma eğilimiyle oldukça uyumlu bir sonuçtur.  Gerek VS Code'un
 gerekse de Visual Studio'nun ilk kurulumda öntanımlı olarak yerleşik bir dark temayla kurulu gelmesi de dark temaların
 geliştiriciler arasında daha popüler olduğu gözlemine uygun bir tercih olarak yorumlanmalıdır.
+
 
 Temaların indirme sayıları ile beğeni skorları ve yorum sayıları arasında anlamlı bir korelasyona rastlanmamıştır.
 İndirme sayısı yüksek olduğu halde beğeni skoru o derece yüksek değildir ve uyumlu olarak yüksek miktarda yorum da
@@ -672,7 +682,15 @@ vardır. İnceleyip ondan da destek alarak burayı zenginleştireceğiz.
 
 Şekil \ref{fig:cctflowchart}'de verilen hesaplama akışı kullanılarak seçilen renk teması, font ve örnek kaynak kod için
 ortalama CCT değerleri hesaplanmıştır. Dark temalar için hesaplanan CCT değerleri Tablo \ref{tab:cct-dark-themes}'da ve
-light temalar için olanlar ise Tablo \ref{tab:cct-light-themes}'da verilmiştir.
+light temalar için olanlar ise Tablo \ref{tab:cct-light-themes}'da verilmiştir.  Tablo sütunlarında:
+
+\begin{itemize}
+  \item $CCT_{avg}$: Tema için hesaplanan ortalama CCT değerini (Kelvin cinsinde)
+  \item $CCT_{bg}$: Temanın arka plan rengine ait CCT değerini (Kelvin cinsinde)
+  \item D65 deviation: Ortalama CCT değerinin D65 (6500 K) seviyesi göreceli farkını (yüzde olarak)
+\end{itemize}
+
+göstermektedir.
 
 \csvnames{themeccts}{
   analyze=\Xanalyze,
@@ -681,6 +699,7 @@ light temalar için olanlar ise Tablo \ref{tab:cct-light-themes}'da verilmiştir
   language=\Xlanguage,%
   theme=\Xtheme,%
   cct=\Xcct,%
+  cctbg=\Xcctbg,%
   diff65=\Xdiff,%
 }
 
@@ -688,14 +707,14 @@ light temalar için olanlar ise Tablo \ref{tab:cct-light-themes}'da verilmiştir
 	\csvreader[%
 		themeccts,%
 		filter ifthen=\equal{\Xanalyze}{dark},%
-		centered tabular=lll,%
-		table head=\multicolumn{3}{c}{}\\\toprule
-    Theme & Mean CCT (K) & Deviation from D65 (\%)\\\midrule,%
+		centered tabular=llll,%
+		table head=\multicolumn{4}{c}{}\\\toprule
+    Theme & $CCT_{avg}$ (K) & $CCT_{bg}$ (K) & D65 deviation (\%)\\\midrule,%
 		late after line=\\, late after last line=\\\bottomrule%
 	]{%
 		./data/themes-by-cct.csv%
 	}{}{%
-    \Xtheme & \Xcct & \Xdiff%
+    \Xtheme & \Xcct & \Xcctbg & \Xdiff%
 	}
 
 	\caption{Dark Themes Temperatures}
@@ -706,14 +725,14 @@ light temalar için olanlar ise Tablo \ref{tab:cct-light-themes}'da verilmiştir
 	\csvreader[%
 		themeccts,%
 		filter ifthen=\equal{\Xanalyze}{light},%
-		centered tabular=lll,%
-		table head=\multicolumn{3}{c}{}\\\toprule
-    Theme & Mean CCT (K) & Deviation from D65 (\%)\\\midrule,%
+		centered tabular=llll,%
+		table head=\multicolumn{4}{c}{}\\\toprule
+    Theme & $CCT_{avg}$ (K) & $CCT_{bg}$ (K) & D65 deviation (\%)\\\midrule,%
 		late after line=\\, late after last line=\\\bottomrule
 	]{%
 		./data/themes-by-cct.csv%
 	}{}{%
-    \Xtheme & \Xcct & \Xdiff%
+    \Xtheme & \Xcct & \Xcctbg & \Xdiff%
 	}
 
 	\caption{Light Themes Temperatures}
@@ -732,12 +751,14 @@ Dark tema grubunda en düşük CCT ortalaması 5.709 K ile Gruvbox iken en yüks
 olmuştur. Dark tema kullananların gün ışığının çok üzerinde bir
 mavı ışığa maruz kaldığını göstermektedir. En fazla indirmenin olduğu "One Dark Pro" için CCT ortalaması 9.384 K'dir. Sonraki en yüksek indirmenin olduğu "Visual Studio C/C++" temasının ortalama CCT değeri D65'de çıkmıştır. 
 
-Light tema grubunda en düşük CCT ortalaması 4.643 K ile "Gruvbox" iken en yüksek CCT ortalaması 22.253 K ile "Atom
-One Light" olmuştur. "Atom One Light" temasının böylesi yüksek bir CCT ortalamasına sahip olmasının temel nedeni bu
-temada programlama dilinin rezerve kelimelerini içeren sözdizimi grubu için ortalama CCT değeri yüksek bir rengin
-seçilmiş olmasıdır. Kaynak kodda rezerve kelime sıklığı yüksek olduğundan temanın bu gruba ilişkin yaptığı renklendirme
-nihai CCT değerinde baskın olarak etki göstermektedir. En fazla indirmenin olduğu "Visual Studio C/C++" için dark temada olduğu gibi CCT
-ortalaması D65'e yakın çıkmıştır (dark için 6.590 K ike light için 6.645 K). Sonraki en yüksek indirmenin olduğu "Github" teması için 7.110 K hesaplanmıştır.
+Light tema grubunda en düşük CCT ortalaması 4.643 K ile "Gruvbox" iken en yüksek CCT ortalaması 22.253 K ile "Atom One
+Light" olmuştur. "Atom One Light" temasının böylesi yüksek bir CCT ortalamasına sahip olmasının temel nedenleri bu
+temada arka plan renginin yüksek CCT değerine sahip olması ve buna ilave olarak programlama dilinin rezerve kelimelerini
+içeren sözdizimi grubu için de CCT değeri yüksek bir rengin seçilmiş olmasıdır. Kaynak kodda rezerve kelime
+sıklığı yüksek olduğundan temanın bu gruba ilişkin yaptığı renklendirme nihai CCT değerinde baskın olarak etki
+göstermektedir. En fazla indirmenin olduğu "Visual Studio C/C++" için dark temada olduğu gibi CCT ortalaması D65'e yakın
+çıkmıştır (dark için 6.590 K ike light için 6.645 K). Sonraki en yüksek indirmenin olduğu "Github" teması için 7.110 K
+hesaplanmıştır.
 
 VS Code'un öntanımlı temaları için hesaplanan ortalama CCT değerleri dark için 6.368 K ve light için 7.847 K olarak hesaplanmıştır. Elde edilen değerlere göre dark, light'a göre düşüktür. Programlama editörünün light default temasını kullananların yüksek mavi ışığa maruz kaldığını göstermektedir.
 
@@ -768,7 +789,9 @@ VS Code'un öntanımlı temaları için hesaplanan ortalama CCT değerleri dark 
 
 Dual temalar için hesaplanan ortalama CCT değerleri Figure \ref{fig:dark-light-pair-compare}'de verilmiştir. Temaların
 light versiyonlarının belirgin bir şekilde dark versiyonlarına oranla daha düşük CCT ürettiği ancak yine de D65'in
-üzerinde olduğu görülmektedir. \textbf{TODO} dark için büyük olmasının sebebi arkaplan renginin mavi yoğun olmasıdır.
+üzerinde olduğu görülmektedir. Tablo \ref{tab:cct-dark-themes} ve \ref{tab:cct-light-themes}'deki $CCT_{bg}$ sütunları
+karşılaştırılacak olursa Dark temaların yüksek CCT değeri göstermesinin temel nedeni bu temalarda yüksek CCT değerli
+mavi yoğun renklerin kullanılmış olmasıdır.
 
 \pgfplotstableread[col sep=comma,text indicator="]{./data/themes-dual.csv}\dualtable
 \pgfplotstabletranspose[colnames from=themes]\tabledual{\dualtable}
@@ -801,16 +824,6 @@ light versiyonlarının belirgin bir şekilde dark versiyonlarına oranla daha d
 Figure \ref{fig:dark-compare}'de dark temaların ortalama CCT değerleri verilmiştir. "Default" tema haricindeki temaların
 ortalama CCT değerleri D65'in üzerindedir. "Night Owl" ve "Shades of Purple" ise hesaplanmış en yüksek CCT değerlerine
 sahip, dolayısıyla en fazla mavi ışık barındıran temalardır.
-
-\begin{comment}
-İndirme sayılarını baz alan popülerlik sıralamasında 4'ncü sırada olan bu temanın Github kaynak kod deposu 18.3 K "star"
-  almıştır\cite{draculatheme2022github}. Bu değer listedeki diğer temaların Github kaynak kod depolarındaki "star"
-  sayılarının çok üzerindedir.  Örneğin listede indirme sayıları açısından birinci sırada olan "One Dark Pro" temasının
-  "star" sayısı 1 K\cite{onedarkprotheme2022github}, ikinci sırada olan "Visual Studio C/C++" temasının star sayısı ise
-  4.6 K'dır\cite{visualstudiotheme2022github}.  Bu sonuç "Dracula Official" temasının bu çalışma kapsamındaki ölçütlere
-  göre en fazla mavi ışık barındırdığını göstermektedir. Diğer yandan tema popülerliği için indirme sayıları dışında
-  ölçütlerin de dikkate alınması gerektiğini ortaya koymaktadır.
-\end{comment}
 
 \pgfplotstableread[col sep=comma,text indicator="]{./data/themes-dark.csv}\darktable
 \pgfplotstabletranspose[colnames from=themes]\tabledark{\darktable}

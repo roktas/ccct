@@ -29,7 +29,8 @@ def process(results)
   [
     ['themes', *selects.map { |select| select['theme'] }],
     ['index',  *1.upto(selects.size).to_a],
-    ['ccts',   *selects.map { |select| select['cct'] }]
+    ['ccts',   *selects.map { |select| select['cct'] }],
+    ['bgccts', *selects.map { |select| select['cctbg'] }]
   ].map { |rows| rows.join(',') }.join("\n")
 end
 

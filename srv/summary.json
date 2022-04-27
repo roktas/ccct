@@ -6,7 +6,8 @@
     "language": "c",
     "theme": "Gruvbox",
     "cct": 4678,
-    "diff65": -28
+    "diff65": -28,
+    "cctbg": 5032
   },
   {
     "analyze": "light",
@@ -15,7 +16,8 @@
     "language": "c",
     "theme": "Tiny Light",
     "cct": 5260,
-    "diff65": -19
+    "diff65": -19,
+    "cctbg": 5754
   },
   {
     "analyze": "dark",
@@ -24,7 +26,8 @@
     "language": "c",
     "theme": "Gruvbox",
     "cct": 5686,
-    "diff65": -13
+    "diff65": -13,
+    "cctbg": 6503
   },
   {
     "analyze": "light",
@@ -33,7 +36,8 @@
     "language": "c",
     "theme": "Monokai Pro",
     "cct": 5937,
-    "diff65": -9
+    "diff65": -9,
+    "cctbg": 6503
   },
   {
     "analyze": "dark",
@@ -42,7 +46,8 @@
     "language": "c",
     "theme": "Monokai Pro",
     "cct": 6093,
-    "diff65": -6
+    "diff65": -6,
+    "cctbg": 6792
   },
   {
     "analyze": "dark",
@@ -51,7 +56,8 @@
     "language": "c",
     "theme": "Default",
     "cct": 6515,
-    "diff65": 0
+    "diff65": 0,
+    "cctbg": 6503
   },
   {
     "analyze": "dark",
@@ -60,7 +66,8 @@
     "language": "c",
     "theme": "Visual Studio C/C++",
     "cct": 6802,
-    "diff65": 5
+    "diff65": 5,
+    "cctbg": 6503
   },
   {
     "analyze": "light",
@@ -69,7 +76,8 @@
     "language": "c",
     "theme": "Ayu",
     "cct": 6864,
-    "diff65": 6
+    "diff65": 6,
+    "cctbg": 6578
   },
   {
     "analyze": "light",
@@ -78,7 +86,8 @@
     "language": "c",
     "theme": "Visual Studio C/C++",
     "cct": 6872,
-    "diff65": 6
+    "diff65": 6,
+    "cctbg": 6503
   },
   {
     "analyze": "light",
@@ -87,7 +96,8 @@
     "language": "c",
     "theme": "Netbeans Light",
     "cct": 6903,
-    "diff65": 6
+    "diff65": 6,
+    "cctbg": 6503
   },
   {
     "analyze": "dark",
@@ -96,7 +106,8 @@
     "language": "c",
     "theme": "Community Material",
     "cct": 7086,
-    "diff65": 9
+    "diff65": 9,
+    "cctbg": 6503
   },
   {
     "analyze": "light",
@@ -105,7 +116,8 @@
     "language": "c",
     "theme": "Snazzy Light",
     "cct": 7086,
-    "diff65": 9
+    "diff65": 9,
+    "cctbg": 6577
   },
   {
     "analyze": "light",
@@ -114,7 +126,8 @@
     "language": "c",
     "theme": "Hop Light",
     "cct": 7206,
-    "diff65": 11
+    "diff65": 11,
+    "cctbg": 6503
   },
   {
     "analyze": "dark",
@@ -123,7 +136,8 @@
     "language": "c",
     "theme": "Winter is Coming",
     "cct": 7306,
-    "diff65": 12
+    "diff65": 12,
+    "cctbg": 5591
   },
   {
     "analyze": "light",
@@ -132,7 +146,8 @@
     "language": "c",
     "theme": "Github",
     "cct": 7450,
-    "diff65": 15
+    "diff65": 15,
+    "cctbg": 6503
   },
   {
     "analyze": "light",
@@ -141,7 +156,8 @@
     "language": "c",
     "theme": "Material",
     "cct": 7518,
-    "diff65": 16
+    "diff65": 16,
+    "cctbg": 6503
   },
   {
     "analyze": "light",
@@ -150,7 +166,8 @@
     "language": "c",
     "theme": "Community Material",
     "cct": 7762,
-    "diff65": 19
+    "diff65": 19,
+    "cctbg": 6503
   },
   {
     "analyze": "light",
@@ -159,7 +176,8 @@
     "language": "c",
     "theme": "Learn with Sumit",
     "cct": 8165,
-    "diff65": 26
+    "diff65": 26,
+    "cctbg": 6503
   },
   {
     "analyze": "light",
@@ -168,7 +186,8 @@
     "language": "c",
     "theme": "Default",
     "cct": 8363,
-    "diff65": 29
+    "diff65": 29,
+    "cctbg": 6503
   },
   {
     "analyze": "dark",
@@ -177,7 +196,8 @@
     "language": "c",
     "theme": "Andromeda",
     "cct": 8517,
-    "diff65": 31
+    "diff65": 31,
+    "cctbg": 9800
   },
   {
     "analyze": "dark",
@@ -186,7 +206,8 @@
     "language": "c",
     "theme": "One Monokai",
     "cct": 8659,
-    "diff65": 33
+    "diff65": 33,
+    "cctbg": 9566
   },
   {
     "analyze": "light",
@@ -195,7 +216,8 @@
     "language": "c",
     "theme": "Tokyo Night",
     "cct": 8786,
-    "diff65": 35
+    "diff65": 35,
+    "cctbg": 6783
   },
   {
     "analyze": "dark",
@@ -204,7 +226,8 @@
     "language": "c",
     "theme": "Github",
     "cct": 8920,
-    "diff65": 37
+    "diff65": 37,
+    "cctbg": 8812
   },
   {
     "analyze": "dark",
@@ -213,7 +236,8 @@
     "language": "c",
     "theme": "Plastic",
     "cct": 9218,
-    "diff65": 42
+    "diff65": 42,
+    "cctbg": 9219
   },
   {
     "analyze": "dark",
@@ -222,7 +246,8 @@
     "language": "c",
     "theme": "Atom One Dark",
     "cct": 9609,
-    "diff65": 48
+    "diff65": 48,
+    "cctbg": 9566
   },
   {
     "analyze": "dark",
@@ -231,7 +256,8 @@
     "language": "c",
     "theme": "One Dark Pro",
     "cct": 9609,
-    "diff65": 48
+    "diff65": 48,
+    "cctbg": 9566
   },
   {
     "analyze": "dark",
@@ -240,7 +266,8 @@
     "language": "c",
     "theme": "Nord",
     "cct": 9999,
-    "diff65": 54
+    "diff65": 54,
+    "cctbg": 11306
   },
   {
     "analyze": "dark",
@@ -249,7 +276,8 @@
     "language": "c",
     "theme": "Material",
     "cct": 10205,
-    "diff65": 57
+    "diff65": 57,
+    "cctbg": 10213
   },
   {
     "analyze": "light",
@@ -258,7 +286,8 @@
     "language": "c",
     "theme": "Night Owl",
     "cct": 10224,
-    "diff65": 57
+    "diff65": 57,
+    "cctbg": 6503
   },
   {
     "analyze": "dark",
@@ -267,7 +296,8 @@
     "language": "c",
     "theme": "Dracula Official",
     "cct": 10560,
-    "diff65": 62
+    "diff65": 62,
+    "cctbg": 11329
   },
   {
     "analyze": "light",
@@ -276,7 +306,8 @@
     "language": "c",
     "theme": "Winter is Coming",
     "cct": 10862,
-    "diff65": 67
+    "diff65": 67,
+    "cctbg": 6503
   },
   {
     "analyze": "dark",
@@ -285,7 +316,8 @@
     "language": "c",
     "theme": "Ayu",
     "cct": 11986,
-    "diff65": 84
+    "diff65": 84,
+    "cctbg": 13096
   },
   {
     "analyze": "dark",
@@ -294,7 +326,8 @@
     "language": "c",
     "theme": "Tokyo Night",
     "cct": 14447,
-    "diff65": 122
+    "diff65": 122,
+    "cctbg": 13595
   },
   {
     "analyze": "dark",
@@ -303,7 +336,8 @@
     "language": "c",
     "theme": "Palenight",
     "cct": 16619,
-    "diff65": 156
+    "diff65": 156,
+    "cctbg": 16766
   },
   {
     "analyze": "dark",
@@ -312,7 +346,8 @@
     "language": "c",
     "theme": "Learn with Sumit",
     "cct": 23913,
-    "diff65": 268
+    "diff65": 268,
+    "cctbg": 27849
   },
   {
     "analyze": "light",
@@ -321,7 +356,8 @@
     "language": "c",
     "theme": "Atom One Light",
     "cct": 26553,
-    "diff65": 309
+    "diff65": 309,
+    "cctbg": 6503
   },
   {
     "analyze": "dark",
@@ -330,7 +366,8 @@
     "language": "c",
     "theme": "Shades of Purple",
     "cct": 124575,
-    "diff65": 1817
+    "diff65": 1817,
+    "cctbg": 147514
   },
   {
     "analyze": "dark",
@@ -339,6 +376,7 @@
     "language": "c",
     "theme": "Night Owl",
     "cct": 124592,
-    "diff65": 1817
+    "diff65": 1817,
+    "cctbg": 146772
   }
 ]
