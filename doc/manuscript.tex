@@ -767,7 +767,7 @@ VS Code'un öntanımlı temaları için hesaplanan ortalama CCT değerleri dark 
 \end{table}
 
 Dual temalar için hesaplanan ortalama CCT değerleri Figure \ref{fig:dark-light-pair-compare}'de verilmiştir. Temaların
-light versiyonlarının belirgin bir şekilde light versiyonlarına oranla daha düşük CCT ürettiği ancak yine de D65'in
+light versiyonlarının belirgin bir şekilde dark versiyonlarına oranla daha düşük CCT ürettiği ancak yine de D65'in
 üzerinde olduğu görülmektedir. \textbf{TODO} dark için büyük olmasının sebebi arkaplan renginin mavi yoğun olmasıdır.
 
 \pgfplotstableread[col sep=comma,text indicator="]{./data/themes-dual.csv}\dualtable
@@ -798,20 +798,24 @@ light versiyonlarının belirgin bir şekilde light versiyonlarına oranla daha 
   \label{fig:dark-light-pair-compare}
 \end{figure}
 
-Figure \ref{fig:dark-compare}'de salt dark temaların ortalama CCT değerleri verilmiştir. "Default" tema
-haricindeki temaların ortalama CCT değerleri D65'in üzerindedir. "Dracula Official" ise CCT değeri en yüksek olan temadır.
-Dolayısıyla en fazla mavi ışık barındıran temadır. İndirme sayılarını baz alan popülerlik sıralamasında 4'ncü sırada olan bu temanın Github kaynak kod deposu 18.3 K "star"
-almıştır\cite{draculatheme2022github}.  Bu değer listedeki diğer temaların Github kaynak kod depolarındaki "star"
-sayılarının çok üzerindedir.  Örneğin listede indirme sayıları açısından birinci sırada olan "One Dark Pro" temasının
-"star" sayısı 1 K\cite{onedarkprotheme2022github}, ikinci sırada olan "Visual Studio C/C++" temasının star sayısı ise
-4.6 K'dır\cite{visualstudiotheme2022github}.  Bu sonuç "Dracula Official" temasının bu çalışma kapsamındaki
-ölçütlere göre en fazla mavi ışık barındırdığını göstermektedir. Diğer yandan tema popülerliği için indirme sayıları dışında
-ölçütlerin de dikkate alınması gerektiğini ortaya koymaktadır.
+Figure \ref{fig:dark-compare}'de dark temaların ortalama CCT değerleri verilmiştir. "Default" tema haricindeki temaların
+ortalama CCT değerleri D65'in üzerindedir. "Night Owl" ve "Shades of Purple" ise hesaplanmış en yüksek CCT değerlerine
+sahip, dolayısıyla en fazla mavi ışık barındıran temalardır.
+
+\begin{comment}
+İndirme sayılarını baz alan popülerlik sıralamasında 4'ncü sırada olan bu temanın Github kaynak kod deposu 18.3 K "star"
+  almıştır\cite{draculatheme2022github}. Bu değer listedeki diğer temaların Github kaynak kod depolarındaki "star"
+  sayılarının çok üzerindedir.  Örneğin listede indirme sayıları açısından birinci sırada olan "One Dark Pro" temasının
+  "star" sayısı 1 K\cite{onedarkprotheme2022github}, ikinci sırada olan "Visual Studio C/C++" temasının star sayısı ise
+  4.6 K'dır\cite{visualstudiotheme2022github}.  Bu sonuç "Dracula Official" temasının bu çalışma kapsamındaki ölçütlere
+  göre en fazla mavi ışık barındırdığını göstermektedir. Diğer yandan tema popülerliği için indirme sayıları dışında
+  ölçütlerin de dikkate alınması gerektiğini ortaya koymaktadır.
+\end{comment}
 
 \pgfplotstableread[col sep=comma,text indicator="]{./data/themes-dark.csv}\darktable
 \pgfplotstabletranspose[colnames from=themes]\tabledark{\darktable}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
   \begin{tikzpicture}
     \begin{axis}[
       xbar,
@@ -824,11 +828,12 @@ sayılarının çok üzerindedir.  Örneğin listede indirme sayıları açısı
       },
       scaled x ticks=false,
       xlabel=$CCT (K)$,
-      xmin=5000,
-      y=8mm,
+      xmin=0,
+      width=0.8\textwidth,
+      y=5mm,
     ]
       \addplot table[x=ccts,y=index] {\tabledark};
-      \draw[thin,dashed] (axis cs: 6500,0) -- (axis cs: 6500,8.5) node[anchor=east, yshift=-8.0mm]{D65};
+      \draw[thin,dashed] (axis cs: 6500,0) -- (axis cs: 6500,15.8) node[anchor=west, yshift=-210]{D65};
     \end{axis}
   \end{tikzpicture}
   \caption{CCT value comparison of dark themes}
@@ -838,7 +843,7 @@ sayılarının çok üzerindedir.  Örneğin listede indirme sayıları açısı
 \pgfplotstableread[col sep=comma,text indicator="]{./data/themes-light.csv}\lighttable
 \pgfplotstabletranspose[colnames from=themes]\tablelight{\lighttable}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
   \begin{tikzpicture}
     \begin{axis}[
       xbar,
@@ -851,11 +856,12 @@ sayılarının çok üzerindedir.  Örneğin listede indirme sayıları açısı
       },
       scaled x ticks=false,
       xlabel=$CCT (K)$,
-      xmin=5000,
-      y=8mm,
+      xmin=0,
+      width=0.8\textwidth,
+      y=5mm,
     ]
       \addplot [fill=red!30!white] table[x=ccts,y=index] {\tablelight};
-      \draw[thin,dashed] (axis cs: 6500,0) -- (axis cs: 6500,8.5) node[anchor=east, yshift=-8.0mm]{D65};
+      \draw[thin,dashed] (axis cs: 6500,0) -- (axis cs: 6500,15.8) node[anchor=west, yshift=-210]{D65};
     \end{axis}
   \end{tikzpicture}
   \caption{CCT value comparison of light themes}

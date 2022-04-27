@@ -4,14 +4,21 @@
 require 'json'
 
 SELECTED_THEMES = [
-  'One Dark Pro',
-  'Github',
-  'Dracula Official',
-  'Atom One Dark',
-  'One Monokai',
-  'Default',
   'Andromeda',
-  'Plastic'
+  'Atom One Dark',
+  'Ayu',
+  'Default',
+  'Dracula Official',
+  'Github',
+  'Gruvbox',
+  'Learn with Sumit',
+  'Night Owl',
+  'One Dark Pro',
+  'One Monokai',
+  'Palenight',
+  'Plastic',
+  'Shades of Purple',
+  'Tokyo Night',
 ].freeze
 
 def process(results)

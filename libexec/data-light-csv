@@ -4,14 +4,21 @@
 require 'json'
 
 SELECTED_THEMES = [
-  'Github',
-  'Monokai Pro',
-  'Default',
-  'Visual Studio C/C++',
-  'Netbeans Light',
-  'Community Material',
+  'Atom One Light',
   'Ayu',
+  'Community Material',
+  'Default',
+  'Github',
+  'Gruvbox',
+  'Learn with Sumit',
+  'Material',
+  'Monokai Pro',
+  'Netbeans Light',
+  'Night Owl',
+  'Tiny Light',
   'Tokyo Night',
+  'Visual Studio C/C++',
+  'Winter is Coming',
 ].freeze
 
 def process(results)
