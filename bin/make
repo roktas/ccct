@@ -191,6 +191,17 @@ data-light-csv() {
 	bundle exec libexec/data-light-csv "$infile" >"$outfile"
 }
 
+data-atomonelight-csv() {
+	local infile=srv/atom-one-light_light_c/result.json
+	local outfile=doc/data/atom-one-light.csv
+
+	outdated "$outfile" "$infile" || return 0
+
+	mkdir -p "$(dirname "$outfile")"
+
+	bundle exec libexec/data-atomonelight-csv "$infile" >"$outfile"
+}
+
 summary-json() {
 	local outfile=srv/summary.json
 	bundle exec libexec/summary-json "$@" >"$outfile"
@@ -249,6 +260,7 @@ main() {
 	data-light-csv
 	data-stats-csv
 	data-statswobg-csv
+	data-atomonelight-csv
 }
 
 main "$@"

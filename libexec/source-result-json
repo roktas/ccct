@@ -18,12 +18,26 @@ def effective_area(width:, height:, line_height_factor:)
 end
 
 def process(source_hash, font_hash, meta_hash)
-  colors = source_hash['codes'].map do |code|
+  background_color   = source_hash['style']['background-color']['value']
+  background_cct     = source_hash['style']['background-color']['cct']
+  line_height_factor = source_hash['style']['line-height'].to_f / source_hash['style']['font-size'].to_f
+
+  source_hash['codes'].map do |code|
+    next unless code['content'].strip.empty?
+    code['color']['value'] = background_color
+  end
+
+  colors_tally = source_hash['codes'].map do |code|
     code['color']['value']
   end.tally
 
-  background_cct     = source_hash['style']['background-color']['cct']
-  line_height_factor = source_hash['style']['line-height'].to_f / source_hash['style']['font-size'].to_f
+  colors = {}
+  source_hash['codes'].each do |code|
+    colors[color = code['color']['value']] = {
+      cct: code['color']['cct'],
+      frequency: colors_tally[color]
+    }
+  end
 
   effective_area= effective_area(width:              font_hash['width'],
                                  height:             font_hash['height'],
@@ -83,7 +97,7 @@ def process(source_hash, font_hash, meta_hash)
   warn "    Average CCCT without background: #{average_cct_without_background.round(2)}"
 
   {
-    colors:                         Hash[colors.sort_by { |k, v| [-v, k] }],
+    colors:                         Hash[colors.sort_by { |_, v| -v[:frequency] }],
     cccts:                          Hash[cccts.sort_by  { |k, v| [-v, k] }],
     source:                         meta_hash,
     average_cct:                    average_cct,

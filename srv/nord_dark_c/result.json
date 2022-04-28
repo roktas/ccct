@@ -1,15 +1,49 @@
 {
   "colors": {
-    "#d8dee9": 5265,
-    "#81a1c1": 3462,
-    "#eceff4": 2917,
-    "#88c0d0": 421,
-    "#b48ead": 243,
-    "#616e88": 223,
-    "#a3be8c": 102,
-    "#5e81ac": 38,
-    "#8fbcbb": 26,
-    "#ebcb8b": 24
+    "#d8dee9": {
+      "cct": 7304.83,
+      "frequency": 3814
+    },
+    "#81a1c1": {
+      "cct": 13455.15,
+      "frequency": 3462
+    },
+    "#eceff4": {
+      "cct": 6830.31,
+      "frequency": 2917
+    },
+    "#2e3440": {
+      "cct": 7304.83,
+      "frequency": 1471
+    },
+    "#88c0d0": {
+      "cct": 10969.17,
+      "frequency": 421
+    },
+    "#b48ead": {
+      "cct": 6243.97,
+      "frequency": 243
+    },
+    "#616e88": {
+      "cct": 12813.75,
+      "frequency": 223
+    },
+    "#a3be8c": {
+      "cct": 5647.21,
+      "frequency": 102
+    },
+    "#5e81ac": {
+      "cct": 34818.9,
+      "frequency": 29
+    },
+    "#ebcb8b": {
+      "cct": 3992.13,
+      "frequency": 24
+    },
+    "#8fbcbb": {
+      "cct": 8550.28,
+      "frequency": 15
+    }
   },
   "cccts": {
     "11306.26": 10526,

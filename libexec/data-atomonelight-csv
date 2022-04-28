@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'json'
+
+def process(result)
+  colors = result['colors']
+
+  [
+    %w[color cct frequency].join(','),
+    *colors.map { |color, hash| [color.delete_prefix('#'), hash['cct'].round, hash['frequency']].join(',') }
+  ].join("\n")
+end
+
+def main
+  puts process(JSON.parse(ARGF.read))
+end
+
+main

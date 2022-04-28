@@ -189,7 +189,7 @@ Since it will not be possible to work with all common programming languages for 
 In the light of these criteria, the source code\cite{github2022gitgrep} of the \texttt{grep} subcommand\cite{git2022grep} was chosen as an example in the source code repository\cite{github2022gitrepo} of the Git\cite{git2022homepage} version tracking system. This sample code, which has a total of 2025 lines, can be accessed in the Git repository with the command below.
 
 \begin{verbatim}
-  git show 0a6adc26e2efd2dcfb3e65407623287e08989a63:grep.c
+        git show 0a6adc26e2efd2dcfb3e65407623287e08989a63:grep.c
 \end{verbatim}
 
 \subsubsection{Font Selection} \label{sec:material-methods.inputs.font}
@@ -354,14 +354,13 @@ In syntax coloring, each syntax group (e.g. an identifier, a keyword) in the sou
 glyph selected in color set in the theme. Bölüm \ref{sec:material-methods} başlangıcında da belirtildiği gibi kaynak kod
 karakter dizisindeki her bir karakter içinde bulunduğu satırın yüksekliğine sahip bir karakter kutusu oluşturmakta ve
 buna göre renklendirilmiş kaynak kod içeriğinin tamamı bu kutulardan oluşan bir karakter kutusu dizisi olarak
-yorumlanabilmektedir. Şekil \ref{fig:colored_code}'de verilen renklendirilmiş kod örneği dikkate alındığında bu karakter
-kutusu dizisinde "\texttt{static}" anahtar kelimesine ilişkin bir bölüm Şekil \ref{fig:line_of_charboxes}'de
-verilmiştir.
+yorumlanmaktadır. Şekil \ref{fig:colored_code}'de verilen renklendirilmiş kod örneği dikkate alındığında bu karakter
+kutusu dizisinde "\texttt{static}" anahtar kelimesine ilişkin bölüm Şekil \ref{fig:line_of_charboxes}'de verilmiştir.
 
 \begin{figure}[H]
   \centering
   \includesvg[inkscapelatex=false, width=100pt]{line.svg}
-  \caption{Line of colored character boxes}
+  \caption{Colored character boxes array}
   \label{fig:line_of_charboxes}
 \end{figure}
 
@@ -378,7 +377,7 @@ Ortalama CCCT değeri iki adımda hesaplanmaktadır.
 \end{enumerate}
 
 Birinci adımda yapılan hesaplamayı örneklemek için \texttt{a} karakteri için Şekil \ref{fig:charbox_TTF}'de verilen
-karakter kutusu dikkate alınsın.  Bu karakterin BDF font tanımı ve bu tanımda yer alan bit eşlemi Şekil
+karakter kutusu dikkate alınsın.  Bu karakterin BDF font tanımı ve tanımda yer alan bit eşlemi Şekil
 \ref{fig:letter_a_BDF}'deki gibidir.
 
 \begin{figure}[htbp]
@@ -425,8 +424,8 @@ karakter kutusu dikkate alınsın.  Bu karakterin BDF font tanımı ve bu tanım
 Renklendirilmiş kaynak kodun HTML temsilinde bildirilen \texttt{line-height} değeri ve Şekil
 \ref{fig:letter_a_BDF_bitmap}'deki bit eşlemi birlikte dikkate alınacak olursa \texttt{a} karakteri için Şekil
 \ref{fig:charbox_BDF}'deki karakter kutusu elde edilir.  Bu karakter kutusunun içerik dizisinde $i$'nci karakter kutusu
-olduğu kabul edilirse bu kutuya ait $CCT(charbox_{i})$ ile gösterilen ortalama CCT katkısı Eşitlik \ref{eq:cct_charbox}
-ile tanımlanmıştır.
+olduğu kabul edilerek kutuya ait $CCT(charbox_{i})$ ile gösterilen ortalama CCT katkısı Eşitlik \ref{eq:cct_charbox} ile
+tanımlanır.
 
 \begin{equation}
 	CCT(charbox_{i}) = \frac{
@@ -521,9 +520,10 @@ kutusu dizisinin $N$ boyutlu olduğu kabul edilecek olursa tüm içeriğin ortal
 
 \textbf{TODO} D65 nedir?
 
-In CCT calculations, as seen in the flow diagram shown in Figure  \ref{fig:general-flowchart}, the production process is taken as inputs for colored code representation and font representation, which is explained in the previous sections. Within the scope of this study, the Color library \cite{colour2022package} written in Python was used in most of the color-related analysis, especially the CCT calculation.
-
-Colour is an open-source Python package providing a comprehensive number of algorithms and datasets for colour science.
+In CCT calculations, as seen in the flow diagram shown in Figure  \ref{fig:general-flowchart}, the production process is
+taken as inputs for colored code representation and font representation, which is explained in the previous sections.
+Within the scope of this study, the "Colour" library \cite{colour2022package} written in Python was used in most of the
+color-related analysis, especially the CCT calculation.  "Colour" is an open-source Python package providing a comprehensive number of algorithms and datasets for colour science.
 
 To estimate the Correlated Color Temperature (CCT) value, a nonlinear optimization problem needs to be solved. Therefore, there is no analytical expression for calculating CCT, and scientists have long sought simple and practical methods to calculate CCT in industrial applications. In all previous methods available for calculating CCT, the aim is to only approximate the function and keep the estimates with limited accuracy. Researchers have proposed to calculate CCT using Newton's method, which requires first and second derivatives of the objective function \cite{li2016accurate}. The proposed method, when initialized with Robertson's method, produced fairly accurate estimates of less than 0.0012 K for light sources with CCTs ranging from 500 K to 106 K \cite{robertson1968computation}. The method proposed by Qiu (1987) is based on established functional relationships between the CCT and the x, y, or u, v chromaticity coordinates of the light source. Qiu's method is applicable for CCTs ranging from 2500 K to 10,000 K. \cite{mccamy1992correlated} found a simpler formula for estimating the temperature from the x, y chromaticity coordinates for CCTs ranging from 2000 K to 12500 K. Hernández-Andrés et al. (1999) \cite{hernandez1999calculating} developed another explicit formula that is valid for estimating a wider range of CCTs up to 106 K. The CCT value is accepted as the temperature of the black body radiation that gives the closest color to it under the same brightness and observation conditions. A low CCT (2,500 K) is called a warm color and a high CCT (6,500 K) is a cool color. The general structure of calculating the CCT from the digital image is shown in Figure 2.
 
@@ -617,7 +617,7 @@ T_M & other
 
 Bu çalışmada programlama editörü olarak seçilen VS Code ile uyumlu SH temalardan en popüler olanları üzerinde
 çalışılmıştır.  Seçilen tüm temalar Tablo \ref{tab:themes}'de indirme sayıları, beğeni skorları ve yorum sayıları ile
-birlikte verilmiştir.  Bazı temaların (ör. Visual Studio C/C++) hem dark hem de light versiyonları aynı paket içinde
+birlikte verilmiştir.  Bazı temaların (ör. "Visual Studio C/C++") hem dark hem de light versiyonları aynı paket içinde
 bulunduğundan bu tür temaların grupları tabloda "dual" olarak belirtilmiş; salt dark veya light nitelikte olan temaların
 grupları ise sırasıyla dark ve light olarak belirtilmiştir.
 
@@ -652,26 +652,25 @@ Tablolar indirme sayılarına göre sıralı olarak sunulmuştur.  Dark ve light
 yapılırken dual nitelikteki temalara ilişkin indirme sayılarının nihai durumda kullanılan tema grubunun kesin şekilde
 belirlenmesini olanaksızlaştırdığı dikkate alınmalıdır.  Buna göre Tablo \ref{tab:themes}'de dual temalar göz ardı
 edilerek sadece tema grubunun kesin olarak bilindiği temalar dikkate alındığında salt dark temalar arasında en fazla indirme
-sayısına sahip olan temanın "One Dark Pro", salt Light temalarda ise "Ayu" olduğu görülmektedir. En fazla indirme sayısı bu
-çalışmanın yapıldığı tarih itibarıyla dark temalar için "One Dark Pro" ile 5 milyon civarı iken light temalar için "Ayu"
-ile 1 milyon civarıdır. Salt dark ve light temaların toplam indirme sayılarına bakıldığında bu sayı dark için 15 milyon
-civarı iken, light için 3 milyon civarıdır.
+sayısına sahip olan temanın "One Dark Pro", salt Light temalarda ise "Atom One Light" olduğu görülmektedir. En fazla indirme sayısı bu
+çalışmanın yapıldığı tarih itibarıyla dark temalar için "One Dark Pro" ile 5 milyon civarı iken light temalar için "Atom
+One Light" ile 600 bin civarıdır. Salt dark ve light temaların toplam indirme sayılarına bakıldığında bu sayı dark için 15 milyon
+civarı iken, light için 1 milyon civarıdır.
 
 Bu noktada tema popülerliği için indirme sayılarının tek başına yeterli bir ölçüt teşkil etmeyeceğinin belirtilmesi
-gerekir.  Bir çok temanın Github üzerinden kolaylıkla erişilebilecek açık kaynak kod depoları incelendiğinde tema
-popülerliğini yansıtan bir başka ölçüt olarak ilgili deponun "star" sayısının dikkate alınabileceği görülmektedir.
-Örneğin indirme sayılarını baz alan popülerlik sıralamasında 4'ncü sırada olan "Dracula" temasının Github kaynak kod
-deposu 18.3 K "star" almıştır\cite{draculatheme2022github}. Bu değer listedeki diğer temaların Github kaynak kod
-depolarındaki "star" sayılarının çok üzerindedir.  "Dracula" temasıyla karşılaştırıldığında indirme sayıları açısından
-birinci sırada olan "One Dark Pro" temasının "star" sayısı 1 K\cite{onedarkprotheme2022github}, ikinci sırada olan
-"Visual Studio C/C++" temasının star sayısı ise 4.6 K'dır\cite{visualstudiotheme2022github}.
+gerekir.  Bir çok temanın Github üzerinden erişilebilecek açık kaynak kod depoları incelendiğinde tema popülerliğini
+yansıtan bir başka ölçüt olarak ilgili deponun "star" sayısının dikkate alınabileceği görülmektedir. Örneğin indirme
+sayılarını baz alan popülerlik sıralamasında 4'ncü sırada olan "Dracula" temasının Github kaynak kod deposu 18.3 K
+"star" almıştır\cite{draculatheme2022github}. Bu değer listedeki diğer temaların Github kaynak kod depolarındaki "star"
+sayılarının çok üzerindedir.  "Dracula" temasıyla karşılaştırıldığında indirme sayıları açısından birinci sırada olan
+"One Dark Pro" temasının "star" sayısı 1 K\cite{onedarkprotheme2022github}, ikinci sırada olan "Visual Studio C/C++"
+temasının star sayısı ise 4.6 K'dır\cite{visualstudiotheme2022github}.
 
 Dark temaların oldukça yüksek bir indirme oranına sahip olduğu görülmektedir. Bu sonuçlar Sarath'ın yaptığı anket
 çalışması \cite{sarath2016prefer} ve Coyier'in CSS özelinde renk tema tercih anketi \cite{coyier2013poll} başta olmak
 üzere farklı çalışmalarda geliştiricilerin dark tema kullanma eğilimiyle oldukça uyumlu bir sonuçtur.  Gerek VS Code'un
 gerekse de Visual Studio'nun ilk kurulumda öntanımlı olarak yerleşik bir dark temayla kurulu gelmesi de dark temaların
 geliştiriciler arasında daha popüler olduğu gözlemine uygun bir tercih olarak yorumlanmalıdır.
-
 
 Temaların indirme sayıları ile beğeni skorları ve yorum sayıları arasında anlamlı bir korelasyona rastlanmamıştır.
 İndirme sayısı yüksek olduğu halde beğeni skoru o derece yüksek değildir ve uyumlu olarak yüksek miktarda yorum da
@@ -742,26 +741,7 @@ göstermektedir.
 
 Ne dark ne de light temalar için indirme sayıları, beğeni skoru veya yorum sayısıyla ortalama CCT arasında anlamlı bir
 ilişki bulunamamıştır. Temaların descriptive istatistik sonuçları Tablo \ref{tab:descriptive}'da verilmiştir. Dark
-temaların ortalama CCT değerlerinin ortalaması 20.982,19 K iken light temalar için 8.024,53 K hesaplanmıştır. 
-
-Dark tema olarak 21 tema analiz edilmiştir (Table \ref{tab:cct-dark-themes}. Ortalama CCT değerlerinin D65'den $-12\%$ ile $1.838\%$ arasında bir sapmaya sahip olduğu görülmektedir. Sadece 4 tema D65 değerinde veya altında çıkmıştır.
-
-Light tema olarak 17 tema analiz edilmiştir (Table \ref{tab:cct-light-themes}. Ortalama CCT değerlerinin D65'den $-29\%$ ile $242\%$ arasında sapmaya sahip olduğu görülmektedir. Sadece 3 tema D65 değerinde veya altında çıkmıştır.
-
-Dark tema grubunda en düşük CCT ortalaması 5.709 K ile Gruvbox iken en yüksek CCT ortalaması 125.958 K ile "Shades of Purple"
-olmuştur. Dark tema kullananların gün ışığının çok üzerinde bir
-mavı ışığa maruz kaldığını göstermektedir. En fazla indirmenin olduğu "One Dark Pro" için CCT ortalaması 9.384 K'dir. Sonraki en yüksek indirmenin olduğu "Visual Studio C/C++" temasının ortalama CCT değeri D65'de çıkmıştır. 
-
-Light tema grubunda en düşük CCT ortalaması 4.643 K ile "Gruvbox" iken en yüksek CCT ortalaması 22.253 K ile "Atom One
-Light" olmuştur. "Atom One Light" temasının böylesi yüksek bir CCT ortalamasına sahip olmasının temel nedenleri bu
-temada arka plan renginin yüksek CCT değerine sahip olması ve buna ilave olarak programlama dilinin rezerve kelimelerini
-içeren sözdizimi grubu için de CCT değeri yüksek bir rengin seçilmiş olmasıdır. Kaynak kodda rezerve kelime
-sıklığı yüksek olduğundan temanın bu gruba ilişkin yaptığı renklendirme nihai CCT değerinde baskın olarak etki
-göstermektedir. En fazla indirmenin olduğu "Visual Studio C/C++" için dark temada olduğu gibi CCT ortalaması D65'e yakın
-çıkmıştır (dark için 6.590 K ike light için 6.645 K). Sonraki en yüksek indirmenin olduğu "Github" teması için 7.110 K
-hesaplanmıştır.
-
-VS Code'un öntanımlı temaları için hesaplanan ortalama CCT değerleri dark için 6.368 K ve light için 7.847 K olarak hesaplanmıştır. Elde edilen değerlere göre dark, light'a göre düşüktür. Programlama editörünün light default temasını kullananların yüksek mavi ışığa maruz kaldığını göstermektedir.
+temaların ortalama CCT değerlerinin ortalaması yaklaşık olarak 20 K iken light temalar için 8 K hesaplanmıştır. 
 
 \csvnames{cct-descriptive}{
   theme=\Xtheme,%
@@ -788,6 +768,38 @@ VS Code'un öntanımlı temaları için hesaplanan ortalama CCT değerleri dark 
 	\label{tab:descriptive}
 \end{table}
 
+Dark tema olarak 21 tema analiz edilmiştir (Table \ref{tab:cct-dark-themes}. Ortalama CCT değerlerinin D65'den $-13\%$
+ile $1.837\%$ arasında bir sapmaya sahip olduğu görülmektedir. Sadece 3 tema D65 değerinde veya altında çıkmıştır.
+
+Light tema olarak 17 tema analiz edilmiştir (Table \ref{tab:cct-light-themes}. Ortalama CCT değerlerinin D65'den $-28\%$
+ile $309\%$ arasında sapmaya sahip olduğu görülmektedir. Sadece 3 tema D65 değerinde veya altında çıkmıştır.
+
+Dark tema grubunda en düşük CCT ortalaması 5.686 K ile Gruvbox iken en yüksek CCT ortalaması 124.592 K ile "Night Owl"
+olmuştur. Bu sonuçlar, D65 referansıyla karşılaştırıldığında, Dark tema kullananların gün ışığının çok üzerinde bir mavi
+ışığa maruz kaldığını göstermektedir. En fazla indirmenin olduğu "One Dark Pro" için CCT ortalaması 9.609 K'dır. Sonraki
+en yüksek indirmenin olduğu "Visual Studio C/C++" temasının ortalama CCT değeri D65'de çıkmıştır.
+
+Light tema grubunda en düşük CCT ortalaması 4.643 K ile "Gruvbox" iken en yüksek CCT ortalaması 26.553 K ile "Atom One
+Light" olmuştur. En fazla indirmenin olduğu "Visual Studio C/C++" için dark temada olduğu gibi CCT ortalaması D65'e yakın
+çıkmıştır (dark için 6.802 K iken light için 6.872 K). Sonraki en yüksek indirmenin olduğu "Github" teması için 7.450 K
+hesaplanmıştır.
+
+VS Code'un öntanımlı temaları için hesaplanan ortalama CCT değerleri dark için 6.515 K ve light için 8.263 K olarak
+hesaplanmıştır. Elde edilen değerlere göre dark D65 değerinde, light ise dark'a göre daha yüksek bir CCT değerindedir.
+Öntanımlı light default temasını kullananların dark versiyona göre daha yüksek mavi ışığa maruz kaldığı görülmektedir.
+VS Code'un ilk kurulumda default dark temayla ayarlı olarak geldiği dikkate alınırsa programlama editörünün gayet makul
+bir öntanımlı yapılandırma sunduğu belirtilmelidir.
+
+Yapılan çözümlemelerin gösterdiği bir diğer sonuç temada yapılan arka plan renk seçiminin temanın ortalama CCT değerini
+önemli ölçüde etkilemesidir. Arka plan rengiyle ortalama CCT değeri arasındaki güçlü ilişki özellikle dark tema
+sonuçlarında belirgin şekilde ortaya çıkmaktadır.  Tablo \ref{tab:cct-dark-themes} incelendiğinde Dark temalarda arka
+plan rengine ait CCT değerlerinin ortalama CCT değerlerine çok yakın olduğu görülmektedir.
+
+Dark temalarda arka plan renk seçiminin sonuçları nasıl etkilediğini daha çarpıcı şekilde görmek amacıyla tüm temalarda
+arka plan renginin CCT değeri 6500 K değerinde sabit tutularak bir çözümleme yapılmış ve dark/light gruplardaki
+temaların ortalama CCT değerlerinin ortalamaları hesaplanmıştır.  Sonuçlar Tablo
+\ref{tab:descriptive_without_background}'de sunulmuştur.
+
 \begin{table}[H]
 	\csvreader[%
 		cct-descriptive,%
@@ -802,8 +814,51 @@ VS Code'un öntanımlı temaları için hesaplanan ortalama CCT değerleri dark 
 	}
 
 	\caption{Theme descriptive statistics taking the background CCT as 6500 K}
-	\label{tab:descriptive}
+	\label{tab:descriptive_without_background}
 \end{table}
+
+Tablo \ref{tab:descriptive_without_background}'deki sonuçlara göre temaların arka plan renkleri D65 seviyesinde bir
+renkle değiştirildiğinde ortalamada dark temaların light temalara göre daha düşük CCT değerinde olacağı görülmektedir.
+Tema geliştiricileri açısından önemli olan bu sonuç, light temalara göre daha popüler olan dark temalarda arka plan
+rengi olarak D65 seviyesine yakın bir rengin seçilmesinin tema kullanıcılarının maruz kalacağı mavi ışık miktarını
+azaltacağını göstermektedir.  Tema geliştiricilerinin bu sonucu dikkate alarak görsel uyumu bozmadan yine dark nitelikte fakat
+daha düşük CCT değerinde bir arka plan rengi kullanmaları yerinde bir seçim olacaktır.
+
+Temaların ortalama CCT değerini arka plan rengi dışında etkileyen bir diğer faktörün kaynak kodda baskın olan söz dizimi
+grupları için yapılan renk seçimleri olduğu görülmüştür.  Örneğin "Atom One Light" temasında kullanılan renkler sıklık
+sırasıyla Tablo \ref{tab:atom_one_light_colors}'de sunulmuştur.
+
+\csvnames{theme-colors}{
+  color=\Xcolor,%
+  cct=\Xcct,%
+  frequency=\Xfrequency,%
+}
+
+\begin{table}[H]
+	\csvreader[%
+		theme-colors,%
+		centered tabular=lll,%
+		table head=\multicolumn{3}{c}{}\\\toprule
+    Color & CCT (K) & Frequency \\\midrule,%
+		late after line=\\, late after last line=\\\bottomrule%
+	]{%
+		./data/atom-one-light.csv%
+	}{}{%
+    \texttt{\#\Xcolor} & \Xcct & \Xfrequency %
+	}
+
+	\caption{Atom One Light theme colors}
+	\label{tab:atom_one_light_colors}
+\end{table}
+
+Bu tabloya göre, birinci sıradaki düşük CCT değerli renk bir yana bırakılacak olursa ikinci sırada görülen
+\texttt{\#a626a4} hex kodlu rengin programlama dilinin rezerve kelimelerini içeren sözdizimi grubunu renklendirmekte
+kullanıldığı belirlenmiştir. Bu rengin hesaplanan CCT değeri 142967'dir.  Kaynak kodda rezerve kelime sıklığı büyük
+olduğundan temanın bu gruba ilişkin yaptığı renklendirme nihai CCT değerinde baskın olarak etki göstermektedir. "Atom
+One Light" temasının 26553 gibi çok yüksek bir ortalama CCT değerine sahip olmasının ana nedeni budur.
+
+Sonuç olarak temaların ortalama CCT değerlerini sunan tüm tablolarda görülen yüksek CCT değerlerinin arkasında bu iki
+faktörün, yani arka plan rengi ve yüksek sıklıklı söz dizimi grubuna ait rengin baskın rol oynadığı söylenmelidir.
 
 Dual temalar için hesaplanan ortalama CCT değerleri Figure \ref{fig:dark-light-pair-compare}'de verilmiştir. Temaların
 light versiyonlarının belirgin bir şekilde dark versiyonlarına oranla daha düşük CCT ürettiği ancak yine de D65'in
@@ -936,7 +991,10 @@ Bu çalışmada kullanılan temaların indirme sayıları incelendiğinde dark t
 
 Hem dark hem de light tema grubu için hesaplanan ortalama CCT değerleri D65'in çok üzerinde çıkmıştır. Dark tema ortalamaları light'a göre daha düşüktür. Bu durum farklı anketlerde ortaya konan dark tema kullanım eğilimiyle uyumludur.
 
-Hem dark hem de light tema grubunu kullananların gün ışığının çok üzerinde bir mavi ışığa maruz kaldığını göstermektedir. Bu durum hem editör ile öntanımlı gelen temalar hem de indirme sayısı yüksek olan temalar için de geçerlidir. Göz sağlığı başta olmak üzere genel insan sağlığı için light yerine dark tema tercih edilmelidir. Dark temalar arasında ise D65'in altında yer alan temalardan seçim yapılmalıdır.
+Hem dark hem de light tema grubunu kullananların gün ışığının üzerinde bir mavi ışığa maruz kaldığını göstermektedir. Bu
+durum hem editör ile öntanımlı gelen temalar hem de indirme sayısı yüksek olan temalar için de geçerlidir. Göz sağlığı
+başta olmak üzere genel insan sağlığı için light yerine dark tema tercih edilmelidir. Dark temalar arasında ise D65'in
+altında yer alan temalardan seçim yapılmalıdır.
 
 Çift olarak sunulan temaların hem dark hem de light versiyonlarının CCT değerleri de D65'in üzerinde çıkmıştır. Tema çiftlerinden illa birisi tercih edilecekse dark tercih edilmelidir.
 
