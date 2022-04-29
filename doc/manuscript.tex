@@ -61,25 +61,29 @@ Syntax highlighting (SH), based on the different coloring of code elements, is a
 
 Coloring plays an important role in syntax highlighting. Coloring allows perceptual segregation of code \cite{hannebauer2018does}. Thus, colors provide a clear model of the perceived concept. Colors clearly indicate the differences between various programming language elements and provide clues to the programmer.
 
-The artificial light produced by digital screens, a critical component of software development, contains blue light hazard (BLH). Artificial light sources are best described by light spectrum (SPD); however, this is generally a complicated task \cite{abe1991}. Therefore, it is sufficient to use CCT to assess the amount of blue light in SPD. While it is not possible to measure SPD, predicting CCT value of the light source requires solving a non-linear optimization problem \cite{li2016}. For this reason, it is not possible to calculate CCT analytically and for quite a long time scientists and engineers have been in the search for practical and simple methods for measuring CCT in industrial applications. In all methods available for the calculation of CCT, the objective function was barely estimated approximately and estimations achieved a limited accuracy. The basis of the method proposed by Qui in 1987 is based on the established functional relationships between CCT and the x, y or u, v chromaticity coordinates of the light source \cite{xingzhong1987formulas}. Qiu’s method is valid for CCTs between $2.500 K$ and $10.000 K$ \cite{li2016}. Following this method, in 1992, McCamy \cite{mccamy1992correlated,mccamy1993correlated} suggested  a more simple formula to estimate temperature from x,y chromaticity coordinates for CCTs ranging from $2.000 K$ to $12.500 K$. McCamy isotherms are high compatible around $6.000 K$ \cite{davis2020correlated}. In 1999, Hernández-Andrés et al.\cite{hernandez1999calculating} produced a different open open formula valid for calculating a wider range of CCT up to $10^6 K$ \cite{li2016}. Li et al. proposed calculating CCT by using Newton method in which the objective function’s first and second derivatives are required. When the proposed method was initialized with Robertson’s method \cite{robertson1968computation}, it generated fairly accurate estimates of less that $0,0012 K$ for light sources with CCT varying between $500 K$ and $10^6 K$ \cite{li2016}. \textbf{TODO: McCammy i kullanmadık!} In this study, McCamy’s CCT formula was used since it is commonly found in a large number of studies and due to its simplicity of calculation.
+The artificial light produced by digital screens, a critical component of software development, contains blue light hazard (BLH). It is sufficient to use CCT to assess the amount of blue light in the artificial light. Predicting CCT value of the light source requires solving a non-linear optimization problem \cite{li2016}. Different methods have been developed to calculate CCT value \cite{robertson1968computation, xingzhong1987formulas,  mccamy1993correlated, hernandez1999calculating, li2016, ohno2014practical, davis2020correlated}.
 
-Blue light, which is known with its phototoxic \cite{ohagan2016} / photochemical \cite{rebec2015, ham1978histologic} adverse effect shows its effects on individuals depending on various parameters such as the time exposed to artificial light producing device (at night, while going to bed, etc.) \cite{cajochen2005high, mineshita2020, yoshimura2017, duncan1985diurnal, white1987degree, organisciak2000circadian, vaughan2002evidence, wong2014circadian, cajochen2007alerting} and frequency \cite{organisciak1989retinal}, dose/intensity \cite{rebec2015, lewy1980light, cajochen2007alerting, duffy2009}, distance \cite{alim2016transient, oh2015, yoshimura2017}, time/past \cite{alim2016transient, cajochen2005high, cajochen2007alerting, lawwill1973effects, lawwill1977retinal, griess1981additivity, duffy2009}, age \cite{cie_human_eye2012, lee2018}. These effects may cause harm with serious side effects on health such as cancer (breast \cite{hansen2001light, blask2005melatonin, stevens2009light, stevens2011testing, kloog2008light, kloog2010nighttime, fang2016, smolensky2015nocturnal, hansen2001increased, schernhammer2001rotating, schernhammer2003night}, prostate and colorectal \cite{kloog2009global, haim2010effects, smolensky2015nocturnal, hansen2001increased, schernhammer2001rotating, schernhammer2003night}), psychological (depression \cite{bedrosian2011dim, maras2015, turner2010role}, anxiety/ severity \cite{maras2015} problems, mental health \cite{grandner2017sleep}, mood disorder \cite{lazzerini2017mood}, more frequent engagement on quiet and mobile devices \cite{aziz2018}, behavioral problems \cite{touitou2016disruption}), body function disorders (increase in temperature and heart rate \cite{kim2019}, obesity \cite{spiegal2004sleep, fonken2010light, goldfield2011physical, mineshita2020, grandner2017sleep}, diabetes \cite{spiegel2005sleep, fang2016}, cardiovascular disease \cite{grandner2017sleep}, hormone balance disorder \cite{gabel2017differential}, systemic disorder \cite{turner2010role}, balance disorder, headache \cite{domingues2017clinical}, long term cumulative effect \cite{algvere2006age}). It has been reported that blue light increased melatonin suppression \cite{kozakov2008}, leading to a deterioration in the circadian rhythm, which is seen as biological clock \cite{ostrin2017}, caused a delay in phase \cite{wahl2019, tahkamo2018, touitou2016disruption, lockley2003, ruger2012}, and had adverse effects such as reproduction/early adolescence \cite{fang2016}. The negative effect on circadian rhythm causes accumulated sleep loss \cite{wolfson1998, turner2010role}, decreases quality of sleep such as sleep interruption/inefficiency \cite{heo2016, moderie2017, kayaba2014, gabel2017differential}, sleep difficulty/delay \cite{domingues2017clinical} and daytime sleepiness \cite{wolfson1998, touitou2016disruption}. It has been shown that smart phone use especially without room light affects sleep disorder \cite{munezawa2011}. As a result of all these, neurocognitive function losses have been reported \cite{grandner2017sleep} such as phase shifts in circadian rhythms \cite{lockley2003}, loss of academic performance \cite{tremblay2011, touitou2016disruption}, cognitive daytime dysfunction \cite{wolfson1998, cajochen2011}, decrease in the ability to learn \cite{mineshita2020}, decrease in the ability to concentrate and remember \cite{cohen2011}, and decrease in comfort and work productivity \cite{conlon1998, kurimoto1986, anshel2007, stoner2002}. 
+Blue light, which is known with its phototoxic \cite{ohagan2016} / photochemical \cite{rebec2015} adverse effect shows its effects on individuals depending on various parameters such as the time exposed to artificial light producing device (at night, while going to bed, etc.) \cite{mineshita2020} and frequency \cite{organisciak1989retinal}, dose/intensity \cite{rebec2015}, distance \cite{yoshimura2017}, time/past \cite{alim2016transient}, age \cite{lee2018}. These effects may cause harm with serious side effects on health such as cancer (breast \cite{fang2016}, prostate and colorectal \cite{smolensky2015nocturnal}), psychological (depression \cite{maras2015}, anxiety/ severity \cite{maras2015} problems, mental health \cite{grandner2017sleep}, mood disorder \cite{lazzerini2017mood}, more frequent engagement on quiet and mobile devices \cite{aziz2018}, behavioral problems \cite{touitou2016disruption}), body function disorders (increase in temperature and heart rate \cite{kim2019}, obesity \cite{mineshita2020}, diabetes \cite{fang2016}, cardiovascular disease \cite{grandner2017sleep}, hormone balance disorder \cite{gabel2017differential}, systemic disorder \cite{turner2010role}, balance disorder, headache \cite{domingues2017clinical}, long term cumulative effect \cite{algvere2006age}). It has been reported that blue light increased melatonin suppression \cite{kozakov2008}, leading to a deterioration in the circadian rhythm, which is seen as biological clock \cite{ostrin2017}, caused a delay in phase \cite{wahl2019}, and had adverse effects such as reproduction/early adolescence \cite{fang2016}. The negative effect on circadian rhythm causes accumulated sleep loss \cite{turner2010role}, decreases quality of sleep such as sleep interruption/inefficiency \cite{gabel2017differential}, sleep difficulty/delay \cite{domingues2017clinical} and daytime sleepiness \cite{touitou2016disruption}. It has been shown that smart phone use especially without room light affects sleep disorder \cite{munezawa2011}. As a result of all these, neurocognitive function losses have been reported \cite{grandner2017sleep} such as phase shifts in circadian rhythms \cite{lockley2003}, loss of academic performance \cite{touitou2016disruption}, cognitive daytime dysfunction \cite{cajochen2011}, decrease in the ability to learn \cite{mineshita2020}, decrease in the ability to concentrate and remember \cite{cohen2011}, and decrease in comfort and work productivity \cite{anshel2007}.
 
-It can be expected that adverse effects will be reduced if screen producers use model estimations to adjust the spectral power of self-illuminated devices by finding out how the products they make will influence melatonin levels and adjusting them to the circadian rhythm \cite{wood2012}. However, this is very difficult to achieve due to concerns such as the perception of image quality. Therefore, we as individuals will have to resort to different methods to minimize the harmful effects of devices while using them. These are filter use \cite{mortazavi2018, heiting2020}, special lens use \cite{sano2014}, special glass use \cite{heiting2020, lely2014}, screen specific night/reading mode \cite{sanz2020, teran2020} and software adjusting color temperature \cite{sanz2020}.
- 
-Setting the CCT regardless of context is a disadvantage. \textbf{TODO} bağlama cümlesi gerekli. The dark theme trend in syntax highlighting themes shows an organic movement in theme selection in the context of eye health \cite{suraj2020dark, coyier2013poll}. Popular themes make subjective evaluations stating that they are better for eye health \cite{}. An objective evaluation cannot be made in the context of eye health for syntax highlighting themes, which are chosen based on popularity and personal tastes. CCT can be used to express the amount of blue light a Syntax highlighting theme contains. The higher the average CCT produced by the Syntax highlighting theme in the coloring of the selected code, the more blue light it has. 
+It can be expected that adverse effects will be reduced if screen producers use model estimations to adjust the spectral power of self-illuminated devices by finding out how the products they make will influence melatonin levels and adjusting them to the circadian rhythm \cite{wood2012}. However, this is very difficult to achieve due to concerns such as the perception of image quality. Therefore, we as individuals will have to resort to different methods to minimize the harmful effects of devices while using them. These are filter use \cite{heiting2020}, special lens use \cite{sano2014}, special glass use \cite{heiting2020}, screen specific night/reading mode \cite{teran2020} and software adjusting color temperature \cite{sanz2020}.
 
-In this study, we aim to the theme for syntax highlighting selection based on Color Correlated Temperature in terms of blue light hazard.
+The dark theme trend in syntax highlighting themes shows an organic movement in theme selection in the context of eye health. Popular themes make subjective evaluations stating that they are better for eye health \cite{suraj2020dark}. An objective evaluation cannot be made in the context of eye health for syntax highlighting themes, which are chosen based on popularity and personal tastes. CCT can be used to express the amount of blue light a Syntax highlighting theme contains. The higher the average CCT produced by the Syntax highlighting theme in the coloring of the selected code, the more blue light it has. In this study, we aim to the theme for syntax highlighting selection based on Color Correlated Temperature in terms of blue light hazard.
 
 \section{Material and Methods} \label{sec:material-methods}
+In this study, the sample source selected with each popular coloring theme was colored, and the average CCT values of the obtained contents were calculated and compared (Figure \ref{fig:general-flowchart}). 
 
-Bu çalışmada seçilen bir örnek kaynak kod, belirli ölçütler dikkate alınarak belirlenen popüler renklendirme temalarının her biriyle renklendirilmiş ve elde edilen içeriklerin ortalama CCT değerleri hesaplanarak karşılaştırılmıştır. Araştırma kapsamında izlenen iş akışı Şekil \ref{fig:general-flowchart}'de görülmektedir. İzlenen yöntemin temelinde,
-renklendirilmiş kaynak kod içeriğinin ilk karakterden son karaktere kadar ilerleyen tek bir karakter dizisi olarak ele alınması yatmaktadır. Bu dizi içinde her bir karakter seçilen yazıtipinden hareketle üretilen bir bit eşlem "karakter kutusu" olarak yorumlanmıştır. Her bir karakter kutusu tema tarafından tanımlanan ön plan ve arka plan renkleriyle
-renklendirilmiş piksellerden oluşmaktadır. Arka plan ve ön plan renkleri kapsadığı piksel alanları oranında o karakter kutusunun ortalama CCT değerine ve her bir karakter kutusu da o kutunun sıklığı oranında içeriğin tamamına ait ortalama CCT değerine katkıda bulunmaktadır. "Correlated Colored Code Temperature" (CCCT) olarak adlandırdığımız bu ortalama CCT
-değeri yüksek hassasiyete sahip olan mutlak bir değer olmaktan ziyade ilgili tema renkleriyle kaynak kodun bir bütün halde sahip olacağı ortalama CCT değeri hakkında bir yaklaşıklıklığı temsil etmektedir. Bu şekilde temaya özgü olarak belirlenen CCCT değerleriyle kod renklendirme temalarının karşılaştırılması için yeni bir nicel ölçüt ortaya
+Depending on the font chosen for each character of the code, a representative bit-process character box is created. Each character box is made up of pixels colored in the theme's foreground and background colors. CCT value is calculated for these colors. For the entire colored code, the average CCT value that we call "Correlated Colored Code Temperature" (CCCT) is calculated. In this way, a novel quantitative criterion has been introduced to compare code coloring themes by using CCCT values specified as theme specified.
+
+\begin{comment}
+AŞAĞIDAKİ PARAGRAFIN SON 3 CÜMLESİNİN ÇEVİRİSİ YUKARIDA
+
+Bu renkler için CCT değeri hesaplanır. Renklendirilmiş kodun tamamı için "Correlated Colored Code Temperature" (CCCT) olarak adlandırdığımız ortalama CCT değeri hesaplanır. Bu şekilde temaya özgü olarak belirlenen CCCT değerleriyle kod renklendirme temalarının karşılaştırılması için yeni bir nicel ölçüt ortaya konulmuştur.
+
+VEYA
+
+Arka plan ve ön plan renkleri kapsadığı piksel alanları oranında o karakter kutusunun ortalama CCT değerine ve her bir karakter kutusu da o kutunun sıklığı oranında içeriğin tamamına ait ortalama CCT değerine katkıda bulunmaktadır. "Correlated Colored Code Temperature" (CCCT) olarak adlandırdığımız bu ortalama CCT değeri yüksek hassasiyete sahip olan mutlak bir değer olmaktan ziyade ilgili tema renkleriyle kaynak kodun bir bütün halde sahip olacağı ortalama CCT değeri hakkında bir yaklaşıklıklığı temsil etmektedir. Bu şekilde temaya özgü olarak belirlenen CCCT değerleriyle kod renklendirme temalarının karşılaştırılması için yeni bir nicel ölçüt ortaya
 konulmuştur.
-
-Çalışma kapsamında geliştirilen tüm çözümleme programları ve üretilen veriler bir Github kod deposunda açık kaynak halde sunulmuştur\cite{Oktas_Code_CCT_2022}. Rationales behind all the selections in the analysis were explained in further sections.
+\end{comment}
 
 \begin{comment}
 In this study, the CCT was utilized to calculate the quantity of blue light contained in popular color themes chosen by developers. It was observed that the average CCT values of both the dark and light versions of the examined themes were above the D65 threshold and contained intense blue light. Theme developers should consider the risks that blue light poses to human eye health while creating their themes.
@@ -88,7 +92,7 @@ The amount of blue light in the color theme was determined using the workflow sh
 \ref{fig:general-flowchart}. Primarily, the themes to be used in the study were selected.
 \end{comment}
 
-The first step was to choose a theme. Themes are generally classified into two theme groups according to the use of dark/light background colors in the user interface: dark/light themes.  Theme selection is dependent on editor selection. The VS Code programming editor was chosen for our research. Developers use a variety of programming languages to create the code for their projects. Because analyzing the influence of the chosen theme on all codes would be impractical, operations were conducted out on a sample source code. For this purpose, a C programming language source code taken from the Git source code, which is a fairly modern code base, was chosen. The HTML output for the colorized version of the code with the chosen theme, as well as a code representation based on it, was created. Different fonts are preferred by developers. The influence of different fonts on the calculation was not investigated in this study. The BDF transformation and subsequently the font representation have been created for the selected font. The McCammy equation has been used to determine the CCT using code and font representation.
+The first step was to choose a theme. Themes are generally classified into two theme groups according to the use of dark/light background colors in the user interface: dark/light themes.  Theme selection is dependent on editor selection. The VS Code programming editor was chosen for our research. Developers use a variety of programming languages to create the code for their projects. Because analyzing the influence of the chosen theme on all codes would be impractical, operations were conducted out on a sample source code. For this purpose, a C programming language source code taken from the Git source code, which is a fairly modern code base, was chosen. The HTML output for the colorized version of the code with the chosen theme, as well as a code representation based on it, was created. Different fonts are preferred by developers. The influence of different fonts on the calculation was not investigated in this study. The BDF transformation and subsequently the font representation have been created for the selected font. The Ohno's method has been used to determine the CCT using code and font representation.
 
 \begin{comment}
 The flow of transactions taking place in the analysis is presented below, each of which is detailed in the relevant sections. As can be seen in this flowchart, all the coloring themes chosen for a single source code and font sample (bk. \ref{sec:material-methods.inputs})  are kept constant as analysis input is handled separately.
@@ -134,6 +138,8 @@ The analyzes were performed in a mixed environment with components written in di
   \item CCT calculation has been done with the Python programming language.
   \item The entire process has been made up of subscripts implemented with the Bash shell programming language.
   \end{itemize}
+
+All analysis programs developed within the scope of the study and the data produced are presented in an open source form in a Github repo \cite{Oktas_Code_CCT_2022}. Rationales behind all the selections in the analysis were explained in further sections.
 
 \subsection{Selection of analysis inputs} \label{sec:material-methods.inputs}
 
@@ -351,11 +357,15 @@ The developers used the \texttt{otf2bdf} tool\cite{otf2bdf2008man} developed as 
 \subsubsection{Calculation of CCT contribution of a character box}
 
 In syntax coloring, each syntax group (e.g. an identifier, a keyword) in the source code is displayed with the font
-glyph selected in color set in the theme. Bölüm \ref{sec:material-methods} başlangıcında da belirtildiği gibi kaynak kod
+glyph selected in color set in the theme. As stated at the beginning of Chapter 1, each character in the source code character series creates a character box with a height of the line in which it is located and accordingly, the entire colored source code content is interpreted as a character box sequence of these boxes. The character box sequence of "\texttt{static}" is given in the Figure \ref{fig:line_of_charboxes}.
+
+\begin{comment}
+TR: Bölüm \ref{sec:material-methods} başlangıcında da belirtildiği gibi kaynak kod
 karakter dizisindeki her bir karakter içinde bulunduğu satırın yüksekliğine sahip bir karakter kutusu oluşturmakta ve
 buna göre renklendirilmiş kaynak kod içeriğinin tamamı bu kutulardan oluşan bir karakter kutusu dizisi olarak
 yorumlanmaktadır. Şekil \ref{fig:colored_code}'de verilen renklendirilmiş kod örneği dikkate alındığında bu karakter
 kutusu dizisinde "\texttt{static}" anahtar kelimesine ilişkin bölüm Şekil \ref{fig:line_of_charboxes}'de verilmiştir.
+\end{comment}
 
 \begin{figure}[H]
   \centering
@@ -364,8 +374,17 @@ kutusu dizisinde "\texttt{static}" anahtar kelimesine ilişkin bölüm Şekil \r
   \label{fig:line_of_charboxes}
 \end{figure}
 
-Ortalama CCCT değeri iki adımda hesaplanmaktadır.
+The average CCCT value is calculated in two steps.
 
+\begin{enumerate}
+  \item The average CCT value of each character box is calculated by considering the CCT contribution of the foreground and background colors of the font glyph in the box and the pixel area ratios covered by these colors in the box. In the example in Figure \ref{fig:line_of_charboxes}, the foreground color is green and the background color is white.
+
+  \item The CCT contribution of each character box depends on the frequency of the character box. For example, in the 6-character content given in Figure \ref{fig:line_of_charboxes}, the character box of the \texttt{a} character is 2 times, and the box of the \texttt{s} character is passed once.
+\end{enumerate}
+
+To sample the calculation made in the first step, take into account the character box given in Figure \ref{fig:charbox_TTF} for the \texttt{a} character. This character's BDF font definition and the bit pattern in the definition are as in Figure \ref{fig:letter_a_BDF}.
+
+\begin{comment}
 \begin{enumerate}
   \item Her bir karakter kutusunun ortalama CCT değerinin hesaplanması için kutuda bulunan font glyph'ın ön ve arka plan
     renklerinin CCT katkısı bu renklerin kutu içinde kapladığı piksel alanı oranları dikkate alınarak hesaplanmalıdır.
@@ -376,9 +395,11 @@ Ortalama CCCT değeri iki adımda hesaplanmaktadır.
     ait karakter kutusu 2 kez, \texttt{s} karakterine ait kutu ise 1 kez geçmektedir.
 \end{enumerate}
 
+
 Birinci adımda yapılan hesaplamayı örneklemek için \texttt{a} karakteri için Şekil \ref{fig:charbox_TTF}'de verilen
 karakter kutusu dikkate alınsın.  Bu karakterin BDF font tanımı ve tanımda yer alan bit eşlemi Şekil
 \ref{fig:letter_a_BDF}'deki gibidir.
+\end{comment}
 
 \begin{figure}[htbp]
   \begin{subfigure}{0.48\textwidth}
@@ -519,6 +540,8 @@ kutusu dizisinin $N$ boyutlu olduğu kabul edilecek olursa tüm içeriğin ortal
 \subsection{CCT Calculation}
 
 \textbf{TODO} D65 nedir?
+Ohno proposed a combination of triangular and parabolic
+calculations based on Robertson’s solution \cite{robertson1968computation}, which reduces the error to 1 K \cite{ohno2014practical}. Recently, Ohno developed a combined solution integrating the LUT method (i.e., the triangular solution) with the fitting method (i.e., the parabolic curve fit), obtaining relatively high accuracy in a wide range of chromaticity. The combined method colligates the triangular and parabolic solution to cope with the dependence of the CCT calculation accuracy on the Duv value of a test light source. However, the LUT adopted in this method, including at least 303 rows of data, is considerably larger than that in Robertson’s method. Also, if higher accuracy is needed, the LUT would store up to 1200 rows of data, thus leading to relatively low search efficiency \cite{zhang2019high}. \textbf{TODO: bu cümleyi tekrardan yaz. Öncesini sadeleştir} In this study, Ohno' CCT approximation was used since it is commonly found in a large number of studies and due to its simplicity of calculation.
 
 In CCT calculations, as seen in the flow diagram shown in Figure  \ref{fig:general-flowchart}, the production process is
 taken as inputs for colored code representation and font representation, which is explained in the previous sections.
@@ -588,6 +611,8 @@ McCamy function \cite{davis2020correlated} was used to calculate CCT with CIE xy
 \end{matrix}
 \label{eq:xy2TM}
 \end{equation}
+
+The correlated colour temperature (CCT) and Duv are then calculated from the chromaticity coordinates of the light source \cite{ohno2014practical}. 
 
 McCamy equation has $O(N^3)$ complexity and it is valid for CCT values between the ranges of 2.000 K to 12.500 K \cite{mccamy1992correlated, mccamy1993correlated}. The intermediate region indicated by isotemperature line of $T_S=2.000 K$ and $T_F=12.5000 K$ was chosen as a safe region for computing CCT in the Planckian Locus. It was checked whether the xy chromaticity coordinates computed from the pixels in the image were within this region. The number of pixels outside this region were called as $p_e$, while the number of pixels inside this region were called as $p_i$. The rate of pixels being included in the computation is calculated in $p_r$ percentage as follows,
 
@@ -985,6 +1010,12 @@ Bu çalışmanın aşağıda listelenen çeşitli kısıtlamaları mevcuttur.
 
 	\item Geliştiricinin renk algısı tek tip olarak kabul edilmiştir.
 \end{itemize}
+
+\textbf{TODO} Aşağıya copy-paste yaptıklarımı da değerlendireceğiz.
+
+Although CCT has been widely used to evaluate light sources, it suffers from the loss of information caused by reducing often complex spectral power distribution shapes and twodimensional chromaticity coordinates into a single number. Since chromaticity diagrams are twodimensional spaces, two coordinates are required to specify each unique point. As a result, two visually distinct light sources can have the same CCT. In addition, CCT calculations are based on colour matching functions devised to estimate colour precept matches made by standard observers under confined environmental conditions. The background and surroundings affect colour perception (e.g. simultaneous contrast). For example, a 4000 K light source may look warm next to a 6500 K light source, but it may appear cooler next to a 2700 K light source \cite{durmus2021correlated}.
+
+Research also shows that visual differences can be perceived among similar CCT sources. For example, observers can perceive a variation in light sources along isometric CCT lines (identical CCTs with different chromaticity coordinates), especially for high CCT light sources (Tcp > 4500 K).21,22 Since CCT inaccuracy increases with distance from the Planckian locus, measuring the chromaticity distance to the Planckian locus was suggested. 21\cite{durmus2021correlated}
 
 \section{Conclusion}
 Bu çalışmada kullanılan temaların indirme sayıları incelendiğinde dark temaların light olanlara oranla çok daha fazla indirildiği görülmüştür. Bu durum farklı anketlerde ortaya konan dark tema kullanım sonuçları uyumludur.
