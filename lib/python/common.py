@@ -137,9 +137,9 @@ def RGB_to_CCT(RGB, method="Ohno 2013"):
     if t != 1:
         if method == "Ohno 2013": #  1.000 K to 20.000 K
             if t == -1:
-                CCT = 20000
+                CCT = 20000 + 1
             elif t == -2:
-                CCT = 1000
+                CCT = 1000 - 1
         else:
             CCT = 0
             pass # TODO: diger metodlar icin benzer calisma yapilacak
