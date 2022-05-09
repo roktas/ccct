@@ -120,38 +120,44 @@ def RGB_to_CCT(RGB, method="Ohno 2013"):
     # Conversion to chromaticity coordinates.
     xy = colour.XYZ_to_xy(XYZ)
     
+    t = 0
+    
     if method == "McCamy 1992":
         logging.debug('\txy: %s', xy)
         t = is_between_Ts_Tf(xy, Ts=2000, Tf=12500)
-        if t != 1:
-            return t
     elif method == "Kang 2002":
         t = is_between_Ts_Tf(xy, Ts=1667, Tf=25000)
-        if t != 1:
-            return t
     elif method == "Hernandez 1999":
         t = is_between_Ts_Tf(xy, Ts=3000, Tf=1000000)
-        if t != 1:
-            return t
     elif method == "Robertson 1968": #  500 K to 10<sup>6
         t = is_between_Ts_Tf(xy, Ts=500, Tf=1000000)
-        if t != 1:
-            return t
-
-    if method == "andres99_1":
-        CCT = xy_to_CCT_with_andres99(xy)
-    elif method == "andres99_2":
-        CCT = xy_to_CCT_with_andres99(xy, is_K_greater_50000=True)
-    elif method == "Robertson 1968":
-        uv = colour.UCS_to_uv(colour.XYZ_to_UCS(colour.xy_to_XYZ(xy)))
-        CCT, _ = colour.uv_to_CCT(uv, method='Robertson 1968')
-    elif method == "Ohno 2013":
-        uv = colour.UCS_to_uv(colour.XYZ_to_UCS(colour.xy_to_XYZ(xy)))
-        CCT, _ = colour.uv_to_CCT(uv, method="Ohno 2013")
-    else:
-        # Conversion to correlated colour temperature in K.
-        # https://github.com/colour-science/colour#correlated-colour-temperature-computation-methods-colour-temperature
-        CCT = colour.xy_to_CCT(xy, method)
+    elif method == "Ohno 2013": #  1.000 K to 20.000 K
+        t = is_between_Ts_Tf(xy, Ts=1000, Tf=20000)
+        
+    if t != 1:
+        if method == "Ohno 2013": #  1.000 K to 20.000 K
+            if t == -1:
+                CCT = 20000
+            elif t == -2:
+                CCT = 1000
+        else:
+            CCT = 0
+            pass # TODO: diger metodlar icin benzer calisma yapilacak
+    else:        
+        if method == "andres99_1":
+            CCT = xy_to_CCT_with_andres99(xy)
+        elif method == "andres99_2":
+            CCT = xy_to_CCT_with_andres99(xy, is_K_greater_50000=True)
+        elif method == "Robertson 1968":
+            uv = colour.UCS_to_uv(colour.XYZ_to_UCS(colour.xy_to_XYZ(xy)))
+            CCT, _ = colour.uv_to_CCT(uv, method='Robertson 1968')
+        elif method == "Ohno 2013":
+            uv = colour.UCS_to_uv(colour.XYZ_to_UCS(colour.xy_to_XYZ(xy)))
+            CCT, _ = colour.uv_to_CCT(uv, method="Ohno 2013")
+        else:
+            # Conversion to correlated colour temperature in K.
+            # https://github.com/colour-science/colour#correlated-colour-temperature-computation-methods-colour-temperature
+            CCT = colour.xy_to_CCT(xy, method)
     
     logging.debug("\t T: %.1f Kelvin (method: %s)" % (CCT, method))
     return round(CCT, 2)
