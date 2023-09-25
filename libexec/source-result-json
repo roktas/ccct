@@ -17,7 +17,7 @@ def effective_area(width:, height:, line_height_factor:)
   width_effective * height_effective
 end
 
-def process(source_hash, font_hash, meta_hash)
+def preprocess(source_hash, font_hash, meta_hash)
   background_color   = source_hash['style']['background-color']['value']
   background_cct     = source_hash['style']['background-color']['cct']
   line_height_factor = source_hash['style']['line-height'].to_f / source_hash['style']['font-size'].to_f
@@ -72,39 +72,59 @@ def process(source_hash, font_hash, meta_hash)
     end
   end.flatten.tally
 
-  average_cct = cccts.sum { |k, v| k * v } / cccts.values.sum.to_f
-  diff65  = 100.0 * (average_cct - 6500.0) / 6500.0
-
-  cccts_without_background = source_hash['codes'].map do |code|
-    cct = code['color']['cct'] || 6500.0
-    code['content'].chars.map do |char|
-      h = font_hash['chars'][char]
-
-      next 6500.0 if char == ' ' || h['ones'].nil?
-
-      count1 = h['ones']
-      count0 = effective_area - count1
-
-      (count1 * cct) / effective_area.to_f
-    end
-  end.flatten.tally
-
-  average_cct_without_background = cccts_without_background.sum do |k, v|
-    k * v
-  end / cccts_without_background.values.sum.to_f
-
-  warn "    Average CCCT                   : #{average_cct.round(2)}"
-  warn "    Average CCCT without background: #{average_cct_without_background.round(2)}"
-
   {
     colors:                         Hash[colors.sort_by { |_, v| -v[:frequency] }],
     cccts:                          Hash[cccts.sort_by  { |k, v| [-v, k] }],
     source:                         meta_hash,
-    average_cct:                    average_cct,
-    average_cct_without_background: average_cct_without_background,
-    diff65:                         diff65,
     background_cct:                 background_cct
   }
+end
+
+# Average CCT 1: Filter out-of-bound CCT values and, ignore in the calculation.
+def average_cct_1(result)
+  cccts = result[:cccts].reject { |cct, count| cct > 20_000 || cct < 1000 }
+
+  cccts.sum { |cct, count| cct * count } / cccts.values.sum.to_f
+end
+
+# Average CCT 2: Crop out-of-bound CCT values.
+def average_cct_2(result)
+  cccts = result[:cccts].transform_keys do |cct|
+    if cct > 20_000
+      20_0001
+    elsif cct < 1000
+      999
+    else
+      cct
+    end
+  end
+
+  cccts.sum { |cct, count| cct * count } / cccts.values.sum.to_f
+end
+
+# Average CCT 3: Keep out-of-bound CCT values and, add them to the calculation as is.
+def average_cct_3(result)
+  cccts = result[:cccts]
+  cccts.sum { |cct, count| cct * count } / cccts.values.sum.to_f
+end
+
+def apply_method(name, average_cct)
+  warn "    #{name} - Average CCCT                   : #{average_cct.round(2)}"
+
+  {
+    average_cct: average_cct,
+    diff65: 100.0 * (average_cct - 6500.0) / 6500.0
+  }
+end
+
+def process(source_hash, font_hash, meta_hash)
+  result = preprocess(source_hash, font_hash, meta_hash)
+
+  result[:h1] = apply_method 'Method 1', average_cct_1(result)
+  result[:h2] = apply_method 'Method 2', average_cct_2(result)
+  result[:h3] = apply_method 'Method 3', average_cct_3(result)
+
+  result
 end
 
 def main
